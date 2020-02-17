@@ -1,0 +1,149 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+/* Custom variables */
+
+$default-size: 80px;
+$default-menu-size: $default-size + 8px;
+$default-right-area-width: 260px;
+$default-content-area-left-margin: 30px;
+$default-content-area-right-margin: 60px;
+$default-content-list-vertical-position: 130px;
+$client-footer-height: 40px;
+
+$default-text-color: #283943;
+$highlight-text-color: #104D77;
+$default-blue-color: #374A59;
+$default-text-color: #283943;
+$label-color:       #707070;
+$grey-1:            #ebebeb;
+$grey-highlight:    #4A4A4A;
+$default-border-grey: #bebebe;
+$grey-default:      #707070;
+
+$default-light-blue: #EDF4F8;
+
+
+$firstColor: #e51d70;
+$secondColor: #f9da2c;
+
+$border-right: #fff;;
+$border-left: rgba(0,0,0,.1);
+
+$default-gradient:  linear-gradient(#ffffff, #f1f1f1);
+
+
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i&display=swap');
+
+/* elaborazione elementi ionic */
+
+$colors: (
+    primary:    #104D77,
+    secondary:  #32db64,
+    danger:     #f53d3d,
+    light:      #f4f4f4,
+    dark:       #222,
+    bar:        #EDF4F8,
+    def:        #283943
+);
+
+
+.main-body {
+    &.login {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        background-size: cover;
+        background-position: center center;
+        .datacontainer {
+            position: absolute; 
+            top: -75%;
+            left: -35%;
+            width: 200%;
+            height: auto;
+            z-index: 0;
+        }
+        .logo {
+            position: absolute;
+            top: 15vh;
+            left: 0;
+            right: 0;
+            margin: 20vw;
+            .claim {
+                color : #fff;
+            }
+        }
+        .access {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 30px;
+            color: #fff;
+        }
+        a:link, a:visited {
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+    }
+}
+
+
+
+.button {
+    font-family: Arial, sans-serif;
+    background: $firstColor;
+    color: #fff;
+    border-radius: 50px;
+    padding: 16px;
+    display: inline-block;
+    font-size: .8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration:  none;
+    position: relative;
+    top: -2px;
+    margin: 3px 0;
+    text-align: center;
+    background-position: 12px center;
+    background-repeat: no-repeat;
+    &.no-icon {
+        padding: 24px;
+    }
+    &.full-width {
+        display: block;
+        width: 100%;
+    }
+    &.small {
+        padding: 3px 10px 4px 10px;
+    }
+}
