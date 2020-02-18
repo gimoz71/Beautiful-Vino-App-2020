@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventiPage implements OnInit {
 
-    firstColor = '#e51d70';
-    secondColor = '#f9da2c';
+    /*firstColor = '#e51d70';
+    secondColor = '#f9da2c';*/
   constructor() { }
 
   ngOnInit() {

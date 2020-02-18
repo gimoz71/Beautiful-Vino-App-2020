@@ -48,8 +48,8 @@ $grey-default:      #707070;
 $default-light-blue: #EDF4F8;
 
 
-$firstColor: #e51d70;
-$secondColor: #f9da2c;
+$firstColor:  var(--first-color); // variabile css:  --first-color */
+$secondColor:  var(--second-color); // variabile css:  --second-color */
 
 $border-right: #fff;;
 $border-left: rgba(0,0,0,.1);
@@ -108,6 +108,14 @@ $colors: (
     def:        #283943
 );
 
+svg {
+    .svg-first-color {
+        fill: $firstColor;
+    }
+    .svg-second-color {
+        fill: $secondColor;
+    }
+}
 
 .clearfix::after {
     clear: both;
@@ -167,7 +175,7 @@ form {
         color: #fff;
     }
     &.btn-second-color {
-        background: $secondColor;
+        background:  $secondColor;
         color: #000;
     }
     &.no-icon {
