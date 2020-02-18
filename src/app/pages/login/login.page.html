@@ -1,24 +1,24 @@
-<div class="main-body login" [style.backgroundImage]="loginImages">
+<div class="main-body access login" [style.backgroundColor]="registerColor">
     <div class="content-area">
         <div class="content login">
-            <div class="datacontainer">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283 238">
-                    <title>header</title>
-                    <g id="Layer_2" data-name="Layer 2">
-                        <g id="Layer_1-2" data-name="Layer 1">
-                            <circle class="first-circle" cx="119" cy="119" r="119" [attr.fill]="secondColor" />
-                            <circle class="last-circle" cx="164" cy="119" r="119" [attr.fill]="firstColor" />
-                        </g>
-                    </g>
-                </svg>
-            </div>
-            <div class="logo">
-                <img src="assets/img/logo-default.png" style="width: 100%;">
-                <p class="claim">Il vino non &egrave; mai stato così bello</p>
-            </div>
-            <div class="access">
-                <button class="button text-center full-width" (click)="submit()">accedi</button>
-                <p>Gi&agrave; registrato? effettua il <a href="#">Login</a></p>
+
+            <h3 class="title-access">
+                Accedi
+            </h3>
+            <form class="user">
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="email">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="psw" placeholder="password">
+                </div>
+            </form>
+            <div class="access-cta">
+                <p style="margin-bottom: 40px;"><a href="#">Dimenticato la password?</a></p>
+                <button class="button white text-center full-width" (click)="submit()">Accedi</button>
+                <p>oppure</p>
+                <button class="button social facebook text-center full-width" (click)="submit()">Accedi con Facebook</button>
+                <button class="button social google text-center full-width" (click)="submit()">Accedi con Google</button>
             </div>
         </div>
     </div>

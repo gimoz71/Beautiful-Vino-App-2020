@@ -1,20 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+<div class="main-body access" [style.backgroundImage]="loginImages">
+    <div class="content-area">
+        <div class="content login">
+            <div class="datacontainer">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283 238">
+                    <title>header</title>
+                    <g id="Layer_2" data-name="Layer 2">
+                        <g id="Layer_1-2" data-name="Layer 1">
+                            <circle class="first-circle" cx="119" cy="119" r="119" [attr.fill]="secondColor" />
+                            <circle class="last-circle" cx="164" cy="119" r="119" [attr.fill]="firstColor" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div class="logo">
+                <img src="assets/img/logo-white.png" style="width: 100%;">
+                <p class="claim">Il vino non &egrave; mai stato così bello</p>
+            </div>
+            <div class="access-cta">
+                <button class="button text-center btn-second-color full-width" (click)="submit()">accedi</button>
+                <p>Gi&agrave; registrato? effettua il <a href="#">Login</a></p>
+            </div>
+        </div>
+    </div>
+</div>

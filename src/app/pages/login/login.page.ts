@@ -6,15 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-    loginImages = 'url(https://www.stockvault.net/data/2019/08/28/268829/preview16.jpg)';
+    registerColor = '#462B35';
 
     firstColor = '#e51d70';
     secondColor = '#f9da2c';
 
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

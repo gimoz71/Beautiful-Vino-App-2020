@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registrati.page.scss'],
 })
 export class RegistratiPage implements OnInit {
+    registerColor = '#462B35';
 
-  constructor() { }
+    firstColor = '#e51d70';
+    secondColor = '#f9da2c';
 
-  ngOnInit() {
-  }
+
+    constructor() { }
+
+    ngOnInit() {
+    }
 
 }

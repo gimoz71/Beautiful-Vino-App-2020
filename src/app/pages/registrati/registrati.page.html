@@ -1,9 +1,29 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>registrati</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<div class="main-body access registrati" [style.backgroundColor]="registerColor">
+    <div class="content-area">
+        <div class="content register">
+            
+            <h3 class="title-access">
+                Registrati
+            </h3>
+            <form class="user">
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user" placeholder="nome">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control form-control-user" placeholder="email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control form-control-user" placeholder="password">
+                </div>
+                
+            </form>
+            <div class="access-cta">
+                <p><small>Cliccando su registrati accetterai i <a hef="#">Termini d'uso</a></small></p>
+                <button class="button white text-center full-width" (click)="submit()">Registrati</button>
+                <p>oppure</p>
+                <button class="button social facebook text-center full-width" (click)="submit()">Registrati con Facebook</button>
+                <button class="button social google text-center full-width" (click)="submit()">Registrati con Google</button>
+            </div>
+        </div>
+    </div>
+</div>
