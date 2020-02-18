@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -36,324 +36,336 @@ $default-content-list-vertical-position: 130px;
 $client-footer-height: 40px;
 
 $default-text-color: #283943;
-$highlight-text-color: #104D77;
-$default-blue-color: #374A59;
+$highlight-text-color: #104d77;
+$default-blue-color: #374a59;
 $default-text-color: #283943;
-$label-color:       #707070;
-$grey-1:            #ebebeb;
-$grey-highlight:    #4A4A4A;
+$label-color: #707070;
+$grey-1: #ebebeb;
+$grey-highlight: #4a4a4a;
 $default-border-grey: #bebebe;
-$grey-default:      #707070;
+$grey-default: #707070;
 
-$default-light-blue: #EDF4F8;
+$default-light-blue: #edf4f8;
 
+$firstColor: var(--first-color); // variabile css:  --first-color */
+$secondColor: var(--second-color); // variabile css:  --second-color */
 
-$firstColor:  var(--first-color); // variabile css:  --first-color */
-$secondColor:  var(--second-color); // variabile css:  --second-color */
+$border-right: #fff;
+$border-left: rgba(0, 0, 0, 0.1);
 
-$border-right: #fff;;
-$border-left: rgba(0,0,0,.1);
-
-$default-gradient:  linear-gradient(#ffffff, #f1f1f1);
+$default-gradient: linear-gradient(#ffffff, #f1f1f1);
 
 @font-face {
-    font-family: 'larsseit';
-    src: url('assets/fonts/larsseit-light-webfont.woff2') format('woff2'),
-         url('assets/fonts/larsseit-light-webfont.woff') format('woff'),
-         url('assets/fonts/larsseit-light-webfont.ttf') format('truetype');
-    font-weight: 200;
-    font-style: normal;
-
+	font-family: "larsseit";
+	src: url("assets/fonts/larsseit-light-webfont.woff2") format("woff2"),
+		url("assets/fonts/larsseit-light-webfont.woff") format("woff"),
+		url("assets/fonts/larsseit-light-webfont.ttf") format("truetype");
+	font-weight: 200;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'larsseit';
-    src: url('assets/fonts/larsseit-webfont.woff2') format('woff2'),
-         url('assets/fonts/larsseit-webfont.woff') format('woff'),
-         url('assets/fonts/larsseit-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-
+	font-family: "larsseit";
+	src: url("assets/fonts/larsseit-webfont.woff2") format("woff2"),
+		url("assets/fonts/larsseit-webfont.woff") format("woff"),
+		url("assets/fonts/larsseit-webfont.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'larsseit';
-    src: url('assets/fonts/larsseit-medium-webfont.woff2') format('woff2'),
-         url('assets/fonts/larsseit-medium-webfont.woff') format('woff'),
-         url('assets/fonts/larsseit-medium-webfont.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-
+	font-family: "larsseit";
+	src: url("assets/fonts/larsseit-medium-webfont.woff2") format("woff2"),
+		url("assets/fonts/larsseit-medium-webfont.woff") format("woff"),
+		url("assets/fonts/larsseit-medium-webfont.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'larsseit';
-    src: url('assets/fonts/larsseit-bold-webfont.woff2') format('woff2'),
-         url('assets/fonts/larsseit-bold-webfont.woff') format('woff'),
-         url('assets/fonts/larsseit-bold-webfont.ttf') format('truetype');
-    font-weight: 800;
-    font-style: normal;
-
+	font-family: "larsseit";
+	src: url("assets/fonts/larsseit-bold-webfont.woff2") format("woff2"),
+		url("assets/fonts/larsseit-bold-webfont.woff") format("woff"),
+		url("assets/fonts/larsseit-bold-webfont.ttf") format("truetype");
+	font-weight: 800;
+	font-style: normal;
 }
 
 /* elaborazione elementi ionic */
 
 $colors: (
-    primary:    #104D77,
-    secondary:  #32db64,
-    danger:     #f53d3d,
-    light:      #f4f4f4,
-    dark:       #222,
-    bar:        #EDF4F8,
-    def:        #283943
+	primary: #104d77,
+	secondary: #32db64,
+	danger: #f53d3d,
+	light: #f4f4f4,
+	dark: #222,
+	bar: #edf4f8,
+	def: #283943
 );
 
 svg {
-    .svg-first-color {
-        fill: $firstColor;
-    }
-    .svg-second-color {
-        fill: $secondColor;
-    }
+	.svg-first-color {
+		fill: $firstColor;
+	}
+	.svg-second-color {
+		fill: $secondColor;
+	}
 }
 
 .clearfix::after {
-    clear: both;
-    display: block;
-    content: "";
-  }
-
-html, body {
-    font-family: 'larsseit';
+	clear: both;
+	display: block;
+	content: "";
 }
 
+html,
+body {
+	font-family: "larsseit";
+}
 
 form {
-    margin: 0 30px;
-    
-    .form-group {
-        margin: 20px 0;
-    }
+	margin: 0 30px;
 
-    input {
-        background: transparent;
-        border: none;
-        border-bottom: solid 1px rgba(255,255,255,.7);
-        padding: 5px;
-        margin: 10px 0;
-        color: #fff;
-        width: 100%;
-        &::placeholder {
-            color: #fff;
-        
-        }
-    }
+	.form-group {
+		margin: 20px 0;
+	}
+
+	input {
+		background: transparent;
+		border: none;
+		border-bottom: solid 1px rgba(255, 255, 255, 0.7);
+		padding: 5px;
+		margin: 10px 0;
+		color: #fff;
+		width: 100%;
+		&::placeholder {
+			color: #fff;
+		}
+	}
 }
 
-
 .button {
-    font-family: Arial, sans-serif;
-    color: #fff;
-     background-color: #fff;
-    border-radius: 50px;
-    color: #000;
-    padding: 16px;
-    display: inline-block;
-    font-size: .8em;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration:  none;
-    position: relative;
-    top: -2px;
-    margin: 3px 0;
-    text-align: center;
-    background-position: 12px center;
-    background-repeat: no-repeat;
-    box-shadow: 0px 2px 2px rgba(0,0,0,.15);
-    &.btn-first-color {
-        background: $firstColor;
-        color: #fff;
-    }
-    &.btn-second-color {
-        background:  $secondColor;
-        color: #000;
-    }
-    &.no-icon {
-        padding: 24px;
-    }
-    &.full-width {
-        display: block;
-        width: 100%;
-    }
-    &.small {
-        padding: 3px 10px 4px 10px;
-    }
-    &.white {
-        background-color: rgba(255,255,255,.5);
-        color: #fff;
-    }
+	font-family: Arial, sans-serif;
+	color: #fff;
+	background-color: #fff;
+	border-radius: 50px;
+	color: #000;
+	padding: 16px;
+	display: inline-block;
+	font-size: 0.8em;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-decoration: none;
+	position: relative;
+	top: -2px;
+	margin: 3px 0;
+	text-align: center;
+	background-position: 12px center;
+	background-repeat: no-repeat;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+	&.btn-first-color {
+		background: $firstColor;
+		color: #fff;
+	}
+	&.btn-second-color {
+		background: $secondColor;
+		color: #000;
+	}
+	&.no-icon {
+		padding: 24px;
+	}
+	&.full-width {
+		display: block;
+		width: 100%;
+	}
+	&.small {
+		padding: 3px 10px 4px 10px;
+	}
+	&.white {
+		background-color: rgba(255, 255, 255, 0.5);
+		color: #fff;
+	}
 
-    &.social {
-        &.facebook {
-            color: #2C78D0;
-            background-color: #fff;
-        }
-        &.google {
-            color: #EA3806;
-            background-color: #fff;
-        }
-    }
+	&.social {
+		&.facebook {
+			color: #2c78d0;
+			background-color: #fff;
+		}
+		&.google {
+			color: #ea3806;
+			background-color: #fff;
+		}
+	}
 }
 
 /* struttura */
 .datacontainer {
-    position: absolute; 
-    top: -75%;
-    left: -35%;
-    width: 200%;
-    height: auto;
-    z-index: 0;
+	position: absolute;
+	top: -75%;
+	left: -35%;
+	width: 200%;
+	height: auto;
+	z-index: 0;
 }
 .scroller-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: $default-size;
-    padding: 15px;
-    padding-top: 30px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: $default-size;
+	padding: 15px;
+	padding-top: 30px;
     overflow: auto;
+    
+}
+.header-title {
+    .scroller-content {
+        top: 40px;
+    }
 }
 
-.access {
-    position: absolute;
+.main-body {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	background-size: cover;
+	background-position: center center;
+}
+
+.logo {
+	position: absolute;
+	top: 25vh;
+	left: 0;
+	right: 0;
+	margin: 0 20vw;
+	.claim {
+		color: #fff;
+	}
+}
+.access-cta {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 30px;
+	color: #fff;
+}
+.title-access {
+	color: #fff;
+	margin-top: 30px;
+}
+a:link,
+a:visited {
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.page-title {
+    color: var(--first-color);
+    position: fixed;
     top: 0;
-    bottom: 0;
     left: 0;
     right: 0;
-    text-align: center;
-    background-size: cover;
-    background-position: center center;
-    
-    .logo {
-        position: absolute;
-        top: 25vh;
-        left: 0;
-        right: 0;
-        margin: 0 20vw;
-        .claim {
-            color : #fff;
-        }
-    }
-    .access-cta {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: 30px;
-        color: #fff;
-    }
-    .title-access {
-        color: #fff;
-        margin-top: 30px;
-    }
-    a:link, a:visited {
-        color: #fff;
-        font-weight: bold;
-        text-decoration: none;
-    }
-
+    padding: 10px;
+    margin: 0;
+    background: #fff;
+    z-index: 10;
 }
-
 /* box elementi generali */
 
 .box {
-    box-shadow: 0 8px 18px rgba(0,0,0,.25);
-    border-radius: 10px;
-    background-color: #fff;
-    padding: 20px;
-    margin: 40px 0 60px 0;
+	box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	background-color: #fff;
+	padding: 20px;
+	margin: 40px 0 60px 0;
     text-align: left;
+    .cover {
+        width: 100%;
+        height: 140px;
+        background-size: cover;
+        background-position: center center;
+        margin-top: -40px;
+        border-radius: 5px;
+        
+    }
+    &.scopri {
+        margin: 20px 0 20px 0;
+        .cover {
+            margin-top: 15px;
+        }
+    }
+
 }
 
-.cover {
-    width: 100%;
-    height: 140px;
-    background-size: cover;
-    background-position: center center;
-    margin-top: -40px;
-    border-radius: 5px
-}
+
 .titolo {
-    margin: 5px 0!important;
-    padding: 0!important;
-    
+	margin: 5px 0 !important;
+	padding: 0 !important;
 }
 .data {
-    float: left;
-    font-size: 14px;
-    color: #999;
-    font-weight: 200;
-    margin: 10px 0 !important;
-    padding: 3px 0px;
-    
+	float: left;
+	font-size: 14px;
+	color: #999;
+	font-weight: 200;
+	margin: 10px 0 !important;
+	padding: 3px 0px;
 }
 .badge {
-    float: right;
-    display: inline-block;
-    background-color: $secondColor;
-    color: #000;
-    font-size: 14px;
-    margin: 10px 0 !important;
-    padding: 3px 8px;
-    border-radius: 13px;
+	float: right;
+	display: inline-block;
+	background-color: $secondColor;
+	color: #000;
+	font-size: 14px;
+	margin: 10px 0 !important;
+	padding: 3px 8px;
+	border-radius: 13px;
 }
 
 .testo {
-    font-size: 14px;
-    
+	font-size: 14px;
 }
-
-
 
 /* footer */
 
-
-
 .footer {
-    position: absolute;
-    top: auto;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: $default-size;
-    background-color: #fafafa;
-    box-shadow: -2px 0 4px rgba(0,0,0,.25)
+	position: absolute;
+	top: auto;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: $default-size;
+	background-color: #fafafa;
+	box-shadow: -2px 0 4px rgba(0, 0, 0, 0.25);
 }
 
 .main-navigation {
-    list-style:  none;
-    display: flex;
-    margin: 0;
-    padding: 5px 0;
-    li {
-        width: 33%;
-        padding: 5px 10px;
-        svg {
-            width: 100%;
-            padding: 0 31px;
-            
-        }
-        span {
-            font-size: 12px;
-            position: relative;
-            top: -.3em;
-        }
-        &.selected {
-            svg, span  {
-                fill: $firstColor;
-                color: $firstColor;
-            }
-        }
-    }
+	list-style: none;
+	display: flex;
+	margin: 0;
+	padding: 5px 0;
+	li {
+		width: 33%;
+		padding: 5px 10px;
+		svg {
+			width: 100%;
+			padding: 0 31px;
+		}
+		span {
+			font-size: 12px;
+			position: relative;
+			top: -0.3em;
+		}
+		&.selected {
+			svg,
+			span {
+				fill: $firstColor;
+				color: $firstColor;
+			}
+		}
+	}
 }
