@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-eventi',
@@ -9,7 +10,9 @@ export class EventiPage implements OnInit {
 
     /*firstColor = '#e51d70';
     secondColor = '#f9da2c';*/
-  constructor() { }
+  constructor(
+      private router: Router
+  ) { }
 
   ngOnInit() {
   }

@@ -27,7 +27,7 @@
 
 /* Custom variables */
 
-$default-header-size: 70px;
+$default-header-size: 90px;
 $profile-header-size: 145px;
 $footer-size: 50px;
 
@@ -98,6 +98,15 @@ $colors: (
 	bar: #edf4f8,
 	def: #283943
 );
+
+.hide {
+	opacity: 0;
+	left: -100%;
+}
+.show {
+	opacity: 1;
+	left: 0;
+}
 
 svg {
 	.svg-first-color {
@@ -212,23 +221,27 @@ form {
 	top: 0;
 	left: 0;
 	right: 0;
-    bottom: $footer-size;
-	padding: 15px;
+	bottom: $footer-size;
+	padding: 0;
 	overflow: auto;
+	.frame-content {
+		padding: 15px;
+	}
 }
 .scroller-content:last-child {
-    bottom: 0;
-
+	bottom: 0;
 }
-.standard-header {
+
+.standard {
 	.page-title {
+        color: #fff;
 		height: $default-header-size;
 	}
 	.scroller-content {
 		top: $default-header-size;
 	}
 }
-.profile-header {
+.profile {
 	.page-title * {
 		color: #fff;
 	}
@@ -236,6 +249,63 @@ form {
 		top: $profile-header-size;
 		background: transparent;
 	}
+}
+
+.dettagli {
+	.dettaglio-header {
+		height: 60vw;
+		width: 100%;
+		background-size: cover;
+		background-position: center;
+		padding: 15px;
+		position: relative;
+		.box {
+			position: absolute;
+			bottom: -100px;
+			left: 15px;
+			right: 15px;
+			&.evento, &.azienda {
+				.data, .indirizzo {
+                    color: var(--first-color);
+                    padding:  0 !important;
+                    margin: 5px 0;
+                    font-weight: 400;
+                }
+			}
+		}
+	}
+	.frame-content {
+		padding-top: 90px;
+	}
+	.intro {
+		margin: 10px;
+		text-align: left;
+		color: #000;
+	}
+	.highlight {
+		margin: 10px;
+		text-align: left;
+		color: var(--first-color);
+	}
+	.description {
+		margin: 10px;
+		text-align: left;
+		color: $grey-default;
+	}
+}
+
+.utility-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+    padding: 5px 0 0 0;
+    //border-radius: 0 0 10px 10px;
+    box-shadow: 0px 0 4px rgba(0, 0, 0, 0.25);
+    svg {
+        opacity: .5;
+    }
 }
 
 .main-body {
@@ -327,72 +397,81 @@ a:visited {
 		.cover {
 			margin-top: 15px;
 		}
-    }
-    &.vino {
-        margin: 20px 0;
-        .vino-thumb {
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            border: solid 2px #ddd;
-            float: left;
-        }
-        .title {
-            margin-top: 0;
-            margin-left: 50px;
-            font-size: 1.2rem;
-            span {
-                display: block;
-                font-size: .9rem;
-                color: #999;
-            }
-        }
-        .info {
-            padding: 0;
-            margin: 0;
-            margin-left: 50px;
-            font-size: .9rem;
-        }
-        div {
-            padding: 10px 0;
-            border-bottom: solid 1px #ddd;
-            &:first-of-type {
-                padding-top: 0;
-            }
-            &:last-of-type {
-                padding-bottom: 0;
-                border: none;
-            }
-        }
-    }
+	}
+	&.vino {
+		margin: 20px 0;
+		.vino-thumb {
+			height: 40px;
+			width: 40px;
+			border-radius: 50%;
+			border: solid 2px #ddd;
+			float: left;
+		}
+		.titolo {
+			margin-top: 0;
+			margin-left: 50px;
+			font-size: 1.2rem;
+			span {
+				display: block;
+				font-size: 0.9rem;
+				color: #999;
+			}
+		}
+		.info {
+			padding: 0;
+			margin: 0;
+			margin-left: 50px;
+			font-size: 0.9rem;
+		}
+		div {
+			padding: 20px 0;
+			border-bottom: solid 1px #efefef;
+			&:first-of-type {
+				padding-top: 0;
+			}
+			&:last-of-type {
+				padding-bottom: 0;
+				border: none;
+			}
+		}
+	}
+	&.evento, &.azienda {
+		/* elementi eventi */
+
+		.titolo {
+			margin: 5px 0 !important;
+			padding: 0 !important;
+		}
+		.data {
+			float: left;
+			font-size: 14px;
+			color: #999;
+			font-weight: 200;
+			margin: 10px 0 !important;
+			padding: 3px 0px;
+		}
+		.indirizzo {
+			float: left;
+			font-size: 16px;
+			color: #999;
+			font-weight: 200;
+			margin: 10px 0 !important;
+			padding: 3px 0px;
+		}
+		.badge {
+			float: right;
+			display: inline-block;
+			background-color: $secondColor;
+			color: #000;
+			font-size: 14px;
+			margin: 10px 0;
+			padding: 3px 8px;
+			border-radius: 13px;
+		}
+	}
 	&:last-of-type {
 		margin-bottom: 20px;
 	}
-}
-
-
-
-.titolo {
-	margin: 5px 0 !important;
-	padding: 0 !important;
-}
-.data {
-	float: left;
-	font-size: 14px;
-	color: #999;
-	font-weight: 200;
-	margin: 10px 0 !important;
-	padding: 3px 0px;
-}
-.badge {
-	float: right;
-	display: inline-block;
-	background-color: $secondColor;
-	color: #000;
-	font-size: 14px;
-	margin: 10px 0 !important;
-	padding: 3px 8px;
-	border-radius: 13px;
 }
 
 .testo {
@@ -418,7 +497,7 @@ a:visited {
 	margin: 0;
 	padding: 5px 0;
 	li {
-		width: 33%;
+		width: 100%;
 		svg {
 			width: 25px;
 			height: 25px;

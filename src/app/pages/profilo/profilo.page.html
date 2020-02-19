@@ -1,6 +1,6 @@
 <div class="main-body">
     <div class="content-area">
-        <div class="content profile-header">
+        <div class="content profile">
             <div class="datacontainer">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283 238">
                     <title>header</title>
@@ -20,37 +20,39 @@
                 </p>
             </div>
             <div class="scroller-content">
-                <div class="box clearfix">
-                    <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
-                    <h2 class="titolo">Degustibus Lini 910</h2>
-                    <div class="clearfix">
-                        <h4 class="data">21 febbraio, ore 12.30</h4>
-                        <h2 class="badge">&euro; 50,00</h2>
+                <div class="frame-content">
+                    <div class="box clearfix">
+                        <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
+                        <h2 class="titolo">Degustibus Lini 910</h2>
+                        <div class="clearfix">
+                            <h4 class="data">21 febbraio, ore 12.30</h4>
+                            <h2 class="badge">&euro; 50,00</h2>
+                        </div>
+                        <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
                     </div>
-                    <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
-                </div>
-                <div class="box clearfix">
-                    <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
-                    <h2 class="titolo">Degustibus Lini 910</h2>
-                    <div class="clearfix">
-                        <h4 class="data">21 febbraio, ore 12.30</h4>
-                        <h2 class="badge">&euro; 50,00</h2>
+                    <div class="box clearfix">
+                        <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
+                        <h2 class="titolo">Degustibus Lini 910</h2>
+                        <div class="clearfix">
+                            <h4 class="data">21 febbraio, ore 12.30</h4>
+                            <h2 class="badge">&euro; 50,00</h2>
+                        </div>
+                        <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
                     </div>
-                    <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
-                </div>
-                <div class="box clearfix">
-                    <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
-                    <h2 class="titolo">Degustibus Lini 910</h2>
-                    <div class="clearfix">
-                        <h4 class="data">21 febbraio, ore 12.30</h4>
-                        <h2 class="badge">&euro; 50,00</h2>
+                    <div class="box clearfix">
+                        <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
+                        <h2 class="titolo">Degustibus Lini 910</h2>
+                        <div class="clearfix">
+                            <h4 class="data">21 febbraio, ore 12.30</h4>
+                            <h2 class="badge">&euro; 50,00</h2>
+                        </div>
+                        <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
                     </div>
-                    <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
                 </div>
             </div>
             <div class="footer">
                 <ul class="main-navigation">
-                    <li>
+                    <li (click)="router.navigate(['/eventi']);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 209.95 194.77">
                             <title>eventi</title>
                             <g id="Layer_2" data-name="Layer 2">
@@ -63,7 +65,7 @@
                         </svg>
                         <span>eventi</span>
                     </li>
-                    <li>
+                    <li (click)="router.navigate(['/scopri']);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232.67 196.51">
                             <title>scopri</title>
                             <g id="Layer_2" data-name="Layer 2">
@@ -78,7 +80,19 @@
                         </svg>
                         <span>scopri</span>
                     </li>
-                    <li class="selected">
+                    <li (click)="router.navigate(['/vini']);">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98.41 200.68">
+                            <title>vini</title>
+                            <g id="Layer_2" data-name="Layer 2">
+                                <g id="Layer_1-2" data-name="Layer 1">
+                                    <path d="M45.86,41.76a6.28,6.28,0,0,1-1.93-4.53V16.66a5.67,5.67,0,0,0,0-9.65V5.16A5.16,5.16,0,0,0,38.77,0H27A5.16,5.16,0,0,0,21.8,5.16V7a5.67,5.67,0,0,0,0,9.66V37.24a4,4,0,0,1-1.23,2.9L9.25,51A30.13,30.13,0,0,0,0,72.74V200.68H65.73V72.74a30.51,30.51,0,0,0-8.55-20.09Zm-.13,138.92H20V72.74a10.18,10.18,0,0,1,3.11-7.3l9.26-8.9L43.32,67.06a11.21,11.21,0,0,1,2.42,5.68Z" />
+                                    <path d="M90.83,50.4l-10-9.65a5.56,5.56,0,0,1-1.71-4V18.51a5,5,0,0,0,0-8.56V7.67a3.93,3.93,0,0,0-3.93-3.93H63.4a3.93,3.93,0,0,0-3.93,3.93V9.95a5,5,0,0,0,0,8.56V36.74a3.56,3.56,0,0,1-1.09,2.57l-4.72,4.54,7.07,6.8a26.52,26.52,0,0,1,4.76,6.42l3.35-3.22,9.7,9.33a8,8,0,0,1,2.14,5v95.67H69.28v17.73H98.41V68.21A27,27,0,0,0,90.83,50.4Z" />
+                                </g>
+                            </g>
+                        </svg>
+                        <span>vini</span>
+                    </li>
+                    <li (click)="router.navigate(['/profilo']);" class="selected">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 199.33 185.89">
                             <title>profilo</title>
                             <g id="Layer_2" data-name="Layer 2">
