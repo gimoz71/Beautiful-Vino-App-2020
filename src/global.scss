@@ -27,13 +27,9 @@
 
 /* Custom variables */
 
-$default-size: 60px;
-$default-menu-size: $default-size + 8px;
-$default-right-area-width: 260px;
-$default-content-area-left-margin: 30px;
-$default-content-area-right-margin: 60px;
-$default-content-list-vertical-position: 130px;
-$client-footer-height: 40px;
+$default-header-size: 70px;
+$profile-header-size: 145px;
+$footer-size: 50px;
 
 $default-text-color: #283943;
 $highlight-text-color: #104d77;
@@ -120,8 +116,8 @@ svg {
 
 html,
 body {
-    font-family: "larsseit";
-    background-color: #fff;
+	font-family: "larsseit";
+	background-color: #fff;
 }
 
 form {
@@ -207,22 +203,39 @@ form {
 	width: 200%;
 	height: auto;
 	z-index: 0;
+	svg {
+		overflow: visible;
+	}
 }
 .scroller-content {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
-	bottom: $default-size;
+    bottom: $footer-size;
 	padding: 15px;
-	padding-top: 30px;
-    overflow: auto;
-    
+	overflow: auto;
 }
-.header-title {
-    .scroller-content {
-        top: 40px;
-    }
+.scroller-content:last-child {
+    bottom: 0;
+
+}
+.standard-header {
+	.page-title {
+		height: $default-header-size;
+	}
+	.scroller-content {
+		top: $default-header-size;
+	}
+}
+.profile-header {
+	.page-title * {
+		color: #fff;
+	}
+	.scroller-content {
+		top: $profile-header-size;
+		background: transparent;
+	}
 }
 
 .main-body {
@@ -266,16 +279,32 @@ a:visited {
 }
 
 .page-title {
-    color: var(--first-color);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    margin: 0;
-    background: #fff;
-    z-index: 10;
+	color: var(--first-color);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 10px;
+	margin: 0;
+	//background: #fff;
+	z-index: 10;
+	.user-thumb {
+		height: 60px;
+		width: 60px;
+		border-radius: 50%;
+		border: solid 5px #fff;
+	}
+	.header-title {
+		margin: 0;
+		padding: 0;
+	}
+	.header-info {
+		margin: 0;
+		padding: 0;
+		font-size: 12px;
+	}
 }
+
 /* box elementi generali */
 
 .box {
@@ -283,25 +312,64 @@ a:visited {
 	border-radius: 10px;
 	background-color: #fff;
 	padding: 20px;
-	margin: 40px 0 60px 0;
-    text-align: left;
-    .cover {
-        width: 100%;
-        height: 40vw;
-        background-size: cover;
-        background-position: center center;
-        margin-top: -40px;
-        border-radius: 5px;
-        
+	margin: 40px 0 50px 0;
+	text-align: left;
+	.cover {
+		width: 100%;
+		height: 40vw;
+		background-size: cover;
+		background-position: center center;
+		margin-top: -40px;
+		border-radius: 5px;
+	}
+	&.scopri {
+		margin: 20px 0 20px 0;
+		.cover {
+			margin-top: 15px;
+		}
     }
-    &.scopri {
-        margin: 20px 0 20px 0;
-        .cover {
-            margin-top: 15px;
+    &.vino {
+        margin: 20px 0;
+        .vino-thumb {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border: solid 2px #ddd;
+            float: left;
+        }
+        .title {
+            margin-top: 0;
+            margin-left: 50px;
+            font-size: 1.2rem;
+            span {
+                display: block;
+                font-size: .9rem;
+                color: #999;
+            }
+        }
+        .info {
+            padding: 0;
+            margin: 0;
+            margin-left: 50px;
+            font-size: .9rem;
+        }
+        div {
+            padding: 10px 0;
+            border-bottom: solid 1px #ddd;
+            &:first-of-type {
+                padding-top: 0;
+            }
+            &:last-of-type {
+                padding-bottom: 0;
+                border: none;
+            }
         }
     }
-
+	&:last-of-type {
+		margin-bottom: 20px;
+	}
 }
+
 
 
 .titolo {
@@ -339,7 +407,7 @@ a:visited {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	height: $default-size;
+	height: $footer-size;
 	background-color: #fafafa;
 	box-shadow: -2px 0 4px rgba(0, 0, 0, 0.25);
 }
@@ -351,15 +419,14 @@ a:visited {
 	padding: 5px 0;
 	li {
 		width: 33%;
-		padding: 5px auto;
 		svg {
-            width: 35px;
-            height: 35px;
+			width: 25px;
+			height: 25px;
 		}
 		span {
 			font-size: 12px;
-            position: relative;
-            display: block;
+			position: relative;
+			display: block;
 			top: -0.3em;
 		}
 		&.selected {
