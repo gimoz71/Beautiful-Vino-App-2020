@@ -1,9 +1,9 @@
 <div class="main-body">
     <div class="content-area">
         <div class="content dettagli footer-action">
-            <div class="scroller-content">
-                <div class="utility-header">
-                    <div class="float-chiudi"  (click)="router.navigate(['/eventi']);">
+            <div class="scroller-content" (scroll)="onScroll($event)">
+                <div class="utility-header" [class.show]="showNav">
+                    <div class="float-chiudi" (click)="router.navigate(['/eventi']);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
                             <g id="Layer_2" data-name="Layer 2">

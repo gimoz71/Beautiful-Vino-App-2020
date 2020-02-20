@@ -8,6 +8,13 @@ import { Router } from '@angular/router';
 })
 export class DettaglioFeedPage implements OnInit {
 
+    scrollTop = 0;
+    showNav = false;
+
+    onScroll(event) {
+        this.showNav = this.scrollTop < event.target.scrollTop;
+        this.scrollTop = event.target.scrollTop;
+    }
   constructor(
       private router: Router
   ) { }
