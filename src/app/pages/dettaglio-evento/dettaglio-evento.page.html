@@ -3,7 +3,7 @@
         <div class="content dettagli footer-action">
             <div class="scroller-content">
                 <div class="utility-header">
-                    <div class="float-chiudi">
+                    <div class="float-chiudi"  (click)="router.navigate(['/eventi']);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
                             <g id="Layer_2" data-name="Layer 2">
@@ -17,7 +17,7 @@
                     <h3 class="float-header">Degustibus Lini 910</h3>
                 </div>
                 <div class="dettaglio-header" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg);">
-                    <div class="chiudi">
+                    <div class="chiudi"  (click)="router.navigate(['/eventi']);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
                             <g id="Layer_2" data-name="Layer 2">
@@ -29,10 +29,12 @@
                         </svg>
                     </div>
                     <div class="box evento clearfix">
-                        <h2 class="titolo">Degustibus Lini 910</h2>
-                        <div class="clearfix">
-                            <h4 class="data">21 febbraio, ore 12.30</h4>
-                            <h2 class="badge">&euro; 50,00</h2>
+                        <div>
+                            <h2 class="titolo">Degustibus Lini 910</h2>
+                            <div class="clearfix">
+                                <h4 class="data">21 febbraio, ore 12.30</h4>
+                                <h2 class="badge">&euro; 50,00</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
