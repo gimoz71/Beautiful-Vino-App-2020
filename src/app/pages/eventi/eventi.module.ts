@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { EventiPageRoutingModule } from './eventi-routing.module';
 
 import { EventiPage } from './eventi.page';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EventiPageRoutingModule
+    EventiPageRoutingModule,
+    PipesModule
   ],
   declarations: [EventiPage]
 })
-export class EventiPageModule {}
+export class EventiPageModule { }

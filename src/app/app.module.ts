@@ -8,16 +8,56 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import {
+  SessionService,
+  BVAuthorizationService,
+  BVHttpService,
+  RichiesteService,
+  BVCommonService,
+  BvinoLibModule
+} from 'bvino-lib';
+import { AppSessionService } from './services/appsession/appSession.service';
+import { ThemeChangerService } from './services/themeChanger/themechanger.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { LogoutCommunicationService } from './services/logoutCommunication/logoutcommunication.service';
+import { BVHttpInterceptor } from './interceptors/http.inteceptor';
+import { AlertService } from './services/alert/alert.service';
+import { environment } from 'src/environments/environmentkeys';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    BvinoLibModule.forRoot(environment),
+    PipesModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    SessionService,
+    BVAuthorizationService,
+    AppSessionService,
+    AlertService,
+    BVHttpService,
+    RichiesteService,
+    BVCommonService,
+    LogoutCommunicationService,
+    ThemeChangerService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BVHttpInterceptor,
+      multi: true
+    }
+  ],
+  exports: [
+    PipesModule
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

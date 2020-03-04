@@ -9,6 +9,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowJs": true,
     "importHelpers": true,
     "target": "es2015",
     "typeRoots": [
@@ -17,7 +18,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "bvino-lib": [
+        "dist/bvino-lib"
+      ],
+      "bvino-lib/*": [
+        "dist/bvino-lib/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

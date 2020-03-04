@@ -7,18 +7,20 @@
             </h3>
             <form class="user">
                 <div class="form-group">
-                    <input type="email" name="email" placeholder="email">
+                    <input type="email" name="email" placeholder="email" [(ngModel)]="username">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="psw" placeholder="password">
+                    <input type="password" name="psw" placeholder="password" [(ngModel)]="password">
                 </div>
             </form>
             <div class="access-cta">
                 <p style="margin-bottom: 40px;"><a href="#">Dimenticato la password?</a></p>
-                <button class="button white text-center full-width" (click)="submit()">Accedi</button>
+                <button class="button white text-center full-width" (click)="login()">Accedi</button>
                 <p>oppure</p>
-                <button class="button social facebook text-center full-width" (click)="submit()">Accedi con Facebook</button>
-                <button class="button social google text-center full-width" (click)="submit()">Accedi con Google</button>
+                <button class="button social facebook text-center full-width">Accedi con
+                    Facebook</button>
+                <button class="button social google text-center full-width">Accedi con
+                    Google</button>
             </div>
         </div>
     </div>

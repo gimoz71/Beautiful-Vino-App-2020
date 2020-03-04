@@ -17,8 +17,9 @@
                 <p class="claim">Il vino non &egrave; mai stato così bello</p>
             </div>
             <div class="access-cta">
-                <button class="button text-center btn-second-color full-width" (click)="submit()">accedi</button>
-                <p>Gi&agrave; registrato? effettua il <a href="#">Login</a></p>
+                <button class="button text-center btn-second-color full-width">accedi</button>
+                <!-- (click)="submit()" -->
+                <p>Gi&agrave; registrato? effettua il <button (click)="goToLogin()">Login</button></p>
             </div>
         </div>
     </div>

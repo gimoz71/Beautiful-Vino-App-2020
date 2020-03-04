@@ -7,7 +7,8 @@
 
   <base href="/" />
 
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
 
@@ -16,10 +17,76 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <script>
+    if (global === undefined) {
+      var global = window;
+    }
+  </script>
 </head>
 
 <body>
   <app-root></app-root>
+  <div class="footer" *ngIf="!isLoginPage()">
+    <ul class="main-navigation">
+      <li (click)="router.navigate(['/eventi']);" class="selected">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 209.95 194.77">
+          <title>eventi</title>
+          <g id="Layer_2" data-name="Layer 2">
+            <g id="Layer_1-2" data-name="Layer 1">
+              <path
+                d="M180.23,30.18H165.09V10.12a10.12,10.12,0,1,0-20.23,0V30.18H65.09V10.12a10.12,10.12,0,1,0-20.23,0V30.18H29.72A29.76,29.76,0,0,0,0,59.9V165a29.76,29.76,0,0,0,29.72,29.72h150.5A29.76,29.76,0,0,0,210,165V59.9A29.76,29.76,0,0,0,180.23,30.18ZM29.72,50.8H44.86v5.86a10.12,10.12,0,0,0,20.23,0V50.8h79.77v5.86a10.12,10.12,0,1,0,20.23,0V50.8h15.14a9.12,9.12,0,0,1,9.11,9.11v23H20.62v-23A9.12,9.12,0,0,1,29.72,50.8Zm150.5,123.36H29.72A9.12,9.12,0,0,1,20.62,165V103.53H189.33V165A9.12,9.12,0,0,1,180.23,174.16Z" />
+              <rect x="49.14" y="128.55" width="20.43" height="20.43" rx="5.25" ry="5.25" />
+              <rect x="92.05" y="128.55" width="20.43" height="20.43" rx="5.25" ry="5.25" />
+            </g>
+          </g>
+        </svg>
+        <span>eventi</span>
+      </li>
+      <li (click)="router.navigate(['/scopri']);">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232.67 196.51">
+          <title>scopri</title>
+          <g id="Layer_2" data-name="Layer 2">
+            <g id="Layer_1-2" data-name="Layer 1">
+              <path
+                d="M204.2,0H64.87A28.47,28.47,0,0,0,36.4,28.57v3.86H28.47A28.5,28.5,0,0,0,0,60.9V168a28.5,28.5,0,0,0,28.47,28.47H204.2A28.5,28.5,0,0,0,232.67,168V28.47A28.5,28.5,0,0,0,204.2,0ZM34.46,174A8.47,8.47,0,0,1,20,168V60.9a8.48,8.48,0,0,1,8.47-8.47h8L36.93,168A8.41,8.41,0,0,1,34.46,174Zm178.2-6a8.48,8.48,0,0,1-8.47,8.47H55.66a28.57,28.57,0,0,0,1.27-8.57L56.4,28.5A8.47,8.47,0,0,1,64.87,20H204.2a8.48,8.48,0,0,1,8.47,8.47Z" />
+              <path
+                d="M86.19,105.27h30.11A18.21,18.21,0,0,0,134.5,87.08V50.19A18.21,18.21,0,0,0,116.31,32H86.19A18.21,18.21,0,0,0,68,50.19V87.08A18.21,18.21,0,0,0,86.19,105.27ZM88,52h26.5V85.27H88Z" />
+              <path d="M193.33,34.44H155.67a10,10,0,0,0,0,20h37.67a10,10,0,0,0,0-20Z" />
+              <path d="M193.33,83.33H155.67a10,10,0,1,0,0,20h37.67a10,10,0,1,0,0-20Z" />
+              <path d="M193.33,129.6H78a10,10,0,0,0,0,20H193.33a10,10,0,0,0,0-20Z" />
+            </g>
+          </g>
+        </svg>
+        <span>scopri</span>
+      </li>
+      <li (click)="router.navigate(['/vini']);">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98.41 200.68">
+          <title>vini</title>
+          <g id="Layer_2" data-name="Layer 2">
+            <g id="Layer_1-2" data-name="Layer 1">
+              <path
+                d="M45.86,41.76a6.28,6.28,0,0,1-1.93-4.53V16.66a5.67,5.67,0,0,0,0-9.65V5.16A5.16,5.16,0,0,0,38.77,0H27A5.16,5.16,0,0,0,21.8,5.16V7a5.67,5.67,0,0,0,0,9.66V37.24a4,4,0,0,1-1.23,2.9L9.25,51A30.13,30.13,0,0,0,0,72.74V200.68H65.73V72.74a30.51,30.51,0,0,0-8.55-20.09Zm-.13,138.92H20V72.74a10.18,10.18,0,0,1,3.11-7.3l9.26-8.9L43.32,67.06a11.21,11.21,0,0,1,2.42,5.68Z" />
+              <path
+                d="M90.83,50.4l-10-9.65a5.56,5.56,0,0,1-1.71-4V18.51a5,5,0,0,0,0-8.56V7.67a3.93,3.93,0,0,0-3.93-3.93H63.4a3.93,3.93,0,0,0-3.93,3.93V9.95a5,5,0,0,0,0,8.56V36.74a3.56,3.56,0,0,1-1.09,2.57l-4.72,4.54,7.07,6.8a26.52,26.52,0,0,1,4.76,6.42l3.35-3.22,9.7,9.33a8,8,0,0,1,2.14,5v95.67H69.28v17.73H98.41V68.21A27,27,0,0,0,90.83,50.4Z" />
+            </g>
+          </g>
+        </svg>
+        <span>vini</span>
+      </li>
+      <li (click)="router.navigate(['/profilo']);">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 199.33 185.89">
+          <title>profilo</title>
+          <g id="Layer_2" data-name="Layer 2">
+            <g id="Layer_1-2" data-name="Layer 1">
+              <path
+                d="M169.3,124.74a113.14,113.14,0,0,0-32.6-18.09,59.78,59.78,0,1,0-74.06,0A113.14,113.14,0,0,0,30,124.74c-18.81,15-30,34.09-30,51.15a10,10,0,0,0,20,0c0-22,35.69-55.67,79.67-55.67,37.7,0,69.31,24.75,77.56,45.67H44.94a10,10,0,0,0,0,20H189.33a10,10,0,0,0,10-10C199.33,158.83,188.11,139.71,169.3,124.74ZM99.67,20A39.78,39.78,0,1,1,59.89,59.78,39.82,39.82,0,0,1,99.67,20Z" />
+            </g>
+          </g>
+        </svg>
+        <span>profilo</span>
+      </li>
+    </ul>
+  </div>
 </body>
 
 </html>
