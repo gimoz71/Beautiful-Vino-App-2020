@@ -1,0 +1,68 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/*
+ * Public API Surface of bvino-lib
+ */
+export { BvinoLibModule } from './lib/bvino-lib.module';
+// services
+// -- AUTH
+export { BVAuthorizationService } from './lib/services/auth/BVAuthorizationService';
+// -- COMUNI
+export { SessionService } from './lib/services/common/session.service';
+export { BVHttpService } from './lib/services/common/bvhttp.service';
+export { RichiesteService } from './lib/services/common/richieste.service';
+export { AlertService } from './lib/services/common/alert.service';
+export { BVCommonService } from './lib/services/common/common.service';
+// models
+// - token
+export { AccessToken } from './lib/models/token/accesstoken';
+export { AccessTokenPayload } from './lib/models/token/accesstokenpayload';
+export { AwsToken } from './lib/models/token/awstoken';
+export { IdToken } from './lib/models/token/idtoken';
+export { IdTokenPayload } from './lib/models/token/idtokenpayload';
+export { RefreshToken } from './lib/models/token/refreshtoken';
+// - utente
+export { AziendaUtente } from './lib/models/entita/utente/aziendautente';
+export { BadgeUtente } from './lib/models/entita/utente/badgeutente';
+export { EventoUtente } from './lib/models/entita/utente/eventoutente';
+export { Utente } from './lib/models/entita/utente/utente';
+export { UtenteUtente } from './lib/models/entita/utente/utenteutente';
+export { VinoUtente } from './lib/models/entita/utente/vinoutente';
+// - azienda
+export { Azienda } from './lib/models/entita/azienda/azienda';
+export { EventoAzienda } from './lib/models/entita/azienda/eventoazienda';
+export { VinoAzienda } from './lib/models/entita/azienda/vinoazienda';
+// - vino
+export { AziendaVino } from './lib/models/entita/vino/aziendavino';
+export { EventoVino } from './lib/models/entita/vino/eventovino';
+export { UtenteVino } from './lib/models/entita/vino/utentevino';
+export { Vino } from './lib/models/entita/vino/vino';
+// - evento
+export { AziendaEvento } from './lib/models/entita/evento/aziendaevento';
+export { BadgeEvento } from './lib/models/entita/evento/badgeevento';
+export { Evento } from './lib/models/entita/evento/evento';
+export { ProvinciaEvento } from './lib/models/entita/evento/provinciaevento';
+export { UtenteEvento } from './lib/models/entita/evento/utenteevento';
+export { VinoEvento } from './lib/models/entita/evento/vinoevento';
+// - feed
+export { AziendaFeed } from './lib/models/entita/feed/aziendafeed';
+export { AziendaVinoFeed } from './lib/models/entita/feed/aziendavino';
+export { EventoFeed } from './lib/models/entita/feed/eventofeed';
+export { Feed } from './lib/models/entita/feed/feed';
+export { VinoFeed } from './lib/models/entita/feed/vinofeed';
+// - badge
+export { Badge } from './lib/models/entita/badge/badge';
+// - comunicazioni
+export { RichiestaGetGenerica } from './lib/models/comunicazioni/richieste/get/richiestagetgenerica';
+export { RispostaGetGenerica } from './lib/models/comunicazioni/richieste/get/rispostagetgenerica';
+export { RichiestaPutGenerica } from './lib/models/comunicazioni/richieste/put/richiestaputgenerica';
+export { RispostaPutGenerica } from './lib/models/comunicazioni/richieste/put/rispostaputgenerica';
+export { RichiestaNotificaGenerica } from './lib/models/comunicazioni/richieste/notifica/richiestanotificagenerica';
+export { RispostaNotificaGenerica } from './lib/models/comunicazioni/richieste/notifica/rispostanotificagenerica';
+// - provincie
+export { Provincia } from './lib/models/entita/provincia/provincia';
+// - profilo azienda
+export { ProfiloAzienda } from './lib/models/entita/profiloAzienda/profiloAzienda';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2J2aW5vLWxpYi8iLCJzb3VyY2VzIjpbInB1YmxpY19hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUlBLCtCQUFjLHdCQUF3QixDQUFDOzs7QUFJdkMsdUNBQWMsNENBQTRDLENBQUM7O0FBRTNELCtCQUFjLHVDQUF1QyxDQUFDO0FBQ3RELDhCQUFjLHNDQUFzQyxDQUFDO0FBQ3JELGlDQUFjLHlDQUF5QyxDQUFDO0FBQ3hELDZCQUFjLHFDQUFxQyxDQUFDO0FBQ3BELGdDQUFjLHNDQUFzQyxDQUFDOzs7QUFJckQsNEJBQWMsZ0NBQWdDLENBQUM7QUFDL0MsbUNBQWMsdUNBQXVDLENBQUM7QUFDdEQseUJBQWMsNkJBQTZCLENBQUM7QUFDNUMsd0JBQWMsNEJBQTRCLENBQUM7QUFDM0MsK0JBQWMsbUNBQW1DLENBQUM7QUFDbEQsNkJBQWMsaUNBQWlDLENBQUM7O0FBRWhELDhCQUFjLDBDQUEwQyxDQUFDO0FBQ3pELDRCQUFjLHdDQUF3QyxDQUFDO0FBQ3ZELDZCQUFjLHlDQUF5QyxDQUFDO0FBQ3hELHVCQUFjLG1DQUFtQyxDQUFDO0FBQ2xELDZCQUFjLHlDQUF5QyxDQUFDO0FBQ3hELDJCQUFjLHVDQUF1QyxDQUFDOztBQUV0RCx3QkFBYyxxQ0FBcUMsQ0FBQztBQUNwRCw4QkFBYywyQ0FBMkMsQ0FBQztBQUMxRCw0QkFBYyx5Q0FBeUMsQ0FBQzs7QUFFeEQsNEJBQWMsc0NBQXNDLENBQUM7QUFDckQsMkJBQWMscUNBQXFDLENBQUM7QUFDcEQsMkJBQWMscUNBQXFDLENBQUM7QUFDcEQscUJBQWMsK0JBQStCLENBQUM7O0FBRTlDLDhCQUFjLDBDQUEwQyxDQUFDO0FBQ3pELDRCQUFjLHdDQUF3QyxDQUFDO0FBQ3ZELHVCQUFjLG1DQUFtQyxDQUFDO0FBQ2xELGdDQUFjLDRDQUE0QyxDQUFDO0FBQzNELDZCQUFjLHlDQUF5QyxDQUFDO0FBQ3hELDJCQUFjLHVDQUF1QyxDQUFDOztBQUV0RCw0QkFBYyxzQ0FBc0MsQ0FBQztBQUNyRCxnQ0FBYyxzQ0FBc0MsQ0FBQztBQUNyRCwyQkFBYyxxQ0FBcUMsQ0FBQztBQUNwRCxxQkFBYywrQkFBK0IsQ0FBQztBQUM5Qyx5QkFBYyxtQ0FBbUMsQ0FBQzs7QUFFbEQsc0JBQWMsaUNBQWlDLENBQUM7O0FBRWhELHFDQUFjLCtEQUErRCxDQUFDO0FBQzlFLG9DQUFjLDhEQUE4RCxDQUFDO0FBQzdFLHFDQUFjLCtEQUErRCxDQUFDO0FBQzlFLG9DQUFjLDhEQUE4RCxDQUFDO0FBQzdFLDBDQUFjLHlFQUF5RSxDQUFDO0FBQ3hGLHlDQUFjLHdFQUF3RSxDQUFDOztBQUV2RiwwQkFBYyx5Q0FBeUMsQ0FBQzs7QUFFeEQsK0JBQWMsbURBQW1ELENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKlxuICogUHVibGljIEFQSSBTdXJmYWNlIG9mIGJ2aW5vLWxpYlxuICovXG5cbmV4cG9ydCAqIGZyb20gJy4vbGliL2J2aW5vLWxpYi5tb2R1bGUnO1xuXG4vLyBzZXJ2aWNlc1xuLy8gLS0gQVVUSFxuZXhwb3J0ICogZnJvbSAnLi9saWIvc2VydmljZXMvYXV0aC9CVkF1dGhvcml6YXRpb25TZXJ2aWNlJztcbi8vIC0tIENPTVVOSVxuZXhwb3J0ICogZnJvbSAnLi9saWIvc2VydmljZXMvY29tbW9uL3Nlc3Npb24uc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9zZXJ2aWNlcy9jb21tb24vYnZodHRwLnNlcnZpY2UnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvc2VydmljZXMvY29tbW9uL3JpY2hpZXN0ZS5zZXJ2aWNlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL3NlcnZpY2VzL2NvbW1vbi9hbGVydC5zZXJ2aWNlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL3NlcnZpY2VzL2NvbW1vbi9jb21tb24uc2VydmljZSc7XG5cbi8vIG1vZGVsc1xuLy8gLSB0b2tlblxuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL3Rva2VuL2FjY2Vzc3Rva2VuJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy90b2tlbi9hY2Nlc3N0b2tlbnBheWxvYWQnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL3Rva2VuL2F3c3Rva2VuJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy90b2tlbi9pZHRva2VuJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy90b2tlbi9pZHRva2VucGF5bG9hZCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvdG9rZW4vcmVmcmVzaHRva2VuJztcbi8vIC0gdXRlbnRlXG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvZW50aXRhL3V0ZW50ZS9hemllbmRhdXRlbnRlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy9lbnRpdGEvdXRlbnRlL2JhZGdldXRlbnRlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy9lbnRpdGEvdXRlbnRlL2V2ZW50b3V0ZW50ZSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvZW50aXRhL3V0ZW50ZS91dGVudGUnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL2VudGl0YS91dGVudGUvdXRlbnRldXRlbnRlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy9lbnRpdGEvdXRlbnRlL3Zpbm91dGVudGUnO1xuLy8gLSBhemllbmRhXG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvZW50aXRhL2F6aWVuZGEvYXppZW5kYSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvZW50aXRhL2F6aWVuZGEvZXZlbnRvYXppZW5kYSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvZW50aXRhL2F6aWVuZGEvdmlub2F6aWVuZGEnO1xuLy8gLSB2aW5vXG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvZW50aXRhL3Zpbm8vYXppZW5kYXZpbm8nO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL2VudGl0YS92aW5vL2V2ZW50b3Zpbm8nO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL2VudGl0YS92aW5vL3V0ZW50ZXZpbm8nO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL2VudGl0YS92aW5vL3Zpbm8nO1xuLy8gLSBldmVudG9cbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy9lbnRpdGEvZXZlbnRvL2F6aWVuZGFldmVudG8nO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL2VudGl0YS9ldmVudG8vYmFkZ2VldmVudG8nO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL2VudGl0YS9ldmVudG8vZXZlbnRvJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy9lbnRpdGEvZXZlbnRvL3Byb3ZpbmNpYWV2ZW50byc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvZW50aXRhL2V2ZW50by91dGVudGVldmVudG8nO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL2VudGl0YS9ldmVudG8vdmlub2V2ZW50byc7XG4vLyAtIGZlZWRcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy9lbnRpdGEvZmVlZC9hemllbmRhZmVlZCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvZW50aXRhL2ZlZWQvYXppZW5kYXZpbm8nO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL2VudGl0YS9mZWVkL2V2ZW50b2ZlZWQnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL2VudGl0YS9mZWVkL2ZlZWQnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbW9kZWxzL2VudGl0YS9mZWVkL3Zpbm9mZWVkJztcbi8vIC0gYmFkZ2VcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy9lbnRpdGEvYmFkZ2UvYmFkZ2UnO1xuLy8gLSBjb211bmljYXppb25pXG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvY29tdW5pY2F6aW9uaS9yaWNoaWVzdGUvZ2V0L3JpY2hpZXN0YWdldGdlbmVyaWNhJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy9jb211bmljYXppb25pL3JpY2hpZXN0ZS9nZXQvcmlzcG9zdGFnZXRnZW5lcmljYSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvY29tdW5pY2F6aW9uaS9yaWNoaWVzdGUvcHV0L3JpY2hpZXN0YXB1dGdlbmVyaWNhJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy9jb211bmljYXppb25pL3JpY2hpZXN0ZS9wdXQvcmlzcG9zdGFwdXRnZW5lcmljYSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvY29tdW5pY2F6aW9uaS9yaWNoaWVzdGUvbm90aWZpY2EvcmljaGllc3Rhbm90aWZpY2FnZW5lcmljYSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvY29tdW5pY2F6aW9uaS9yaWNoaWVzdGUvbm90aWZpY2EvcmlzcG9zdGFub3RpZmljYWdlbmVyaWNhJztcbi8vIC0gcHJvdmluY2llXG5leHBvcnQgKiBmcm9tICcuL2xpYi9tb2RlbHMvZW50aXRhL3Byb3ZpbmNpYS9wcm92aW5jaWEnO1xuLy8gLSBwcm9maWxvIGF6aWVuZGFcbmV4cG9ydCAqIGZyb20gJy4vbGliL21vZGVscy9lbnRpdGEvcHJvZmlsb0F6aWVuZGEvcHJvZmlsb0F6aWVuZGEnO1xuIl19

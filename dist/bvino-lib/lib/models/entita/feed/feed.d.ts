@@ -1,0 +1,30 @@
+import { Vino } from '../vino/vino';
+import { Evento } from '../evento/evento';
+import { VinoFeed } from './vinofeed';
+import { EventoFeed } from './eventofeed';
+import { AziendaFeed } from './aziendafeed';
+export declare class Feed {
+    idFeed: string;
+    idEntitaFeed: string;
+    tipoFeed: number;
+    dataFeed: number;
+    urlImmagineFeed: string;
+    urlVideoFeed: string;
+    titoloFeed: string;
+    testoLabelFeed: string;
+    idEntitaHeaderFeed: string;
+    dataEntitaHeaderFeed: number;
+    tipoEntitaHeaderFeed: string;
+    urlImmagineHeaderFeed: string;
+    headerFeed: string;
+    sottoHeaderFeed: string;
+    testoFeed: string;
+    visualizzaButtonFeed: string;
+    puntiEsperienza: number;
+    pubblicato: boolean;
+    vinoFeed: Vino;
+    vinoFeedInt: VinoFeed;
+    eventoFeed: Evento;
+    eventoFeedInt: EventoFeed;
+    aziendaFeedInt: AziendaFeed;
+}

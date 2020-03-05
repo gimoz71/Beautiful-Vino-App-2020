@@ -1,0 +1,31 @@
+import { RichiestaGetGenerica } from '../../models/comunicazioni/richieste/get/richiestagetgenerica';
+import { RichiestaPutGenerica } from '../../models/comunicazioni/richieste/put/richiestaputgenerica';
+import { Utente } from '../../models/entita/utente/utente';
+import { Evento } from '../../models/entita/evento/evento';
+import { Feed } from '../../models/entita/feed/feed';
+import { Vino } from '../../models/entita/vino/vino';
+import { Provincia } from '../../models/entita/provincia/provincia';
+import { RichiestaNotificaGenerica } from '../../models/comunicazioni/richieste/notifica/richiestanotificagenerica';
+export declare class RichiesteService {
+    private env;
+    constructor(env: any);
+    getRichiestaGetUtenti(): RichiestaGetGenerica;
+    getRichiestaGetUtente(idUtente: string): RichiestaGetGenerica;
+    getRichiestaGetAziende(): RichiestaGetGenerica;
+    getRichiestaGetBadges(): RichiestaGetGenerica;
+    getRichiestaGetEventi(): RichiestaGetGenerica;
+    getRichiestaGetEvento(idEvento: string): RichiestaGetGenerica;
+    getRichiestaGetProvincie(): RichiestaGetGenerica;
+    getRichiestaGetFeed(): RichiestaGetGenerica;
+    getRichiestaGetVini(): RichiestaGetGenerica;
+    getRichiestaGetVino(idVino: string): RichiestaGetGenerica;
+    getRichiestaGetViniAzienda(idAzienda: string): RichiestaGetGenerica;
+    getRichiestaGetProfiloAzienda(idProfiloAzienda: string): RichiestaGetGenerica;
+    getRichiestaPutImmagine(file: any, filename: string, tipoEntita: string): RichiestaPutGenerica;
+    getRichiestaPutProvincia(provincia: Provincia): RichiestaPutGenerica;
+    getRichiestaPutUtente(utente: Utente): RichiestaPutGenerica;
+    getRichiestaPutEvento(evento: Evento): RichiestaPutGenerica;
+    getRichiestaPutFeed(feed: Feed): RichiestaPutGenerica;
+    getRichiestaPutVino(vino: Vino): RichiestaPutGenerica;
+    getRichiestaNotifica(messaggio: string): RichiestaNotificaGenerica;
+}

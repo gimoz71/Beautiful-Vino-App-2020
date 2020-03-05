@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export class RispostaNotificaGenerica {
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmlzcG9zdGFub3RpZmljYWdlbmVyaWNhLmpzIiwic291cmNlUm9vdCI6Im5nOi8vYnZpbm8tbGliLyIsInNvdXJjZXMiOlsibGliL21vZGVscy9jb211bmljYXppb25pL3JpY2hpZXN0ZS9ub3RpZmljYS9yaXNwb3N0YW5vdGlmaWNhZ2VuZXJpY2EudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE1BQU0sT0FBTyx3QkFBd0I7Q0FFcEMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY2xhc3MgUmlzcG9zdGFOb3RpZmljYUdlbmVyaWNhIHtcblxufVxuIl19

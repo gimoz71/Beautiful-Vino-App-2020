@@ -1,0 +1,34 @@
+import { Azienda } from '../../../entita/azienda/azienda';
+import { Evento } from '../../../entita/evento/evento';
+import { Vino } from '../../../entita/vino/vino';
+import { Badge } from '../../../entita/badge/badge';
+import { Feed } from '../../../entita/feed/feed';
+import { Provincia } from '../../../entita/provincia/provincia';
+import { Token } from '../../../entita/token/token';
+import { Utente } from '../../../entita/utente/utente';
+import { Esito } from '../../../entita/esito/esito';
+import { ProfiloAzienda } from '../../../entita/profiloAzienda/profiloAzienda';
+export declare class RispostaGetGenerica {
+    stato: string;
+    azienda: Azienda;
+    profiloAzienda: ProfiloAzienda;
+    eventiAzienda: Array<Evento>;
+    viniAzienda: Array<Vino>;
+    aziende: Array<Azienda>;
+    badge: Badge;
+    numTotEventi: number;
+    eventi: Array<Evento>;
+    evento: Evento;
+    numTotFeed: number;
+    feed: Array<Feed>;
+    province: Array<Provincia>;
+    newToken: Token;
+    utente: Utente;
+    utenti: Array<Utente>;
+    vini: Array<Vino>;
+    badges: Array<Badge>;
+    vino: Vino;
+    token: Token;
+    utentePresente: number;
+    esito: Esito;
+}
