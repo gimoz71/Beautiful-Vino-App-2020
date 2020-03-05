@@ -56,6 +56,7 @@ export class LoginPage extends BaseComponent implements OnInit {
           this.commonService.get(this.richiesteService.getRichiestaGetUtente(idUtenteDb)).subscribe(r => {
             if (r.esito.codice === environment.ESITO_OK_CODICE) {
               const utente = r.utente as Utente;
+              this.appSessionService.set(environment.KEY_UTENTE, JSON.stringify(utente));
               if (utente.idProfiloAziendaUtente !== undefined && utente.idProfiloAziendaUtente !== '') {
                 this.commonService.get(this.richiesteService.getRichiestaGetProfiloAzienda(utente.idProfiloAziendaUtente)).subscribe(s => {
                   if (s.esito.codice === environment.ESITO_OK_CODICE) {

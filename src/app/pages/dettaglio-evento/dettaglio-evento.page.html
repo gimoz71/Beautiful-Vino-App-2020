@@ -50,20 +50,22 @@
                     <div class="box vino clearfix" *ngFor="let vino of evento.viniEventoInt"
                         (click)="dettaglioVino(vino)">
                         <div>
-                            <img [src]="vino.urlLogoVino" class="vino-thumb">
+                            <div class="vino-thumb"></div>
                             <h3 class="titolo">{{vino.nomeVino}} <span>{{vino.uvaggioVino}}</span></h3>
                             <p class="info">{{vino.inBreveVino}}</p>
                         </div>
                     </div>
                     <h3 class="titolo-box">Dove</h3>
                 </div>
-                <div class="area-mappa"
-                    style="background-image: url(https://www.google.com/maps/d/u/0/thumbnail?mid=1kd0s4-pdSHW2U5YRWG6yleVjQ0E)">
+                <div class="area-mappa">
+                    <app-bvmaps [latitudine]="evento.latitudineEvento" [longitudine]="evento.longitudineEvento"
+                        [zoom]="12">
+                    </app-bvmaps>
                     <div class="box mappa clearfix">
-                        <p class="indirizzo"><b>{{evento.aziendaOspitanteEvento.indirizzoAzienda}}</b>,<br>
+                        <p class="indirizzo"><b>{{evento.indirizzoEvento}}</b>,<br>
                         </p>
                         <p class="contatti">
-                            {{evento.aziendaOspitanteEvento.telefonoAzienda}}<br>{{evento.aziendaOspitanteEvento.emailAzienda}}
+                            {{evento.telefonoEvento}}<br>{{evento.emailEvento}}
                         </p>
                     </div>
                 </div>

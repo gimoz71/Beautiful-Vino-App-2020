@@ -41,8 +41,11 @@ export class AppComponent implements OnInit {
         });
     }
 
-    public isLoginPage(): boolean {
-        return this.router.url === '/login';
+    public barVisible(): boolean {
+        return this.router.url === '/eventi' ||
+            this.router.url === '/scopri' ||
+            this.router.url === '/vini' ||
+            this.router.url === '/profilo';
     }
 }
 

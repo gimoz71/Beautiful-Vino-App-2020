@@ -21,7 +21,7 @@
                 <div class="frame-content">
                     <div class="box evento clearfix" *ngFor="let evento of listaEventi"
                         (click)="dettaglioEvento(evento)">
-                        <div class="cover" style="background-image: url({{evento.urlFotoEvento}}">
+                        <div class="cover" [ngStyle]="{'background-image': 'url(' + evento.urlFotoEvento + ')'}">
                         </div>
                         <h2 class="titolo">{{evento.titoloEvento}}</h2>
                         <div class="clearfix">

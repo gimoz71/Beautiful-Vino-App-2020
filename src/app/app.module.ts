@@ -25,6 +25,16 @@ import { AlertService } from './services/alert/alert.service';
 import { environment } from 'src/environments/environmentkeys';
 import { PipesModule } from './pipes/pipes.module';
 
+import { MapsModule } from './components/maps/maps.module';
+
+
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -34,7 +44,10 @@ import { PipesModule } from './pipes/pipes.module';
     AppRoutingModule,
     HttpClientModule,
     BvinoLibModule.forRoot(environment),
-    PipesModule
+    PipesModule,
+    MapsModule,
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
@@ -49,6 +62,9 @@ import { PipesModule } from './pipes/pipes.module';
     BVCommonService,
     LogoutCommunicationService,
     ThemeChangerService,
+    Camera,
+    File,
+    WebView,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: BVHttpInterceptor,
@@ -56,7 +72,8 @@ import { PipesModule } from './pipes/pipes.module';
     }
   ],
   exports: [
-    PipesModule
+    PipesModule,
+    MapsModule
   ],
   bootstrap: [AppComponent]
 })

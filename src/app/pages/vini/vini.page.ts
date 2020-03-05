@@ -1,23 +1,38 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { LogoutCommunicationService } from 'src/app/services/logoutCommunication/logoutcommunication.service';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Vino, BVCommonService, RichiesteService } from 'bvino-lib';
+import { environment } from 'src/environments/environmentkeys';
+import { BaseComponent } from 'src/app/components/base/base.component';
+import { AlertService } from 'src/app/services/alert/alert.service';
+import { AppSessionService } from 'src/app/services/appsession/appSession.service';
 
 @Component({
   selector: 'app-vini',
   templateUrl: './vini.page.html',
   styleUrls: ['./vini.page.scss'],
 })
-export class ViniPage implements OnInit {
+export class ViniPage extends BaseComponent implements OnInit {
 
   private unsubscribe$ = new Subject<void>();
 
+  public listaVini: Array<Vino>;
+
   constructor(
-    private router: Router,
+    private commonService: BVCommonService,
+    private richiesteService: RichiesteService,
+    public alertService: AlertService,
+    public router: Router,
     private logoutComm: LogoutCommunicationService,
-    public ngZone: NgZone
-  ) { }
+    public ngZone: NgZone,
+    private appSessionService: AppSessionService
+  ) {
+    super(router, alertService);
+    this.listaVini = new Array<Vino>();
+
+  }
 
   ionViewDidEnter() {
     this.logoutComm.logoutObservable.pipe(
@@ -28,9 +43,25 @@ export class ViniPage implements OnInit {
       this.ngZone.run(() => this.router.navigate(['login'])).then();
     });
 
+    const idAzienda = this.appSessionService.get(environment.KEY_AZIENDA_ID);
+
+    this.commonService.get(this.richiesteService.getRichiestaGetViniAzienda(idAzienda)).subscribe(r => {
+      if (r.esito.codice === environment.ESITO_OK_CODICE) {
+        this.listaVini = r.vini;
+      } else {
+        this.manageError(r);
+      }
+    }, err => {
+      this.alertService.presentErrorAlert(err.statusText);
+    });
   }
 
+
   ngOnInit() {
+  }
+
+  public dettaglioVino(vino: Vino) {
+    this.goToPageParams('dettaglio-vino', { queryParams: { vinoselezionato: JSON.stringify(vino), reload: 'false' } });
   }
 
   ionViewDidLeave() {

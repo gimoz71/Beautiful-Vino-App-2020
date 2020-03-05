@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { DettaglioAziendaPageRoutingModule } from './dettaglio-azienda-routing.module';
 
 import { DettaglioAziendaPage } from './dettaglio-azienda.page';
+import { MapsModule } from 'src/app/components/maps/maps.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DettaglioAziendaPageRoutingModule
+    DettaglioAziendaPageRoutingModule,
+    MapsModule
   ],
   declarations: [DettaglioAziendaPage]
 })
-export class DettaglioAziendaPageModule {}
+export class DettaglioAziendaPageModule { }

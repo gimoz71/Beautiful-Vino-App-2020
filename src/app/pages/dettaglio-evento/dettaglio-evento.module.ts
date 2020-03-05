@@ -8,6 +8,7 @@ import { DettaglioEventoPageRoutingModule } from './dettaglio-evento-routing.mod
 
 import { DettaglioEventoPage } from './dettaglio-evento.page';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { MapsModule } from 'src/app/components/maps/maps.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     FormsModule,
     IonicModule,
     DettaglioEventoPageRoutingModule,
-    PipesModule
+    PipesModule,
+    MapsModule
   ],
   declarations: [DettaglioEventoPage]
 })

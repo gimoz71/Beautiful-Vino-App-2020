@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SessionService } from 'bvino-lib';
+import { LogoutCommunicationService } from '../logoutCommunication/logoutcommunication.service';
 
 /**
  *Wrapper per la sessione in libreria che aggiunge la gestione dei cookies
@@ -9,7 +10,8 @@ import { SessionService } from 'bvino-lib';
 export class AppSessionService {
 
   constructor(
-    private sessionService: SessionService) { }
+    private sessionService: SessionService,
+    private logoutComm: LogoutCommunicationService) { }
 
   /**
    * controlla sia nella sessione che nei cookies. La precedenza va alla sessione per velocizzare le operazioni
@@ -48,5 +50,10 @@ export class AppSessionService {
   public clearAll(): void {
     this.sessionService.clearSession();
     // this.cookieService.deleteAll('/');
+  }
+
+  public clearForLogout() {
+    this.clearAll();
+    this.logoutComm.comunicateLogout();
   }
 }

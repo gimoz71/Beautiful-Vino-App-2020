@@ -3,54 +3,54 @@
         <div class="content dettagli">
             <div class="scroller-content" (scroll)="onScroll($event)">
                 <div class="utility-header" [class.reveal]="showNav">
-                    <div class="float-chiudi" (click)="router.navigate(['/vini']);">
+                    <div class="float-chiudi" (click)="elencoVini()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
                             <g id="Layer_2" data-name="Layer 2">
                                 <g id="Layer_1-2" data-name="Layer 1">
                                     <!--<path d="M92.66,0a92.66,92.66,0,1,0,92.66,92.66A92.77,92.77,0,0,0,92.66,0Zm0,175.33a82.66,82.66,0,1,1,82.66-82.66A82.76,82.76,0,0,1,92.66,175.33Z" />-->
-                                    <path d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
+                                    <path
+                                        d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
                                 </g>
                             </g>
                         </svg>
                     </div>
-                    <h3 class="float-header">Nome vino</h3>
+                    <h3 class="float-header">{{vino.nomeVino}}</h3>
                 </div>
-                <div class="dettaglio-header" style="background-image: url(https://wips.plug.it/cips/initalia.virgilio.it/cms/2019/11/cantina.jpg);">
-                    <div class="chiudi"  (click)="router.navigate(['/vini']);">
+                <div class="dettaglio-header" [ngStyle]="{'background-image': 'url(' + vino.urlImmagineVino + ')'}">
+                    <div class="chiudi" (click)="elencoVini()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
                             <g id="Layer_2" data-name="Layer 2">
                                 <g id="Layer_1-2" data-name="Layer 1">
                                     <!--<path d="M92.66,0a92.66,92.66,0,1,0,92.66,92.66A92.77,92.77,0,0,0,92.66,0Zm0,175.33a82.66,82.66,0,1,1,82.66-82.66A82.76,82.76,0,0,1,92.66,175.33Z" />-->
-                                    <path d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
+                                    <path
+                                        d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
                                 </g>
                             </g>
                         </svg>
                     </div>
                     <div class="box azienda clearfix">
                         <div>
-                            <h2 class="titolo">Nome Vino</h2>
+                            <h2 class="titolo">{{vino.nomeVino}}</h2>
                             <div class="clearfix">
-                                <h4 class="indirizzo">altre info</h4>
+                                <h4 class="indirizzo">{{vino.infoVino}}</h4>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="frame-content">
                     <p class="intro">
-                        <span>Uvaggio:</span> <b>Syrah 100%</b><br>
-                        <span>Regione:</span> <b>Campania</b><br>
-                        <span>Profumo:</span> <b>Frutti di bosco e miele</b>
+                        <span>Uvaggio:</span> <b>{{vino.uvaggioVino}}</b><br>
+                        <span>Regione:</span> <b>{{vino.regioneVino}}</b><br>
+                        <span>Profumo:</span> <b>{{vino.profumoVino}}</b>
                     </p>
                     <p class="intro highlight">
-                        <b>in breve:</b> pieno e intenso, con aromi di frutta fresca, adatto a carne e piatti speziati.
+                        <b>in breve:</b> {{vino.inBreveVino}}
                     </p>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam, libero et placerat condimentum, mauris massa elementum ligula, at tincidunt nibh tellus non arcu. Integer aliquam velit arcu, vel placerat ex congue nec. Nullam euismod sit amet sapien non posuere. Suspendisse volutpat venenatis risus faucibus elementum. Vestibulum dignissim purus non commodo imperdiet. In hac habitasse platea dictumst. Proin porttitor nec enim a pharetra. Nullam eu nisi a ex sodales interdum eget nec nulla. Nulla at mauris fermentum, ullamcorper libero eget, pulvinar neque. Quisque viverra velit non risus bibendum consectetur. Praesent commodo pulvinar metus ut ullamcorper.
-                    </p>
+                    <p class="description" [innerHTML]="vino.descrizioneVino"></p>
                 </div>
-                <div class="frame-content">
+                <!-- <div class="frame-content">
                     <h3 class="titolo-box">Prossimi eventi</h3>
                     <div class="box evento clearfix">
                         <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
@@ -61,25 +61,7 @@
                         </div>
                         <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
                     </div>
-                    <div class="box evento clearfix">
-                        <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
-                        <h2 class="titolo">Degustibus Lini 910</h2>
-                        <div class="clearfix">
-                            <h4 class="data">21 febbraio, ore 12.30</h4>
-                            <h2 class="badge">&euro; 50,00</h2>
-                        </div>
-                        <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
-                    </div>
-                    <div class="box evento clearfix">
-                        <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
-                        <h2 class="titolo">Degustibus Lini 910</h2>
-                        <div class="clearfix">
-                            <h4 class="data">21 febbraio, ore 12.30</h4>
-                            <h2 class="badge">&euro; 50,00</h2>
-                        </div>
-                        <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
-                    </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -1,5 +1,7 @@
 {
   "name": "BeautifulVinoApp2020",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

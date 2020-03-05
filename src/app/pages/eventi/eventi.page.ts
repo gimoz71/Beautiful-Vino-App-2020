@@ -70,7 +70,7 @@ export class EventiPage extends BaseComponent implements OnInit {
   }
 
   public dettaglioEvento(evento: Evento) {
-    this.goToPageParams('dettaglio-evento', { queryParams: { eventoselezionato: JSON.stringify(evento) } });
+    this.goToPageParams('dettaglio-evento', { queryParams: { eventoselezionato: JSON.stringify(evento), reload: 'false' } });
   }
 
   ionViewDidLeave() {
