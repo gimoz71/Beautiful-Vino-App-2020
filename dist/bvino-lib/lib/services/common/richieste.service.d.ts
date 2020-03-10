@@ -10,13 +10,16 @@ export declare class RichiesteService {
     private env;
     constructor(env: any);
     getRichiestaGetUtenti(): RichiestaGetGenerica;
+    getRichiestaGetUtentiAzienda(idAzienda: string): RichiestaGetGenerica;
     getRichiestaGetUtente(idUtente: string): RichiestaGetGenerica;
     getRichiestaGetAziende(): RichiestaGetGenerica;
     getRichiestaGetBadges(): RichiestaGetGenerica;
     getRichiestaGetEventi(): RichiestaGetGenerica;
+    getRichiestaGetEventiAzienda(idAzienda: string): RichiestaGetGenerica;
     getRichiestaGetEvento(idEvento: string): RichiestaGetGenerica;
     getRichiestaGetProvincie(): RichiestaGetGenerica;
     getRichiestaGetFeed(): RichiestaGetGenerica;
+    getRichiestaGetFeedAzienda(idAzienda: string): RichiestaGetGenerica;
     getRichiestaGetVini(): RichiestaGetGenerica;
     getRichiestaGetVino(idVino: string): RichiestaGetGenerica;
     getRichiestaGetViniAzienda(idAzienda: string): RichiestaGetGenerica;

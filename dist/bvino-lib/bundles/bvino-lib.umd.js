@@ -449,6 +449,21 @@
                 return richiesta;
             };
         /**
+         * @param {?} idAzienda
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaGetUtentiAzienda = /**
+         * @param {?} idAzienda
+         * @return {?}
+         */
+            function (idAzienda) {
+                /** @type {?} */
+                var richiesta = new RichiestaGetGenerica();
+                richiesta.functionName = this.env.getUtentiAziendaFunctionName;
+                richiesta.idAzienda = idAzienda;
+                return richiesta;
+            };
+        /**
          * @param {?} idUtente
          * @return {?}
          */
@@ -502,6 +517,23 @@
                 return richiesta;
             };
         /**
+         * @param {?} idAzienda
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaGetEventiAzienda = /**
+         * @param {?} idAzienda
+         * @return {?}
+         */
+            function (idAzienda) {
+                /** @type {?} */
+                var richiesta = new RichiestaGetGenerica();
+                richiesta.functionName = this.env.getEventiAziendaFunctionName;
+                richiesta.idAzienda = idAzienda;
+                richiesta.idUtente = '';
+                richiesta.elencoCompleto = 'S';
+                return richiesta;
+            };
+        /**
          * @param {?} idEvento
          * @return {?}
          */
@@ -538,6 +570,21 @@
                 /** @type {?} */
                 var richiesta = new RichiestaGetGenerica();
                 richiesta.functionName = this.env.getFeedFunctionName;
+                return richiesta;
+            };
+        /**
+         * @param {?} idAzienda
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaGetFeedAzienda = /**
+         * @param {?} idAzienda
+         * @return {?}
+         */
+            function (idAzienda) {
+                /** @type {?} */
+                var richiesta = new RichiestaGetGenerica();
+                richiesta.functionName = this.env.getFeedAziendaFunctionName;
+                richiesta.idAzienda = idAzienda;
                 return richiesta;
             };
         /**

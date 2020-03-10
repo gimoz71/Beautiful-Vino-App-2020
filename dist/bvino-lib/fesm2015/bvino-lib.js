@@ -284,6 +284,17 @@ class RichiesteService {
         return richiesta;
     }
     /**
+     * @param {?} idAzienda
+     * @return {?}
+     */
+    getRichiestaGetUtentiAzienda(idAzienda) {
+        /** @type {?} */
+        const richiesta = new RichiestaGetGenerica();
+        richiesta.functionName = this.env.getUtentiAziendaFunctionName;
+        richiesta.idAzienda = idAzienda;
+        return richiesta;
+    }
+    /**
      * @param {?} idUtente
      * @return {?}
      */
@@ -324,6 +335,19 @@ class RichiesteService {
         return richiesta;
     }
     /**
+     * @param {?} idAzienda
+     * @return {?}
+     */
+    getRichiestaGetEventiAzienda(idAzienda) {
+        /** @type {?} */
+        const richiesta = new RichiestaGetGenerica();
+        richiesta.functionName = this.env.getEventiAziendaFunctionName;
+        richiesta.idAzienda = idAzienda;
+        richiesta.idUtente = '';
+        richiesta.elencoCompleto = 'S';
+        return richiesta;
+    }
+    /**
      * @param {?} idEvento
      * @return {?}
      */
@@ -350,6 +374,17 @@ class RichiesteService {
         /** @type {?} */
         const richiesta = new RichiestaGetGenerica();
         richiesta.functionName = this.env.getFeedFunctionName;
+        return richiesta;
+    }
+    /**
+     * @param {?} idAzienda
+     * @return {?}
+     */
+    getRichiestaGetFeedAzienda(idAzienda) {
+        /** @type {?} */
+        const richiesta = new RichiestaGetGenerica();
+        richiesta.functionName = this.env.getFeedAziendaFunctionName;
+        richiesta.idAzienda = idAzienda;
         return richiesta;
     }
     /**
