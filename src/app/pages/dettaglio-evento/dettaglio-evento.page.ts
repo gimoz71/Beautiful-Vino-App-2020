@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environmentkeys';
+import { AppSessionService } from 'src/app/services/appsession/appSession.service';
 
 @Component({
     selector: 'app-dettaglio-evento',
@@ -30,7 +31,8 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
         private logoutComm: LogoutCommunicationService,
         public ngZone: NgZone,
         public commonService: BVCommonService,
-        public richiesteService: RichiesteService
+        public richiesteService: RichiesteService,
+        public appSessionService: AppSessionService
     ) {
         super(router, alertService);
         this.evento = new Evento();
@@ -38,6 +40,8 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
     }
 
     ionViewDidEnter() {
+        this.appSessionService.set(environment.KEY_PAGINA_SELEZIONATA, 'dettaglio-azienda');
+
         this.logoutComm.logoutObservable.pipe(
             takeUntil(this.unsubscribe$)
         ).subscribe(r => {
@@ -53,16 +57,20 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
             this.evento = JSON.parse(params.eventoselezionato) as Evento;
             if (this.reload) {
                 // devo ricaricare l'evento
-                this.commonService.get(this.richiesteService.getRichiestaGetEvento(this.evento.idEvento)).subscribe(r => {
-                    if (r.esito.codice === environment.ESITO_OK_CODICE) {
-                        this.evento = r.evento;
-                    } else {
-                        this.manageError(r);
-                    }
-                }, err => {
-                    this.alertService.presentErrorAlert(err.statusText);
-                });
+                this.reloadEvento();
             }
+        });
+    }
+
+    public reloadEvento() {
+        this.commonService.get(this.richiesteService.getRichiestaGetEvento(this.evento.idEvento)).subscribe(r => {
+            if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                this.evento = r.evento;
+            } else {
+                this.manageError(r);
+            }
+        }, err => {
+            this.alertService.presentErrorAlert(err.statusText);
         });
     }
 

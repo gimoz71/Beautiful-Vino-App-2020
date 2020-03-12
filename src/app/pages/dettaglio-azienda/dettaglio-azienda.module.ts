@@ -8,6 +8,7 @@ import { DettaglioAziendaPageRoutingModule } from './dettaglio-azienda-routing.m
 
 import { DettaglioAziendaPage } from './dettaglio-azienda.page';
 import { MapsModule } from 'src/app/components/maps/maps.module';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { MapsModule } from 'src/app/components/maps/maps.module';
     FormsModule,
     IonicModule,
     DettaglioAziendaPageRoutingModule,
+    PipesModule,
     MapsModule
   ],
   declarations: [DettaglioAziendaPage]

@@ -35,6 +35,7 @@ export class ProfiloPage extends BaseComponent implements OnInit {
   }
 
   ionViewDidEnter() {
+    this.appSessionService.set(environment.KEY_PAGINA_SELEZIONATA, 'profilo');
     this.logoutComm.logoutObservable.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(r => {
@@ -43,6 +44,20 @@ export class ProfiloPage extends BaseComponent implements OnInit {
       this.ngZone.run(() => this.router.navigate(['login'])).then();
     });
 
+    if (this.appSessionService.isInSession(environment.KEY_AZIENDA_ID)) {
+      this.ottieniDati(this.appSessionService.get(environment.KEY_AZIENDA_ID));
+    } else {
+      this.appSessionService.loadDataFromStorage(environment.KEY_AZIENDA_ID).then((val: string) => {
+        if (val !== undefined && val !== null && val !== '') {
+          const decodedVal = this.decodeObjectInStorage(val);
+          console.log('recuperato id azienda da storage: ' + decodedVal);
+          this.ottieniDati(decodedVal);
+        } else {
+          this.goToPage('login');
+        }
+      });
+    }
+
     const utenteString = this.appSessionService.get(environment.KEY_UTENTE);
     if (utenteString === undefined || utenteString === '') {
       // necessario login
@@ -50,6 +65,10 @@ export class ProfiloPage extends BaseComponent implements OnInit {
     } else {
       this.utente = JSON.parse(utenteString) as Utente;
     }
+  }
+
+  private ottieniDati(idAzienda: string) {
+
   }
 
   ngOnInit() {

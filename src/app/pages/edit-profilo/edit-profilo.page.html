@@ -25,9 +25,10 @@
                     </svg>
                 </a>
                 <button class="button small  logout">Esci</button>
-                <div class="thumb-edit">
+                <app-fileupload [thumbImage]="utente.urlFotoUtente"></app-fileupload>
+                <!-- <div class="thumb-edit">
                     <img src="https://i.pravatar.cc/150?img=52" class="user-thumb edit">
-                    <a href="#" class="add-photo">
+                    <a [routerLink]="" class="add-photo">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168.25 124.36" (click)="selectImage()">
                             <title>camera</title>
                             <g id="Layer_2" data-name="Layer 2">
@@ -40,9 +41,8 @@
                                 </g>
                             </g>
                         </svg>
-
                     </a>
-                </div>
+                </div> -->
             </div>
             <div class="scroller-content">
                 <form class="user-data">

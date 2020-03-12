@@ -35,6 +35,7 @@ export class ViniPage extends BaseComponent implements OnInit {
   }
 
   ionViewDidEnter() {
+    this.appSessionService.set(environment.KEY_PAGINA_SELEZIONATA, 'vini');
     this.logoutComm.logoutObservable.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(r => {
@@ -43,19 +44,33 @@ export class ViniPage extends BaseComponent implements OnInit {
       this.ngZone.run(() => this.router.navigate(['login'])).then();
     });
 
-    const idAzienda = this.appSessionService.get(environment.KEY_AZIENDA_ID);
-
-    this.commonService.get(this.richiesteService.getRichiestaGetViniAzienda(idAzienda)).subscribe(r => {
-      if (r.esito.codice === environment.ESITO_OK_CODICE) {
-        this.listaVini = r.vini;
-      } else {
-        this.manageError(r);
-      }
-    }, err => {
-      this.alertService.presentErrorAlert(err.statusText);
-    });
+    if (this.appSessionService.isInSession(environment.KEY_AZIENDA_ID)) {
+      this.ottieniDati(this.appSessionService.get(environment.KEY_AZIENDA_ID));
+    } else {
+      this.appSessionService.loadDataFromStorage(environment.KEY_AZIENDA_ID).then((val: string) => {
+        if (val !== undefined && val !== null && val !== '') {
+          const decodedVal = this.decodeObjectInStorage(val);
+          console.log('recuperato id azienda da storage: ' + decodedVal);
+          this.ottieniDati(decodedVal);
+        } else {
+          this.goToPage('login');
+        }
+      });
+    }
   }
 
+  private ottieniDati(idAzienda: string) {
+    this.commonService.get(this.richiesteService.getRichiestaGetViniAzienda(this.appSessionService.get(environment.KEY_AZIENDA_ID)))
+      .subscribe(r => {
+        if (r.esito.codice === environment.ESITO_OK_CODICE) {
+          this.listaVini = r.vini;
+        } else {
+          this.manageError(r);
+        }
+      }, err => {
+        this.alertService.presentErrorAlert(err.statusText);
+      });
+  }
 
   ngOnInit() {
   }

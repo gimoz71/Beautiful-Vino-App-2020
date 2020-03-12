@@ -34,6 +34,8 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { FileuploadModule } from './components/fileupload/fileupload.module';
+import { StoreService } from './services/store/store.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -46,6 +48,7 @@ import { IonicStorageModule } from '@ionic/storage';
     BvinoLibModule.forRoot(environment),
     PipesModule,
     MapsModule,
+    FileuploadModule,
     HttpClientModule,
     IonicStorageModule.forRoot()
   ],
@@ -63,6 +66,7 @@ import { IonicStorageModule } from '@ionic/storage';
     LogoutCommunicationService,
     ThemeChangerService,
     Camera,
+    StoreService,
     File,
     WebView,
     {
@@ -73,7 +77,8 @@ import { IonicStorageModule } from '@ionic/storage';
   ],
   exports: [
     PipesModule,
-    MapsModule
+    MapsModule,
+    FileuploadModule
   ],
   bootstrap: [AppComponent]
 })

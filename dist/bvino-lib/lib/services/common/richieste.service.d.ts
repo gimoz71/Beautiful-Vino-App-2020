@@ -13,6 +13,7 @@ export declare class RichiesteService {
     getRichiestaGetUtentiAzienda(idAzienda: string): RichiestaGetGenerica;
     getRichiestaGetUtente(idUtente: string): RichiestaGetGenerica;
     getRichiestaGetAziende(): RichiestaGetGenerica;
+    getRichiestaGetAzienda(idAzienda: string): RichiestaGetGenerica;
     getRichiestaGetBadges(): RichiestaGetGenerica;
     getRichiestaGetEventi(): RichiestaGetGenerica;
     getRichiestaGetEventiAzienda(idAzienda: string): RichiestaGetGenerica;

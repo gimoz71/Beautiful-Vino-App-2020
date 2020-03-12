@@ -2,7 +2,7 @@
   <ion-router-outlet></ion-router-outlet>
   <div class="footer" *ngIf="barVisible()">
     <ul class="main-navigation">
-      <li (click)="router.navigate(['/eventi']);" class="selected">
+      <li (click)="goToPage('eventi')" [ngClass]="{'selected': isPage('eventi')}">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 209.95 194.77">
           <title>eventi</title>
           <g id="Layer_2" data-name="Layer 2">
@@ -16,7 +16,7 @@
         </svg>
         <span>eventi</span>
       </li>
-      <li (click)="router.navigate(['/scopri']);">
+      <li (click)="goToPage('scopri')" [ngClass]="{'selected': isPage('scopri')}">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232.67 196.51">
           <title>scopri</title>
           <g id="Layer_2" data-name="Layer 2">
@@ -33,7 +33,7 @@
         </svg>
         <span>scopri</span>
       </li>
-      <li (click)="router.navigate(['/vini']);">
+      <li (click)="goToPage('vini')" [ngClass]="{'selected': isPage('vini')}">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98.41 200.68">
           <title>vini</title>
           <g id="Layer_2" data-name="Layer 2">
@@ -47,7 +47,7 @@
         </svg>
         <span>vini</span>
       </li>
-      <li (click)="router.navigate(['/profilo']);">
+      <li (click)="goToPage('profilo')" [ngClass]="{'selected': isPage('profilo')}">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 199.33 185.89">
           <title>profilo</title>
           <g id="Layer_2" data-name="Layer 2">

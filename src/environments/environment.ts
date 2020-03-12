@@ -26,11 +26,14 @@ export const environment = {
   getBadgeFunctionName: 'getBadgeGen',
   getBadgesFunctionName: 'getBadgesGen',
   getEventiFunctionName: 'getEventiGen',
+  getEventiAziendaFunctionName: 'getEventiAziendaGen',
   getEventiUtenteFunctionName: 'getEventiUtenteGen',
   getEventoFunctionName: 'getEventoGen',
   getFeedFunctionName: 'getFeedGen',
+  getFeedAziendaFunctionName: 'getFeedAziendaGen',
   getProvincieFunctionName: 'getProvinceGen',
   getTokenFunctionName: 'getTokenGen',
+  getUtentiAziendaFunctionName: 'getUtentiAziendaGen',
   getUtentiFunctionName: 'getUtentiGen',
   getUtenteFunctionName: 'getUtenteGen',
   getViniFunctionName: 'getViniGen',
@@ -59,7 +62,8 @@ export const environment = {
   AWS_UPLOADBUCKET_SECRETACCESS_KEY: '',
   AWS_UPLOADBUCKET_REGION: '',
   AWS_UPLOADBUCKET_BUCKETNAME: '',
-  GOOGLE_MAP_API_KEY: ''
+  GOOGLE_MAP_API_KEY: '',
+  KEY_PAGINA_SELEZIONATA: 'paginaSelezionata'
 };
 
 /*

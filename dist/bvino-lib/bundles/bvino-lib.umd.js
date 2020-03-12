@@ -491,6 +491,21 @@
                 return richiesta;
             };
         /**
+         * @param {?} idAzienda
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaGetAzienda = /**
+         * @param {?} idAzienda
+         * @return {?}
+         */
+            function (idAzienda) {
+                /** @type {?} */
+                var richiesta = new RichiestaGetGenerica();
+                richiesta.functionName = this.env.getAziendaFunctionName;
+                richiesta.idAzienda = idAzienda;
+                return richiesta;
+            };
+        /**
          * @return {?}
          */
         RichiesteService.prototype.getRichiestaGetBadges = /**

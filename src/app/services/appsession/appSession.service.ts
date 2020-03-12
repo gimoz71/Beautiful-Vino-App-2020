@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { SessionService } from 'bvino-lib';
 import { LogoutCommunicationService } from '../logoutCommunication/logoutcommunication.service';
+import { StoreService } from '../store/store.service';
 
 /**
- *Wrapper per la sessione in libreria che aggiunge la gestione dei cookies
+ * Wrapper per la sessione in libreria
+ * che aggiunge la gestione dello storage
  *
  */
 @Injectable()
@@ -11,49 +13,47 @@ export class AppSessionService {
 
   constructor(
     private sessionService: SessionService,
-    private logoutComm: LogoutCommunicationService) { }
+    private logoutComm: LogoutCommunicationService,
+    private storeService: StoreService) { }
 
   /**
    * controlla sia nella sessione che nei cookies. La precedenza va alla sessione per velocizzare le operazioni
    *
    *
    */
-  public get(key: string): string {
-    const objectInSession = this.sessionService.get(key);
-    if (objectInSession === undefined || objectInSession === null) {
-      // non c'è l'oggetto in sessione. Controllo se è nei cookies
-      // const objectInCookiesEncoded = this.cookieService.get(key); // usiamo le stesse chiavi
-      // if (objectInCookiesEncoded === undefined || objectInCookiesEncoded === null || objectInCookiesEncoded === '') {
-      //   // non ho trovato niente ne' in sessione, ne' tra i cookies
-      //   return '';
-      // } else {
-      //   return window.atob(objectInCookiesEncoded);
-      // }
-    } else {
-      // this.cookieService.set(key, window.btoa(objectInSession));
-      return objectInSession;
-    }
+  public get(key: string) {
+    return this.sessionService.get(key);
   }
 
-  public set(key: string, value: string): void {
+  public loadDataFromStorage(key: string): Promise<any> {
+    return this.storeService.getDataPromise(key);
+  }
+
+  public isInSession(key: string): boolean {
+    const objectInSession = this.sessionService.get(key);
+    return objectInSession !== null && objectInSession !== undefined && objectInSession !== '';
+  }
+
+  public set(key: string, value: string) {
     this.sessionService.set(key, value);
     const encodedValue = window.btoa(value);
-    // this.cookieService.set(key, encodedValue, null, '/');
+    this.storeService.setData(key, encodedValue);
   }
 
   // cancellazione e svuotamento da fare
-  public deleteKey(key: string): void {
+  public async deleteKey(key: string) {
     this.sessionService.deleteKey(key);
-    // this.cookieService.delete(key);
+    await this.storeService.removeData(key);
   }
 
-  public clearAll(): void {
+  public async clearAll() {
     this.sessionService.clearSession();
-    // this.cookieService.deleteAll('/');
+    this.storeService.clearUserData();
   }
 
-  public clearForLogout() {
-    this.clearAll();
+  public async clearForLogout() {
+    await this.clearAll();
     this.logoutComm.comunicateLogout();
   }
+
 }

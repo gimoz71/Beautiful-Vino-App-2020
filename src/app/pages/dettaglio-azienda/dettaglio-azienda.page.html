@@ -3,49 +3,63 @@
         <div class="content dettagli">
             <div class="scroller-content">
                 <div class="utility-header">
-                    <div class="float-chiudi"  (click)="router.navigate(['/eventi  (click)="router.navigate(['/vini']);"']);">
+                    <div class="float-chiudi" (click)="router.navigate(['/eventi']);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
                             <g id="Layer_2" data-name="Layer 2">
                                 <g id="Layer_1-2" data-name="Layer 1">
                                     <!--<path d="M92.66,0a92.66,92.66,0,1,0,92.66,92.66A92.77,92.77,0,0,0,92.66,0Zm0,175.33a82.66,82.66,0,1,1,82.66-82.66A82.76,82.76,0,0,1,92.66,175.33Z" />-->
-                                    <path d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
+                                    <path
+                                        d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
                                 </g>
                             </g>
                         </svg>
                     </div>
-                    <h3 class="float-header">Lini910</h3>
+                    <h3 class="float-header">{{azienda.nomeAzienda}}</h3>
                 </div>
-                <div class="dettaglio-header" style="background-image: url(https://brooklynwinecompany.files.wordpress.com/2010/08/24234_334083422797_71013937797_3801709_1890238_n.jpg);">
-                    <div class="chiudi"  (click)="router.navigate(['/eventi']);">
+                <div class="dettaglio-header"
+                    [ngStyle]="{'background-image': 'url(' + azienda.urlImmagineAzienda + ')'}">
+                    <div class="chiudi" (click)="router.navigate(['/eventi']);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
                             <g id="Layer_2" data-name="Layer 2">
                                 <g id="Layer_1-2" data-name="Layer 1">
                                     <!--<path d="M92.66,0a92.66,92.66,0,1,0,92.66,92.66A92.77,92.77,0,0,0,92.66,0Zm0,175.33a82.66,82.66,0,1,1,82.66-82.66A82.76,82.76,0,0,1,92.66,175.33Z" />-->
-                                    <path d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
+                                    <path
+                                        d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
                                 </g>
                             </g>
                         </svg>
                     </div>
                     <div class="box azienda clearfix">
                         <div>
-                            <h2 class="titolo">Lini910</h2>
+                            <h2 class="titolo">{{azienda.nomeAzienda}}</h2>
                             <div class="clearfix">
-                                <h4 class="indirizzo">indirizzo dell'azienda</h4>
+                                <h4 class="indirizzo">
+                                    {{azienda.indirizzoAzienda + ', ' + azienda.cittaAzienda + ', ' + azienda.regioneAzienda}}
+                                </h4>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="frame-content">
-                    <p class="intro"><span><b>Sito:</b></span> www.azienda.com<br>
-                    <span><b>email:</b></span> info@azienda.com</p>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam, libero et placerat condimentum, mauris massa elementum ligula, at tincidunt nibh tellus non arcu. Integer aliquam velit arcu, vel placerat ex congue nec. Nullam euismod sit amet sapien non posuere. Suspendisse volutpat venenatis risus faucibus elementum. Vestibulum dignissim purus non commodo imperdiet. In hac habitasse platea dictumst. Proin porttitor nec enim a pharetra. Nullam eu nisi a ex sodales interdum eget nec nulla. Nulla at mauris fermentum, ullamcorper libero eget, pulvinar neque. Quisque viverra velit non risus bibendum consectetur. Praesent commodo pulvinar metus ut ullamcorper.
-                    </p>
+                    <p class="description" [innerHTML]="azienda.infoAzienda"></p>
                     <h3 class="titolo-box">Dove</h3>
                 </div>
-                <div class="area-mappa" style="background-image: url(https://www.google.com/maps/d/u/0/thumbnail?mid=1kd0s4-pdSHW2U5YRWG6yleVjQ0E)">
+                <div class="area-mappa">
+                    <app-bvmaps [latitudine]="azienda.latitudineAzienda" [longitudine]="azienda.longitudineAzienda"
+                        [zoom]="12">
+                    </app-bvmaps>
+                    <div class="box mappa clearfix">
+                        <p class="indirizzo"><b>{{azienda.cittaAzienda}}</b>,<br>
+                            {{azienda.indirizzoAzienda}}<br>
+                        </p><br>
+                        <p class="contatti">
+                            {{azienda.telefonoAzienda}}<br>{{azienda.emailAzienda}}<br>{{azienda.sitoAzienda}}</p>
+                    </div>
+                </div>
+                <!-- <div class="area-mappa"
+                    style="background-image: url(https://www.google.com/maps/d/u/0/thumbnail?mid=1kd0s4-pdSHW2U5YRWG6yleVjQ0E)">
                     <div class="box mappa clearfix">
                         <p class="indirizzo"><b>Milano</b>,<br>
                             via Gobetti, 10<br>
@@ -53,52 +67,30 @@
                         </p>
                         <p class="contatti">+3906360424548<br>info@email.com</p>
                     </div>
-                </div>
-                <div class="frame-content">
+                </div> -->
+                <div class="frame-content" *ngIf="azienda.viniAzienda && azienda.viniAzienda.length > 0">
                     <h3 class="titolo-box">Elenco dei vini</h3>
-                    <div class="box vino clearfix">
+                    <div class="box vino clearfix" *ngFor="let vino of azienda.viniAzienda"
+                        (click)="dettaglioVino(vino)">
                         <div>
-                            <img src="https://via.placeholder.com/150/ffffff/cccccc/?Text=BV" class="vino-thumb">
-                            <h3 class="titolo">Nome Vino <span>sottotitolo</span></h3>
-                            <p class="info">metodo classico affinato in bottiglia</p>
-                        </div>
-                    </div>
-                    <div class="box vino clearfix">
-                        <div>
-                            <img src="https://via.placeholder.com/150/ffffff/cccccc/?Text=BV" class="vino-thumb">
-                            <h3 class="titolo">Nome Vino <span>sottotitolo</span></h3>
-                            <p class="info">metodo classico affinato in bottiglia</p>
+                            <img [src]="vino.urlLogoVino" class="vino-thumb">
+                            <h3 class="titolo">{{vino.nomeVino}}<span>{{vino.AnnoVino}}</span></h3>
+                            <p class="info">{{vino.uvaggioVino}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="frame-content">
+                <div class="frame-content" *ngIf="azienda.eventiAzienda && azienda.eventiAzienda.length > 0">
                     <h3 class="titolo-box">Prossimi eventi</h3>
-                    <div class="box evento clearfix">
-                        <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
-                        <h2 class="titolo">Degustibus Lini 910</h2>
-                        <div class="clearfix">
-                            <h4 class="data">21 febbraio, ore 12.30</h4>
-                            <h2 class="badge">&euro; 50,00</h2>
+                    <div class="box evento clearfix" *ngFor="let evento of azienda.eventiAzienda"
+                        (click)="dettaglioEvento(evento)">
+                        <div class="cover" [ngStyle]="{'background-image': 'url(' + evento.urlFotoEvento + ')'}">
                         </div>
-                        <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
-                    </div>
-                    <div class="box evento clearfix">
-                        <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
-                        <h2 class="titolo">Degustibus Lini 910</h2>
+                        <h2 class="titolo">{{evento.nomeEvento}}</h2>
                         <div class="clearfix">
-                            <h4 class="data">21 febbraio, ore 12.30</h4>
-                            <h2 class="badge">&euro; 50,00</h2>
+                            <h4 class="data">{{evento.dataEvento | BVDateFormat_gg_mm_aaaa}}</h4>
+                            <h2 class="badge">{{evento.prezzoEvento}}</h2>
                         </div>
-                        <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
-                    </div>
-                    <div class="box evento clearfix">
-                        <div class="cover" style="background-image: url(https://as1.ftcdn.net/jpg/01/77/91/92/500_F_177919212_n8GX3CRgHYAsuWfbMJQoqpA7boO0oj7R.jpg)"></div>
-                        <h2 class="titolo">Degustibus Lini 910</h2>
-                        <div class="clearfix">
-                            <h4 class="data">21 febbraio, ore 12.30</h4>
-                            <h2 class="badge">&euro; 50,00</h2>
-                        </div>
-                        <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero ipsum, consequat non urna molestie, volutpat suscipit justo. Phasellus quis lacus ac nisl iaculis varius quis vel augue.</p>
+                        <div class="testo estratto" [innerHTML]="evento.testoEvento"></div>
                     </div>
                 </div>
             </div>

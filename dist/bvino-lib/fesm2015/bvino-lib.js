@@ -315,6 +315,17 @@ class RichiesteService {
         return richiesta;
     }
     /**
+     * @param {?} idAzienda
+     * @return {?}
+     */
+    getRichiestaGetAzienda(idAzienda) {
+        /** @type {?} */
+        const richiesta = new RichiestaGetGenerica();
+        richiesta.functionName = this.env.getAziendaFunctionName;
+        richiesta.idAzienda = idAzienda;
+        return richiesta;
+    }
+    /**
      * @return {?}
      */
     getRichiestaGetBadges() {

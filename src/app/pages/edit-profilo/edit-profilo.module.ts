@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { EditProfiloPageRoutingModule } from './edit-profilo-routing.module';
 
 import { EditProfiloPage } from './edit-profilo.page';
+import { FileuploadModule } from 'src/app/components/fileupload/fileupload.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditProfiloPageRoutingModule
+    EditProfiloPageRoutingModule,
+    FileuploadModule
   ],
   declarations: [EditProfiloPage]
 })
-export class EditProfiloPageModule {}
+export class EditProfiloPageModule { }

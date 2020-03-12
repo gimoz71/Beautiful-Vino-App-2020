@@ -6,6 +6,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
+import { AppSessionService } from './services/appsession/appSession.service';
+import { environment } from 'src/environments/environment';
+
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
@@ -15,6 +18,8 @@ export class AppComponent implements OnInit {
 
     firstColor = '#e51d70'; /* default BV #e51d70 */
     secondColor = '#f9da2c'; /* Default BV #f9da2c */
+
+    private selectedPage = 'eventi';
 
     ngOnInit(): void {
 
@@ -29,7 +34,8 @@ export class AppComponent implements OnInit {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private sanitizer: DomSanitizer,
-        private router: Router
+        private router: Router,
+        private appSessionService: AppSessionService
     ) {
         this.initializeApp();
     }
@@ -46,6 +52,15 @@ export class AppComponent implements OnInit {
             this.router.url === '/scopri' ||
             this.router.url === '/vini' ||
             this.router.url === '/profilo';
+    }
+
+    public goToPage(pageName: string): void {
+        this.appSessionService.set(environment.KEY_PAGINA_SELEZIONATA, pageName);
+        this.router.navigate([pageName]);
+    }
+
+    public isPage(pageName: string): boolean {
+        return pageName === this.appSessionService.get(environment.KEY_PAGINA_SELEZIONATA);
     }
 }
 

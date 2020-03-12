@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { MapsComponent } from './maps.component';
 
 import { AgmCoreModule } from '@agm/core';
-import { environment } from 'src/environments/environmentkeys';
+import { environment } from '../../../environments/environmentkeys';
 
 @NgModule({
     imports: [

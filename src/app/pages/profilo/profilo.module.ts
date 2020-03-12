@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ProfiloPageRoutingModule } from './profilo-routing.module';
 
 import { ProfiloPage } from './profilo.page';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfiloPageRoutingModule
+    ProfiloPageRoutingModule,
+    PipesModule
   ],
   declarations: [ProfiloPage]
 })
-export class ProfiloPageModule {}
+export class ProfiloPageModule { }

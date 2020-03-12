@@ -41,4 +41,12 @@ export class BaseComponent implements OnInit {
       this.alertService.presentErrorAlert('Si è verificato un errore nella richiesta: ' + error.statusText);
     }
   }
+
+  public decodeObjectInStorage(val: string) {
+    return window.atob(val);
+  }
+
+  protected loadToken(): void {
+
+  }
 }

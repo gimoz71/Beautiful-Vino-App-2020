@@ -21,7 +21,14 @@ export class BVHttpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.printInstant(request.url + ' __ START _____ ');
-    const tokenValue = this.appSessionService.get(environment.KEY_AUTH_TOKEN);
+    if (this.appSessionService.isInSession(environment.KEY_AUTH_TOKEN)) {
+      return this.manageRequest(this.appSessionService.get(environment.KEY_AUTH_TOKEN), request, next);
+    } else {
+      this.router.navigate(['login']);
+    }
+  }
+
+  private manageRequest(tokenValue: string, request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = request.clone({
       headers: new HttpHeaders({
         Authorization: tokenValue,

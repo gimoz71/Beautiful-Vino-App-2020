@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environmentkeys';
+import { AppSessionService } from 'src/app/services/appsession/appSession.service';
 
 @Component({
     selector: 'app-dettaglio-feed',
@@ -30,13 +31,16 @@ export class DettaglioFeedPage extends BaseComponent implements OnInit {
         private logoutComm: LogoutCommunicationService,
         public ngZone: NgZone,
         public commonService: BVCommonService,
-        public richiesteService: RichiesteService
+        public richiesteService: RichiesteService,
+        public appSessionService: AppSessionService
     ) {
         super(router, alertService);
         this.feed = new Feed();
     }
 
     ionViewDidEnter() {
+        this.appSessionService.set(environment.KEY_PAGINA_SELEZIONATA, 'dettaglio-feed');
+
         this.logoutComm.logoutObservable.pipe(
             takeUntil(this.unsubscribe$)
         ).subscribe(r => {
