@@ -79,6 +79,7 @@ export class DettaglioAziendaPage extends BaseComponent implements OnInit {
                     this.azienda = r.azienda;
                 } else {
                     this.manageError(r);
+
                 }
             }, err => {
                 this.alertService.presentErrorAlert(err.statusText);

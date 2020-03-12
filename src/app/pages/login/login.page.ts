@@ -7,6 +7,8 @@ import { AppSessionService } from 'src/app/services/appsession/appSession.servic
 import { environment } from 'src/environments/environmentkeys';
 import { ThemeChangerService } from 'src/app/services/themeChanger/themechanger.service';
 import { AlertService } from 'src/app/services/alert/alert.service';
+import { Subject } from 'rxjs';
+import { ColorChangeCommunicationService } from '../../services/colorChangeCommunication/colorchangecommunication.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +32,8 @@ export class LoginPage extends BaseComponent implements OnInit {
     public alertService: AlertService,
     public commonService: BVCommonService,
     public richiesteService: RichiesteService,
-    public themeChanger: ThemeChangerService) {
+    public themeChanger: ThemeChangerService,
+    public colorChangeComm: ColorChangeCommunicationService) {
     super(router, alertService);
   }
 
@@ -69,6 +72,10 @@ export class LoginPage extends BaseComponent implements OnInit {
                     this.appSessionService.set(environment.KEY_AZIENDA_LOGO, profiloAzienda.logo);
                     this.appSessionService.set(environment.KEY_AZIENDA_SPLASHSCREEN, profiloAzienda.splaqshScreen);
                     this.appSessionService.set(environment.KEY_AZIENDA_PAYPAL_CODE, profiloAzienda.paypalCode);
+                    this.appSessionService.set(environment.KEY_AZIENDA_COLOREPRIMARIO, profiloAzienda.colorePrimario);
+                    this.appSessionService.set(environment.KEY_AZIENDA_COLORESECONDARIO, profiloAzienda.coloreSecondario);
+
+                    this.colorChangeComm.comunicateColorChange();
 
                     this.router.navigate(['/eventi']);
 

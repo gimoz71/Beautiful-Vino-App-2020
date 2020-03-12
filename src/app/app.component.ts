@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 
 import { AppSessionService } from './services/appsession/appSession.service';
 import { environment } from 'src/environments/environment';
+import { ColorChangeCommunicationService } from './services/colorChangeCommunication/colorchangecommunication.service';
 
 @Component({
     selector: 'app-root',
@@ -16,7 +17,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent implements OnInit {
 
-    firstColor = '#e51d70'; /* default BV #e51d70 */
+    firstColor = '#66bb6a'; /* default BV #e51d70 */
     secondColor = '#f9da2c'; /* Default BV #f9da2c */
 
     private selectedPage = 'eventi';
@@ -35,7 +36,8 @@ export class AppComponent implements OnInit {
         private statusBar: StatusBar,
         private sanitizer: DomSanitizer,
         private router: Router,
-        private appSessionService: AppSessionService
+        private appSessionService: AppSessionService,
+        private colorComm: ColorChangeCommunicationService
     ) {
         this.initializeApp();
     }
@@ -45,6 +47,13 @@ export class AppComponent implements OnInit {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
         });
+        this.colorComm.colorObservable.subscribe(r => {
+            if (r) {
+                this.firstColor = this.appSessionService.get(environment.KEY_AZIENDA_COLOREPRIMARIO);
+                this.secondColor = this.appSessionService.get(environment.KEY_AZIENDA_COLORESECONDARIO);
+            }
+        });
+
     }
 
     public barVisible(): boolean {

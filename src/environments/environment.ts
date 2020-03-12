@@ -19,6 +19,8 @@ export const environment = {
   KEY_AZIENDA_LOGO: 'beautifulvino_azienda_logo',
   KEY_AZIENDA_SPLASHSCREEN: 'beautifulvino_azienda_splashscreen',
   KEY_AZIENDA_PAYPAL_CODE: 'beautifulvino_azienda_paypal_code',
+  KEY_AZIENDA_COLOREPRIMARIO: 'beautifulvino_azienda_coloreprimario',
+  KEY_AZIENDA_COLORESECONDARIO: 'beautifulvino_azienda_coloresecondario',
   KEY_UTENTE: 'beautifulvino_utente',
   getAziendeFunctionName: 'getAziendeGen',
   getAziendaFunctionName: 'getAziendaGen',

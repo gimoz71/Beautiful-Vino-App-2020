@@ -36,6 +36,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { FileuploadModule } from './components/fileupload/fileupload.module';
 import { StoreService } from './services/store/store.service';
+import { ColorChangeCommunicationService } from './services/colorChangeCommunication/colorchangecommunication.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -64,6 +65,7 @@ import { StoreService } from './services/store/store.service';
     RichiesteService,
     BVCommonService,
     LogoutCommunicationService,
+    ColorChangeCommunicationService,
     ThemeChangerService,
     Camera,
     StoreService,
