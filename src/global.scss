@@ -351,13 +351,14 @@ form {
                 }
             }
             &.mappa {
+                display: block;
                 .indirizzo, .contatti {
                     font-size: .9em;
                     float: none;
                     margin: 0;
                 }
                 .contatti {
-                    margin-top: 1em;
+                    margin-top: .5em;
                     color: $grey-default;
                 }
 			}
