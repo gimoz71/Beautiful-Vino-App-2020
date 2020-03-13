@@ -280,6 +280,21 @@ var BVHttpService = /** @class */ (function () {
             + this.env.pathSeparator
             + path, request);
     };
+    /**
+     * @param {?} path
+     * @param {?} request
+     * @return {?}
+     */
+    BVHttpService.prototype.postConnect = /**
+     * @param {?} path
+     * @param {?} request
+     * @return {?}
+     */
+    function (path, request) {
+        return this.http.post(this.env.baseAppUrlConnect
+            + this.env.pathSeparator
+            + path, request);
+    };
     BVHttpService.decorators = [
         { type: Injectable }
     ];
@@ -454,6 +469,27 @@ var RichiesteService = /** @class */ (function () {
         richiesta.idAzienda = idAzienda;
         richiesta.idUtente = '';
         richiesta.elencoCompleto = 'S';
+        return richiesta;
+    };
+    /**
+     * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} idUtente
+     * @return {?}
+     */
+    RichiesteService.prototype.getRichiestaGetEventoUtente = /**
+     * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} idUtente
+     * @return {?}
+     */
+    function (idEvento, dataEvento, idUtente) {
+        /** @type {?} */
+        var richiesta = new RichiestaGetGenerica();
+        richiesta.functionName = this.env.getEventoFunctionName;
+        richiesta.idEvento = idEvento;
+        richiesta.idUtente = idUtente;
+        richiesta.dataEvento = dataEvento;
         return richiesta;
     };
     /**
@@ -690,6 +726,9 @@ var RichiesteService = /** @class */ (function () {
     /**
      * @param {?} idUtente
      * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} statoPreferitoEvento
+     * @param {?} statoAcquistatoEvento
      * @return {?}
      */
     RichiesteService.prototype.getRichiestaAggiungiEventoAPreferiti = 
@@ -697,52 +736,76 @@ var RichiesteService = /** @class */ (function () {
     /**
      * @param {?} idUtente
      * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} statoPreferitoEvento
+     * @param {?} statoAcquistatoEvento
      * @return {?}
      */
-    function (idUtente, idEvento) {
+    function (idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
         /** @type {?} */
         var richiesta = new RichiestaConnectGenerica();
         richiesta.idUtente = idUtente;
         richiesta.idEvento = idEvento;
+        richiesta.dataEvento = dataEvento;
         richiesta.statoEvento = 'P';
+        richiesta.statoPreferitoEvento = statoPreferitoEvento;
+        richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
         richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
         return richiesta;
     };
     /**
      * @param {?} idUtente
      * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} statoPreferitoEvento
+     * @param {?} statoAcquistatoEvento
      * @return {?}
      */
     RichiesteService.prototype.getRichiestaAcquistaEvento = /**
      * @param {?} idUtente
      * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} statoPreferitoEvento
+     * @param {?} statoAcquistatoEvento
      * @return {?}
      */
-    function (idUtente, idEvento) {
+    function (idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
         /** @type {?} */
         var richiesta = new RichiestaConnectGenerica();
         richiesta.idUtente = idUtente;
         richiesta.idEvento = idEvento;
+        richiesta.dataEvento = dataEvento;
         richiesta.statoEvento = 'A';
+        richiesta.statoPreferitoEvento = statoPreferitoEvento;
+        richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
         richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
         return richiesta;
     };
     /**
      * @param {?} idUtente
      * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} statoPreferitoEvento
+     * @param {?} statoAcquistatoEvento
      * @return {?}
      */
     RichiesteService.prototype.getRichiestaRimuoviEventoDaPreferiti = /**
      * @param {?} idUtente
      * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} statoPreferitoEvento
+     * @param {?} statoAcquistatoEvento
      * @return {?}
      */
-    function (idUtente, idEvento) {
+    function (idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
         /** @type {?} */
         var richiesta = new RichiestaConnectGenerica();
         richiesta.idUtente = idUtente;
         richiesta.idEvento = idEvento;
+        richiesta.dataEvento = dataEvento;
         richiesta.statoEvento = 'D';
+        richiesta.statoPreferitoEvento = statoPreferitoEvento;
+        richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
         richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
         return richiesta;
     };
@@ -845,6 +908,17 @@ var BVCommonService = /** @class */ (function () {
      */
     function (request) {
         return this.httpService.post(this.env.getServiceName, request);
+    };
+    /**
+     * @param {?} request
+     * @return {?}
+     */
+    BVCommonService.prototype.connect = /**
+     * @param {?} request
+     * @return {?}
+     */
+    function (request) {
+        return this.httpService.postConnect(this.env.connectServiceName, request);
     };
     BVCommonService.decorators = [
         { type: Injectable }
@@ -1201,6 +1275,16 @@ var RispostaNotificaGenerica = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var RispostaConnectGenerica = /** @class */ (function () {
+    function RispostaConnectGenerica() {
+    }
+    return RispostaConnectGenerica;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var Provincia = /** @class */ (function () {
     function Provincia() {
     }
@@ -1227,6 +1311,6 @@ var ProfiloAzienda = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { BvinoLibModule, BVAuthorizationService, SessionService, BVHttpService, RichiesteService, AlertService, BVCommonService, AccessToken, AccessTokenPayload, AwsToken, IdToken, IdTokenPayload, RefreshToken, AziendaUtente, BadgeUtente, EventoUtente, Utente, UtenteUtente, VinoUtente, Azienda, EventoAzienda, VinoAzienda, AziendaVino, EventoVino, UtenteVino, Vino, AziendaEvento, BadgeEvento, Evento, ProvinciaEvento, UtenteEvento, VinoEvento, AziendaFeed, AziendaVinoFeed, EventoFeed, Feed, VinoFeed, Badge, RichiestaGetGenerica, RispostaGetGenerica, RichiestaPutGenerica, RispostaPutGenerica, RichiestaNotificaGenerica, RispostaNotificaGenerica, Provincia, ProfiloAzienda };
+export { BvinoLibModule, BVAuthorizationService, SessionService, BVHttpService, RichiesteService, AlertService, BVCommonService, AccessToken, AccessTokenPayload, AwsToken, IdToken, IdTokenPayload, RefreshToken, AziendaUtente, BadgeUtente, EventoUtente, Utente, UtenteUtente, VinoUtente, Azienda, EventoAzienda, VinoAzienda, AziendaVino, EventoVino, UtenteVino, Vino, AziendaEvento, BadgeEvento, Evento, ProvinciaEvento, UtenteEvento, VinoEvento, AziendaFeed, AziendaVinoFeed, EventoFeed, Feed, VinoFeed, Badge, RichiestaGetGenerica, RispostaGetGenerica, RichiestaPutGenerica, RispostaPutGenerica, RichiestaNotificaGenerica, RispostaNotificaGenerica, RichiestaConnectGenerica, RispostaConnectGenerica, Provincia, ProfiloAzienda };
 
 //# sourceMappingURL=bvino-lib.js.map

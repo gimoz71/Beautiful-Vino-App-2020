@@ -18,6 +18,7 @@ export declare class Evento {
     prezzoEvento: number;
     urlFotoEvento: string;
     statoEvento: string;
+    statoPreferitoEvento: string;
     testoEvento: string;
     latitudineEvento: number;
     longitudineEvento: number;

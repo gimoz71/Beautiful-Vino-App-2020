@@ -18,6 +18,7 @@ export declare class RichiesteService {
     getRichiestaGetBadges(): RichiestaGetGenerica;
     getRichiestaGetEventi(): RichiestaGetGenerica;
     getRichiestaGetEventiAzienda(idAzienda: string): RichiestaGetGenerica;
+    getRichiestaGetEventoUtente(idEvento: string, dataEvento: number, idUtente: string): RichiestaGetGenerica;
     getRichiestaGetEvento(idEvento: string): RichiestaGetGenerica;
     getRichiestaGetProvincie(): RichiestaGetGenerica;
     getRichiestaGetFeed(): RichiestaGetGenerica;
@@ -33,7 +34,7 @@ export declare class RichiesteService {
     getRichiestaPutFeed(feed: Feed): RichiestaPutGenerica;
     getRichiestaPutVino(vino: Vino): RichiestaPutGenerica;
     getRichiestaNotifica(messaggio: string): RichiestaNotificaGenerica;
-    getRichiestaAggiungiEventoAPreferiti(idUtente: string, idEvento: string): RichiestaConnectGenerica;
-    getRichiestaAcquistaEvento(idUtente: string, idEvento: string): RichiestaConnectGenerica;
-    getRichiestaRimuoviEventoDaPreferiti(idUtente: string, idEvento: string): RichiestaConnectGenerica;
+    getRichiestaAggiungiEventoAPreferiti(idUtente: string, idEvento: string, dataEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
+    getRichiestaAcquistaEvento(idUtente: string, idEvento: string, dataEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
+    getRichiestaRimuoviEventoDaPreferiti(idUtente: string, idEvento: string, dataEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
 }

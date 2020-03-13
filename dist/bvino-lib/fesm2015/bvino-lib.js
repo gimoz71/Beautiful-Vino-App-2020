@@ -230,6 +230,16 @@ class BVHttpService {
             + this.env.pathSeparator
             + path, request);
     }
+    /**
+     * @param {?} path
+     * @param {?} request
+     * @return {?}
+     */
+    postConnect(path, request) {
+        return this.http.post(this.env.baseAppUrlConnect
+            + this.env.pathSeparator
+            + path, request);
+    }
 }
 BVHttpService.decorators = [
     { type: Injectable }
@@ -363,6 +373,21 @@ class RichiesteService {
         richiesta.idAzienda = idAzienda;
         richiesta.idUtente = '';
         richiesta.elencoCompleto = 'S';
+        return richiesta;
+    }
+    /**
+     * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} idUtente
+     * @return {?}
+     */
+    getRichiestaGetEventoUtente(idEvento, dataEvento, idUtente) {
+        /** @type {?} */
+        const richiesta = new RichiestaGetGenerica();
+        richiesta.functionName = this.env.getEventoFunctionName;
+        richiesta.idEvento = idEvento;
+        richiesta.idUtente = idUtente;
+        richiesta.dataEvento = dataEvento;
         return richiesta;
     }
     /**
@@ -533,42 +558,60 @@ class RichiesteService {
     /**
      * @param {?} idUtente
      * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} statoPreferitoEvento
+     * @param {?} statoAcquistatoEvento
      * @return {?}
      */
-    getRichiestaAggiungiEventoAPreferiti(idUtente, idEvento) {
+    getRichiestaAggiungiEventoAPreferiti(idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
         /** @type {?} */
         const richiesta = new RichiestaConnectGenerica();
         richiesta.idUtente = idUtente;
         richiesta.idEvento = idEvento;
+        richiesta.dataEvento = dataEvento;
         richiesta.statoEvento = 'P';
+        richiesta.statoPreferitoEvento = statoPreferitoEvento;
+        richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
         richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
         return richiesta;
     }
     /**
      * @param {?} idUtente
      * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} statoPreferitoEvento
+     * @param {?} statoAcquistatoEvento
      * @return {?}
      */
-    getRichiestaAcquistaEvento(idUtente, idEvento) {
+    getRichiestaAcquistaEvento(idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
         /** @type {?} */
         const richiesta = new RichiestaConnectGenerica();
         richiesta.idUtente = idUtente;
         richiesta.idEvento = idEvento;
+        richiesta.dataEvento = dataEvento;
         richiesta.statoEvento = 'A';
+        richiesta.statoPreferitoEvento = statoPreferitoEvento;
+        richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
         richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
         return richiesta;
     }
     /**
      * @param {?} idUtente
      * @param {?} idEvento
+     * @param {?} dataEvento
+     * @param {?} statoPreferitoEvento
+     * @param {?} statoAcquistatoEvento
      * @return {?}
      */
-    getRichiestaRimuoviEventoDaPreferiti(idUtente, idEvento) {
+    getRichiestaRimuoviEventoDaPreferiti(idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
         /** @type {?} */
         const richiesta = new RichiestaConnectGenerica();
         richiesta.idUtente = idUtente;
         richiesta.idEvento = idEvento;
+        richiesta.dataEvento = dataEvento;
         richiesta.statoEvento = 'D';
+        richiesta.statoPreferitoEvento = statoPreferitoEvento;
+        richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
         richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
         return richiesta;
     }
@@ -655,6 +698,13 @@ class BVCommonService {
      */
     get(request) {
         return this.httpService.post(this.env.getServiceName, request);
+    }
+    /**
+     * @param {?} request
+     * @return {?}
+     */
+    connect(request) {
+        return this.httpService.postConnect(this.env.connectServiceName, request);
     }
 }
 BVCommonService.decorators = [
@@ -908,6 +958,13 @@ class RispostaNotificaGenerica {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class RispostaConnectGenerica {
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class Provincia {
 }
 
@@ -928,6 +985,6 @@ class ProfiloAzienda {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { BvinoLibModule, BVAuthorizationService, SessionService, BVHttpService, RichiesteService, AlertService, BVCommonService, AccessToken, AccessTokenPayload, AwsToken, IdToken, IdTokenPayload, RefreshToken, AziendaUtente, BadgeUtente, EventoUtente, Utente, UtenteUtente, VinoUtente, Azienda, EventoAzienda, VinoAzienda, AziendaVino, EventoVino, UtenteVino, Vino, AziendaEvento, BadgeEvento, Evento, ProvinciaEvento, UtenteEvento, VinoEvento, AziendaFeed, AziendaVinoFeed, EventoFeed, Feed, VinoFeed, Badge, RichiestaGetGenerica, RispostaGetGenerica, RichiestaPutGenerica, RispostaPutGenerica, RichiestaNotificaGenerica, RispostaNotificaGenerica, Provincia, ProfiloAzienda };
+export { BvinoLibModule, BVAuthorizationService, SessionService, BVHttpService, RichiesteService, AlertService, BVCommonService, AccessToken, AccessTokenPayload, AwsToken, IdToken, IdTokenPayload, RefreshToken, AziendaUtente, BadgeUtente, EventoUtente, Utente, UtenteUtente, VinoUtente, Azienda, EventoAzienda, VinoAzienda, AziendaVino, EventoVino, UtenteVino, Vino, AziendaEvento, BadgeEvento, Evento, ProvinciaEvento, UtenteEvento, VinoEvento, AziendaFeed, AziendaVinoFeed, EventoFeed, Feed, VinoFeed, Badge, RichiestaGetGenerica, RispostaGetGenerica, RichiestaPutGenerica, RispostaPutGenerica, RichiestaNotificaGenerica, RispostaNotificaGenerica, RichiestaConnectGenerica, RispostaConnectGenerica, Provincia, ProfiloAzienda };
 
 //# sourceMappingURL=bvino-lib.js.map

@@ -36,7 +36,7 @@ export class AppSessionService {
 
   public set(key: string, value: string) {
     this.sessionService.set(key, value);
-    const encodedValue = window.btoa(value);
+    const encodedValue = window.btoa(unescape(encodeURIComponent(value)));
     this.storeService.setData(key, encodedValue);
   }
 

@@ -41,9 +41,10 @@
                                     </g>
                                 </g>
                             </svg>
-                            Milano
+                            {{evento.cittaEvento}}
                         </div>
-                        <div class="favourites">
+                        <div class="favourites" *ngIf="evento && evento.statoPreferitoEvento === 'P'"
+                            (click)="togliDaiPreferiti()">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 407.98 375.6">
                                 <title>favourites</title>
                                 <g id="Layer_2" data-name="Layer 2">
@@ -54,7 +55,8 @@
                                 </g>
                             </svg>
                         </div>
-                        <div class="favourites-off">
+                        <div class="favourites-off" *ngIf="!(evento && evento.statoPreferitoEvento === 'P')"
+                            (click)="aggiungiAiPreferiti()">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 407.98 375.6">
                                 <title>favourites-off</title>
                                 <g id="Layer_2" data-name="Layer 2">
@@ -69,7 +71,7 @@
                             <h2 class="titolo">{{evento.titoloEvento}}</h2>
                             <div class="clearfix">
                                 <h4 class="data">{{evento.dataEvento | BVDateFormat_gg_mm_aaaa}}</h4>
-                                <h2 class="badge">&euro; 50,00</h2>
+                                <h2 class="badge">&euro; {{evento.prezzoEvento}}</h2>
                             </div>
                         </div>
                     </div>
@@ -106,7 +108,8 @@
             </div>
             <div class="footer action">
                 <div class="frame-content">
-                    <button class="button text-center btn-second-color full-width"><b>Acquista</b>
+                    <button class="button text-center btn-second-color full-width"
+                        (click)="acquistaEvento()"><b>Acquista</b>
                         (&euro; {{evento.prezzoEvento}})</button>
                 </div>
             </div>

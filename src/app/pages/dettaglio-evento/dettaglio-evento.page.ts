@@ -24,6 +24,8 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
     public evento: Evento;
     public reload = false;
 
+    public idUtente: string;
+
     constructor(
         private route: ActivatedRoute,
         public alertService: AlertService,
@@ -50,28 +52,49 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
             this.ngZone.run(() => this.router.navigate(['home'])).then();
         });
 
+        if (this.appSessionService.isInSession(environment.KEY_USER_ID)) {
+            this.idUtente = this.appSessionService.get(environment.KEY_USER_ID);
+            this.ottieniDati();
+        } else {
+            this.appSessionService.loadDataFromStorage(environment.KEY_USER_ID).then((val) => {
+                if (val !== undefined && val !== null && val !== '') {
+                    const decodedVal = this.decodeObjectInStorage(val);
+                    this.idUtente = decodedVal;
+                    this.ottieniDati();
+                } else {
+                    this.appSessionService.clearForLogout();
+                }
+            }, (err) => {
+                this.manageError(err);
+                this.appSessionService.clearForLogout();
+            });
+        }
+    }
+
+    private ottieniDati() {
         this.route.queryParams.pipe(
             takeUntil(this.unsubscribe$)
         ).subscribe(params => {
-            this.reload = params.reload === 'true';
             this.evento = JSON.parse(params.eventoselezionato) as Evento;
-            if (this.reload) {
-                // devo ricaricare l'evento
-                this.reloadEvento();
-            }
+            // devo ricaricare l'evento
+            this.reloadEvento();
         });
     }
 
     public reloadEvento() {
-        this.commonService.get(this.richiesteService.getRichiestaGetEvento(this.evento.idEvento)).subscribe(r => {
-            if (r.esito.codice === environment.ESITO_OK_CODICE) {
-                this.evento = r.evento;
-            } else {
-                this.manageError(r);
-            }
-        }, err => {
-            this.alertService.presentErrorAlert(err.statusText);
-        });
+        this.commonService.get(this.richiesteService.getRichiestaGetEventoUtente(
+            this.evento.idEvento,
+            this.evento.dataEvento,
+            this.idUtente))
+            .subscribe(r => {
+                if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                    this.evento = r.evento;
+                } else {
+                    this.manageError(r);
+                }
+            }, err => {
+                this.alertService.presentErrorAlert(err.statusText);
+            });
     }
 
     ngOnInit() {
@@ -79,6 +102,51 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
 
     public dettaglioVino(vino: Vino) {
         console.log('vado al dettaglio vino: ' + vino.nomeVino);
+    }
+
+
+    public togliDaiPreferiti() {
+        this.commonService.connect(this.richiesteService.getRichiestaRimuoviEventoDaPreferiti(
+            this.idUtente,
+            this.evento.idEvento,
+            this.evento.dataEvento,
+            0,
+            0
+        ))
+            .subscribe(r => {
+                if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                    // ricarico l'utente
+                    this.reloadEvento();
+                } else {
+                    this.alertService.presentErrorAlert(r.esito.message);
+                }
+            }, err => {
+                this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
+            });
+    }
+
+    public aggiungiAiPreferiti() {
+        const preferitoEvento = (this.evento.statoPreferitoEvento === 'P' ? 1 : 0);
+        this.commonService.connect(this.richiesteService.getRichiestaAggiungiEventoAPreferiti(
+            this.idUtente,
+            this.evento.idEvento,
+            this.evento.dataEvento,
+            1,
+            0))
+            .subscribe(r => {
+                if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                    // ricarico l'utente
+                    this.reloadEvento();
+                } else {
+                    this.alertService.presentErrorAlert(r.esito.message);
+                }
+            }, err => {
+                this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
+            });
+    }
+
+    public acquistaEvento() {
+        this.alertService.presentAlert('FUNZIONE NON IMPLEMENTATA');
     }
 
     onScroll(event) {

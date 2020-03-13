@@ -53,7 +53,7 @@ export class ViniPage extends BaseComponent implements OnInit {
           console.log('recuperato id azienda da storage: ' + decodedVal);
           this.ottieniDati(decodedVal);
         } else {
-          this.goToPage('login');
+          this.appSessionService.clearForLogout();
         }
       });
     }

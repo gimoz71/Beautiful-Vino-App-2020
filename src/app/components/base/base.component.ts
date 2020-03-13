@@ -43,7 +43,7 @@ export class BaseComponent implements OnInit {
   }
 
   public decodeObjectInStorage(val: string) {
-    return window.atob(val);
+    return escape(window.atob(val));
   }
 
   protected loadToken(): void {

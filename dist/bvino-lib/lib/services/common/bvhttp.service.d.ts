@@ -6,6 +6,8 @@ import { RispostaPutGenerica } from '../../models/comunicazioni/richieste/put/ri
 import { RichiestaPutGenerica } from '../../models/comunicazioni/richieste/put/richiestaputgenerica';
 import { RichiestaNotificaGenerica } from '../../models/comunicazioni/richieste/notifica/richiestanotificagenerica';
 import { RispostaNotificaGenerica } from '../../models/comunicazioni/richieste/notifica/rispostanotificagenerica';
+import { RichiestaConnectGenerica } from '../../models/comunicazioni/richieste/connect/richiestaconnectgenerica';
+import { RispostaConnectGenerica } from '../../models/comunicazioni/richieste/connect/rispostaconnectgenerica';
 export declare class BVHttpService {
     private http;
     private backEnd;
@@ -14,4 +16,5 @@ export declare class BVHttpService {
     post(path: string, request: RichiestaGetGenerica): Observable<RispostaGetGenerica>;
     postPut(path: string, request: RichiestaPutGenerica): Observable<RispostaPutGenerica>;
     postNotifica(path: string, request: RichiestaNotificaGenerica): Observable<RispostaNotificaGenerica>;
+    postConnect(path: string, request: RichiestaConnectGenerica): Observable<RispostaConnectGenerica>;
 }

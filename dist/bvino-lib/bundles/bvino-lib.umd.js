@@ -380,6 +380,21 @@
                     + this.env.pathSeparator
                     + path, request);
             };
+        /**
+         * @param {?} path
+         * @param {?} request
+         * @return {?}
+         */
+        BVHttpService.prototype.postConnect = /**
+         * @param {?} path
+         * @param {?} request
+         * @return {?}
+         */
+            function (path, request) {
+                return this.http.post(this.env.baseAppUrlConnect
+                    + this.env.pathSeparator
+                    + path, request);
+            };
         BVHttpService.decorators = [
             { type: core.Injectable }
         ];
@@ -556,6 +571,27 @@
                 richiesta.idAzienda = idAzienda;
                 richiesta.idUtente = '';
                 richiesta.elencoCompleto = 'S';
+                return richiesta;
+            };
+        /**
+         * @param {?} idEvento
+         * @param {?} dataEvento
+         * @param {?} idUtente
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaGetEventoUtente = /**
+         * @param {?} idEvento
+         * @param {?} dataEvento
+         * @param {?} idUtente
+         * @return {?}
+         */
+            function (idEvento, dataEvento, idUtente) {
+                /** @type {?} */
+                var richiesta = new RichiestaGetGenerica();
+                richiesta.functionName = this.env.getEventoFunctionName;
+                richiesta.idEvento = idEvento;
+                richiesta.idUtente = idUtente;
+                richiesta.dataEvento = dataEvento;
                 return richiesta;
             };
         /**
@@ -792,6 +828,9 @@
         /**
          * @param {?} idUtente
          * @param {?} idEvento
+         * @param {?} dataEvento
+         * @param {?} statoPreferitoEvento
+         * @param {?} statoAcquistatoEvento
          * @return {?}
          */
         RichiesteService.prototype.getRichiestaAggiungiEventoAPreferiti =
@@ -799,52 +838,76 @@
             /**
              * @param {?} idUtente
              * @param {?} idEvento
+             * @param {?} dataEvento
+             * @param {?} statoPreferitoEvento
+             * @param {?} statoAcquistatoEvento
              * @return {?}
              */
-            function (idUtente, idEvento) {
+            function (idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
                 /** @type {?} */
                 var richiesta = new RichiestaConnectGenerica();
                 richiesta.idUtente = idUtente;
                 richiesta.idEvento = idEvento;
+                richiesta.dataEvento = dataEvento;
                 richiesta.statoEvento = 'P';
+                richiesta.statoPreferitoEvento = statoPreferitoEvento;
+                richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
                 richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
                 return richiesta;
             };
         /**
          * @param {?} idUtente
          * @param {?} idEvento
+         * @param {?} dataEvento
+         * @param {?} statoPreferitoEvento
+         * @param {?} statoAcquistatoEvento
          * @return {?}
          */
         RichiesteService.prototype.getRichiestaAcquistaEvento = /**
          * @param {?} idUtente
          * @param {?} idEvento
+         * @param {?} dataEvento
+         * @param {?} statoPreferitoEvento
+         * @param {?} statoAcquistatoEvento
          * @return {?}
          */
-            function (idUtente, idEvento) {
+            function (idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
                 /** @type {?} */
                 var richiesta = new RichiestaConnectGenerica();
                 richiesta.idUtente = idUtente;
                 richiesta.idEvento = idEvento;
+                richiesta.dataEvento = dataEvento;
                 richiesta.statoEvento = 'A';
+                richiesta.statoPreferitoEvento = statoPreferitoEvento;
+                richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
                 richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
                 return richiesta;
             };
         /**
          * @param {?} idUtente
          * @param {?} idEvento
+         * @param {?} dataEvento
+         * @param {?} statoPreferitoEvento
+         * @param {?} statoAcquistatoEvento
          * @return {?}
          */
         RichiesteService.prototype.getRichiestaRimuoviEventoDaPreferiti = /**
          * @param {?} idUtente
          * @param {?} idEvento
+         * @param {?} dataEvento
+         * @param {?} statoPreferitoEvento
+         * @param {?} statoAcquistatoEvento
          * @return {?}
          */
-            function (idUtente, idEvento) {
+            function (idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
                 /** @type {?} */
                 var richiesta = new RichiestaConnectGenerica();
                 richiesta.idUtente = idUtente;
                 richiesta.idEvento = idEvento;
+                richiesta.dataEvento = dataEvento;
                 richiesta.statoEvento = 'D';
+                richiesta.statoPreferitoEvento = statoPreferitoEvento;
+                richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
                 richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
                 return richiesta;
             };
@@ -949,6 +1012,17 @@
          */
             function (request) {
                 return this.httpService.post(this.env.getServiceName, request);
+            };
+        /**
+         * @param {?} request
+         * @return {?}
+         */
+        BVCommonService.prototype.connect = /**
+         * @param {?} request
+         * @return {?}
+         */
+            function (request) {
+                return this.httpService.postConnect(this.env.connectServiceName, request);
             };
         BVCommonService.decorators = [
             { type: core.Injectable }
@@ -1307,6 +1381,16 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var RispostaConnectGenerica = /** @class */ (function () {
+        function RispostaConnectGenerica() {
+        }
+        return RispostaConnectGenerica;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var Provincia = /** @class */ (function () {
         function Provincia() {
         }
@@ -1377,6 +1461,8 @@
     exports.RispostaPutGenerica = RispostaPutGenerica;
     exports.RichiestaNotificaGenerica = RichiestaNotificaGenerica;
     exports.RispostaNotificaGenerica = RispostaNotificaGenerica;
+    exports.RichiestaConnectGenerica = RichiestaConnectGenerica;
+    exports.RispostaConnectGenerica = RispostaConnectGenerica;
     exports.Provincia = Provincia;
     exports.ProfiloAzienda = ProfiloAzienda;
 

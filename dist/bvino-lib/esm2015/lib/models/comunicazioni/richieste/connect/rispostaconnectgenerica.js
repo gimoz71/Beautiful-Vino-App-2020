@@ -1,0 +1,11 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export class RispostaConnectGenerica {
+}
+if (false) {
+    /** @type {?} */
+    RispostaConnectGenerica.prototype.esito;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmlzcG9zdGFjb25uZWN0Z2VuZXJpY2EuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9idmluby1saWIvIiwic291cmNlcyI6WyJsaWIvbW9kZWxzL2NvbXVuaWNhemlvbmkvcmljaGllc3RlL2Nvbm5lY3QvcmlzcG9zdGFjb25uZWN0Z2VuZXJpY2EudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUVBLE1BQU0sT0FBTyx1QkFBdUI7Q0FFbkM7OztJQURDLHdDQUFvQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEVzaXRvIH0gZnJvbSAnLi4vLi4vLi4vZW50aXRhL2VzaXRvL2VzaXRvJztcblxuZXhwb3J0IGNsYXNzIFJpc3Bvc3RhQ29ubmVjdEdlbmVyaWNhIHtcbiAgcHVibGljIGVzaXRvOiBFc2l0bztcbn1cbiJdfQ==
