@@ -110,4 +110,12 @@ export class LoginPage extends BaseComponent implements OnInit {
         console.log('ERRORE DI AUTENTICAZIONE: ' + err);
       });
   }
+
+  public loginFacebook() {
+    this.alertService.presentAlert('NON ANCORA IMPLEMENTATA');
+  }
+
+  public loginGoogle() {
+    this.alertService.presentAlert('NON ANCORA IMPLEMENTATA');
+  }
 }

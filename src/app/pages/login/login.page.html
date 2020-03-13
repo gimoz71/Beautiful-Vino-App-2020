@@ -12,16 +12,16 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" name="psw"  [(ngModel)]="password">
+                    <input type="password" name="psw" [(ngModel)]="password">
                 </div>
             </form>
             <div class="access-cta">
                 <p style="margin-bottom: 40px;"><a href="#">Dimenticato la password?</a></p>
                 <button class="button white text-center full-width" (click)="login()">Accedi</button>
                 <p>oppure</p>
-                <button class="button social facebook text-center full-width">Accedi con
+                <button class="button social facebook text-center full-width" (click)="loginFacebook()">Accedi con
                     Facebook</button>
-                <button class="button social google text-center full-width">Accedi con
+                <button class="button social google text-center full-width" (click)="loginGoogle()">Accedi con
                     Google</button>
             </div>
         </div>

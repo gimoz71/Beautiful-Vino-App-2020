@@ -63,4 +63,8 @@ export class HomePage extends BaseComponent implements OnInit {
     this.goToPage('login');
   }
 
+  public registrati() {
+    this.alertService.presentAlert('NON ANCORA IMPLEMENTATA');
+  }
+
 }
