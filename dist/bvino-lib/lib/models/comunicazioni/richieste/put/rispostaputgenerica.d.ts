@@ -1,4 +1,6 @@
+import { Esito } from '../../../entita/esito/esito';
 export declare class RispostaPutGenerica {
+    esito: Esito;
     idAzienda: string;
     idBadge: string;
     idEvento: string;

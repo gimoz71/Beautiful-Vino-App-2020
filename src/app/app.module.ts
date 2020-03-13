@@ -28,7 +28,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { MapsModule } from './components/maps/maps.module';
 
 
-import { Camera } from '@ionic-native/Camera/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
@@ -37,6 +37,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { FileuploadModule } from './components/fileupload/fileupload.module';
 import { StoreService } from './services/store/store.service';
 import { ColorChangeCommunicationService } from './services/colorChangeCommunication/colorchangecommunication.service';
+import { FileuploadService } from './services/bvfileupload/fileupload.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -69,6 +70,7 @@ import { ColorChangeCommunicationService } from './services/colorChangeCommunica
     ThemeChangerService,
     Camera,
     StoreService,
+    FileuploadService,
     File,
     WebView,
     {

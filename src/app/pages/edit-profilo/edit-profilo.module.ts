@@ -9,6 +9,8 @@ import { EditProfiloPageRoutingModule } from './edit-profilo-routing.module';
 import { EditProfiloPage } from './edit-profilo.page';
 import { FileuploadModule } from 'src/app/components/fileupload/fileupload.module';
 
+import { Camera } from '@ionic-native/camera/ngx';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +19,9 @@ import { FileuploadModule } from 'src/app/components/fileupload/fileupload.modul
     EditProfiloPageRoutingModule,
     FileuploadModule
   ],
-  declarations: [EditProfiloPage]
+  declarations: [EditProfiloPage],
+  providers: [
+    Camera
+  ]
 })
 export class EditProfiloPageModule { }

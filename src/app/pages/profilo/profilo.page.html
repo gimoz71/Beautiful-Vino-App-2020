@@ -27,13 +27,13 @@
                     </svg>
                 </a>
                 <img [src]="utente.urlFotoUtente" class="user-thumb">
-                <h3 class="header-title">Nome Utente</h3>
-                <p class="header-info">livello: <span>bevo acqua</span><br>
-                    Per diventare <span>novellino</span> ti mancano ancora 81 pp
+                <h3 class="header-title">{{utente.nomeUtente}}</h3>
+                <p class="header-info">livello: <span>{{utente.livelloUtente}}</span><br>
+                    Per diventare <span>{{utente.livelloUtente}}</span> ti mancano ancora 81 pp
                 </p>
             </div>
             <div class="scroller-content">
-                <div class="frame-content" *ngIf="utente && utente.eventiUtente">
+                <div class="frame-content" *ngIf="utente && utente.eventiUtente && utente.eventiUtente.length > 0">
                     <div class="box evento clearfix" *ngFor="let evento of utente.eventiUtente">
                         <div class="cover" [ngStyle]="{'background-image': 'url(' + evento.urlFotoEvento + ')'}">
                         </div>
@@ -45,7 +45,7 @@
                         <p class="testo" [innerHTML]="evento.testoEvento"></p>
                     </div>
                 </div>
-                <div class="frame-content" *ngIf="!(utente && utente.eventiUtente)">
+                <div class="frame-content" *ngIf="!(utente && utente.eventiUtente && utente.eventiUtente.length > 0)">
                     <div class="box evento clearfix">
                         <h2 class="titolo">Non ci sono eventi preferiti</h2>
                     </div>

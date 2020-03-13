@@ -46,7 +46,7 @@ export class DettaglioFeedPage extends BaseComponent implements OnInit {
         ).subscribe(r => {
             this.unsubscribe$.next();
             this.unsubscribe$.complete();
-            this.ngZone.run(() => this.router.navigate(['login'])).then();
+            this.ngZone.run(() => this.router.navigate(['home'])).then();
         });
 
         this.route.queryParams.pipe(

@@ -48,6 +48,8 @@ export class LoginPage extends BaseComponent implements OnInit {
         const idToken = response.getIdToken();
         const idUtenteDb = idToken.payload['cognito:username'];
 
+        this.appSessionService.set(environment.KEY_USER_ID, idUtenteDb);
+
         // per l'interceptor per le richieste da adesso in avanti
         this.appSessionService.set(environment.KEY_AUTH_TOKEN, idToken.getJwtToken());
         this.appSessionService.set(environment.KEY_USER, JSON.stringify(response));
@@ -72,10 +74,14 @@ export class LoginPage extends BaseComponent implements OnInit {
                     this.appSessionService.set(environment.KEY_AZIENDA_LOGO, profiloAzienda.logo);
                     this.appSessionService.set(environment.KEY_AZIENDA_SPLASHSCREEN, profiloAzienda.splaqshScreen);
                     this.appSessionService.set(environment.KEY_AZIENDA_PAYPAL_CODE, profiloAzienda.paypalCode);
-                    this.appSessionService.set(environment.KEY_AZIENDA_COLOREPRIMARIO, profiloAzienda.colorePrimario);
-                    this.appSessionService.set(environment.KEY_AZIENDA_COLORESECONDARIO, profiloAzienda.coloreSecondario);
 
-                    this.colorChangeComm.comunicateColorChange();
+                    if (profiloAzienda.colorePrimario && profiloAzienda.colorePrimario !== ''
+                      && profiloAzienda.coloreSecondario && profiloAzienda.coloreSecondario !== '') {
+                      this.appSessionService.set(environment.KEY_AZIENDA_COLOREPRIMARIO, profiloAzienda.colorePrimario);
+                      this.appSessionService.set(environment.KEY_AZIENDA_COLORESECONDARIO, profiloAzienda.coloreSecondario);
+
+                      this.colorChangeComm.comunicateColorChange();
+                    }
 
                     this.router.navigate(['/eventi']);
 
@@ -100,6 +106,7 @@ export class LoginPage extends BaseComponent implements OnInit {
         }
       },
       (err) => {
+        this.alertService.presentErrorAlert('Errore di autenticazione');
         console.log('ERRORE DI AUTENTICAZIONE: ' + err);
       });
   }

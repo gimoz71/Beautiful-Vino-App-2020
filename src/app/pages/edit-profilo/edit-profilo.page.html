@@ -24,8 +24,10 @@
                         </g>
                     </svg>
                 </a>
-                <button class="button small  logout">Esci</button>
-                <app-fileupload [thumbImage]="utente.urlFotoUtente"></app-fileupload>
+                <button class="button small  logout" (click)="logout()">Esci</button>
+                <app-fileupload [thumbImage]="imgPreview" (change)="changeProfileImage($event)"
+                    *ngIf="imgPreview && imgPreview != ''">
+                </app-fileupload>
                 <!-- <div class="thumb-edit">
                     <img src="https://i.pravatar.cc/150?img=52" class="user-thumb edit">
                     <a [routerLink]="" class="add-photo">

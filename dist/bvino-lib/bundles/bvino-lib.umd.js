@@ -428,6 +428,16 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var RichiestaConnectGenerica = /** @class */ (function () {
+        function RichiestaConnectGenerica() {
+        }
+        return RichiestaConnectGenerica;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var RichiesteService = /** @class */ (function () {
         function RichiesteService(env) {
             this.env = env;
@@ -775,6 +785,67 @@
                 /** @type {?} */
                 var richiesta = new RichiestaNotificaGenerica();
                 richiesta.messaggio = messaggio;
+                return richiesta;
+            };
+        // -------- CONNECT --------
+        // -------- CONNECT --------
+        /**
+         * @param {?} idUtente
+         * @param {?} idEvento
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaAggiungiEventoAPreferiti =
+            // -------- CONNECT --------
+            /**
+             * @param {?} idUtente
+             * @param {?} idEvento
+             * @return {?}
+             */
+            function (idUtente, idEvento) {
+                /** @type {?} */
+                var richiesta = new RichiestaConnectGenerica();
+                richiesta.idUtente = idUtente;
+                richiesta.idEvento = idEvento;
+                richiesta.statoEvento = 'P';
+                richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
+                return richiesta;
+            };
+        /**
+         * @param {?} idUtente
+         * @param {?} idEvento
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaAcquistaEvento = /**
+         * @param {?} idUtente
+         * @param {?} idEvento
+         * @return {?}
+         */
+            function (idUtente, idEvento) {
+                /** @type {?} */
+                var richiesta = new RichiestaConnectGenerica();
+                richiesta.idUtente = idUtente;
+                richiesta.idEvento = idEvento;
+                richiesta.statoEvento = 'A';
+                richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
+                return richiesta;
+            };
+        /**
+         * @param {?} idUtente
+         * @param {?} idEvento
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaRimuoviEventoDaPreferiti = /**
+         * @param {?} idUtente
+         * @param {?} idEvento
+         * @return {?}
+         */
+            function (idUtente, idEvento) {
+                /** @type {?} */
+                var richiesta = new RichiestaConnectGenerica();
+                richiesta.idUtente = idUtente;
+                richiesta.idEvento = idEvento;
+                richiesta.statoEvento = 'D';
+                richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
                 return richiesta;
             };
         RichiesteService.decorators = [

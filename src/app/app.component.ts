@@ -17,7 +17,8 @@ import { ColorChangeCommunicationService } from './services/colorChangeCommunica
 })
 export class AppComponent implements OnInit {
 
-    firstColor = '#66bb6a'; /* default BV #e51d70 */
+    // default, nel caso non fossero nel p
+    firstColor = '#e51d70'; /* default BV #e51d70 */
     secondColor = '#f9da2c'; /* Default BV #f9da2c */
 
     private selectedPage = 'eventi';
@@ -43,17 +44,32 @@ export class AppComponent implements OnInit {
     }
 
     initializeApp() {
+
+        this.appSessionService.loadDataFromStorage(environment.KEY_AZIENDA_COLOREPRIMARIO).then((val) => {
+            if (val && val !== '') {
+                this.firstColor = window.atob(val);
+                this.appSessionService.set(environment.KEY_AZIENDA_COLOREPRIMARIO, val);
+            }
+        });
+
+        this.appSessionService.loadDataFromStorage(environment.KEY_AZIENDA_COLORESECONDARIO).then((val) => {
+            if (val && val !== '') {
+                this.secondColor = window.atob(val);
+                this.appSessionService.set(environment.KEY_AZIENDA_COLORESECONDARIO, val);
+            }
+        });
+
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
         });
+
         this.colorComm.colorObservable.subscribe(r => {
             if (r) {
                 this.firstColor = this.appSessionService.get(environment.KEY_AZIENDA_COLOREPRIMARIO);
                 this.secondColor = this.appSessionService.get(environment.KEY_AZIENDA_COLORESECONDARIO);
             }
         });
-
     }
 
     public barVisible(): boolean {

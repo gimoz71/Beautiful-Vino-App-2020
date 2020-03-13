@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 
 import { File, FileEntry } from '@ionic-native/File/ngx';
 import { HttpClient } from '@angular/common/http';
@@ -6,9 +6,10 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { ActionSheetController, Platform, LoadingController } from '@ionic/angular';
 import { FilePath } from '@ionic-native/file-path/ngx';
-import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
 import { AlertService } from 'bvino-lib';
 import { finalize } from 'rxjs/operators';
+import { FileuploadService } from '../../services/bvfileupload/fileupload.service';
 
 @Component({
   selector: 'app-fileupload',
@@ -19,7 +20,13 @@ export class FileuploadComponent implements OnInit {
 
   @Input() thumbImage: string;
 
+  @Output()
+  change: EventEmitter<string> = new EventEmitter<string>();
+
   public images = [];
+
+  public imgPreview;
+  public imageSet = false;
 
   constructor(
     public alertService: AlertService,
@@ -31,24 +38,31 @@ export class FileuploadComponent implements OnInit {
     private platform: Platform,
     private loadingController: LoadingController,
     private ref: ChangeDetectorRef,
-    private filePath: FilePath) { }
+    private filePath: FilePath,
+    public fileUploadService: FileuploadService) { }
 
   ngOnInit() { }
 
   async selectImage() {
+    console.log('------ UPLOAD_COMPONENT -------- selectImage');
     const actionSheet = await this.actionSheetController.create({
       header: 'Select Image source',
       buttons: [{
         text: 'Load from Library',
         handler: () => {
-          this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+          this.fileUploadService.setProfilePhoto('', this.camera.PictureSourceType.PHOTOLIBRARY).then(data => {
+            this.change.emit(data);
+            this.imageSet = true;
+          });
         }
       },
       {
         text: 'Use Camera',
         handler: () => {
-          this.alertService.presentAlert('taking picture');
-          this.takePicture(this.camera.PictureSourceType.CAMERA);
+          this.fileUploadService.setProfilePhoto('', this.camera.PictureSourceType.CAMERA).then(data => {
+            this.change.emit(data);
+            this.imageSet = true;
+          });
         }
       },
       {
@@ -61,6 +75,7 @@ export class FileuploadComponent implements OnInit {
   }
 
   takePicture(sourceTypeI: PictureSourceType) {
+    console.log('------ UPLOAD_COMPONENT -------- takePicture');
     const options: CameraOptions = {
       quality: 100,
       sourceType: sourceTypeI,
@@ -87,6 +102,7 @@ export class FileuploadComponent implements OnInit {
   }
 
   pathForImage(img) {
+    console.log('------ UPLOAD_COMPONENT -------- pathForImage');
     if (img === null) {
       return '';
     } else {
@@ -96,6 +112,7 @@ export class FileuploadComponent implements OnInit {
   }
 
   createFileName() {
+    console.log('------ UPLOAD_COMPONENT -------- createFileName');
     const d = new Date(),
       n = d.getTime(),
       newFileName = n + '.jpg';
@@ -103,8 +120,12 @@ export class FileuploadComponent implements OnInit {
   }
 
   copyFileToLocalDir(namePath, currentName, newFileName) {
+    console.log('------ UPLOAD_COMPONENT -------- copyFileToLocalDir. namePath: ' + namePath
+      + ' currentName: ' + currentName + ' newFileName: ' + newFileName);
     this.file.copyFile(namePath, currentName, this.file.dataDirectory, newFileName).then(success => {
       this.alertService.presentAlert('updatingStored: ' + newFileName);
+      console.log('file copiato: ' + this.file.dataDirectory + ' - ' + newFileName);
+      this.change.emit(this.file.dataDirectory + newFileName);
       // this.updateStoredImages(newFileName);
     }, error => {
       this.alertService.presentAlert('Error while storing file.');
@@ -138,6 +159,7 @@ export class FileuploadComponent implements OnInit {
   // }
 
   startUpload(imgEntry) {
+    console.log('------ UPLOAD_COMPONENT -------- startUpload');
     this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
       .then(entry => {
         (entry as FileEntry).file(file => this.readFile(file));
@@ -148,6 +170,7 @@ export class FileuploadComponent implements OnInit {
   }
 
   readFile(file: any) {
+    console.log('------ UPLOAD_COMPONENT -------- readFile');
     const reader = new FileReader();
     reader.onload = () => {
       const formData = new FormData();
@@ -161,6 +184,7 @@ export class FileuploadComponent implements OnInit {
   }
 
   async uploadImageData(formData: FormData) {
+    console.log('------ UPLOAD_COMPONENT -------- uploadImageData');
     const loading = await this.loadingController.create({
       message: 'Uploading image...',
     });

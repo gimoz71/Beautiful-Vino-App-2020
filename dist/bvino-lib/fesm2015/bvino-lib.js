@@ -266,6 +266,13 @@ class RichiestaNotificaGenerica {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class RichiestaConnectGenerica {
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class RichiesteService {
     /**
      * @param {?} env
@@ -520,6 +527,49 @@ class RichiesteService {
         /** @type {?} */
         const richiesta = new RichiestaNotificaGenerica();
         richiesta.messaggio = messaggio;
+        return richiesta;
+    }
+    // -------- CONNECT --------
+    /**
+     * @param {?} idUtente
+     * @param {?} idEvento
+     * @return {?}
+     */
+    getRichiestaAggiungiEventoAPreferiti(idUtente, idEvento) {
+        /** @type {?} */
+        const richiesta = new RichiestaConnectGenerica();
+        richiesta.idUtente = idUtente;
+        richiesta.idEvento = idEvento;
+        richiesta.statoEvento = 'P';
+        richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
+        return richiesta;
+    }
+    /**
+     * @param {?} idUtente
+     * @param {?} idEvento
+     * @return {?}
+     */
+    getRichiestaAcquistaEvento(idUtente, idEvento) {
+        /** @type {?} */
+        const richiesta = new RichiestaConnectGenerica();
+        richiesta.idUtente = idUtente;
+        richiesta.idEvento = idEvento;
+        richiesta.statoEvento = 'A';
+        richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
+        return richiesta;
+    }
+    /**
+     * @param {?} idUtente
+     * @param {?} idEvento
+     * @return {?}
+     */
+    getRichiestaRimuoviEventoDaPreferiti(idUtente, idEvento) {
+        /** @type {?} */
+        const richiesta = new RichiestaConnectGenerica();
+        richiesta.idUtente = idUtente;
+        richiesta.idEvento = idEvento;
+        richiesta.statoEvento = 'D';
+        richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
         return richiesta;
     }
 }

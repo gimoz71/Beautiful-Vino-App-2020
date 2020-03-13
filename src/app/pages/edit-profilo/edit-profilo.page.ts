@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { Utente, BVCommonService, RichiesteService } from 'bvino-lib';
@@ -7,18 +7,10 @@ import { takeUntil, finalize } from 'rxjs/operators';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { Subject } from 'rxjs';
 
-import { File, FileEntry } from '@ionic-native/File/ngx';
-import { HttpClient } from '@angular/common/http';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
-
-import { ActionSheetController, Platform, LoadingController } from '@ionic/angular';
-import { FilePath } from '@ionic-native/file-path/ngx';
-import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
-
 import { environment } from 'src/environments/environmentkeys';
 import { AppSessionService } from 'src/app/services/appsession/appSession.service';
-
-// const STORAGE_KEY = 'my_images';
+import { FileuploadService } from '../../services/bvfileupload/fileupload.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-profilo',
@@ -37,6 +29,13 @@ export class EditProfiloPage extends BaseComponent implements OnInit {
 
   public images = [];
 
+  public urlUtenteCambiata = false;
+
+  private folder = 'immagineutente';
+
+  public imgPreview = '';
+
+
   constructor(
     private route: ActivatedRoute,
     public alertService: AlertService,
@@ -45,7 +44,9 @@ export class EditProfiloPage extends BaseComponent implements OnInit {
     public ngZone: NgZone,
     public commonService: BVCommonService,
     public richiesteService: RichiesteService,
-    public appSessionService: AppSessionService
+    public appSessionService: AppSessionService,
+    public uploadService: FileuploadService,
+    public alertController: AlertController
   ) {
     super(router, alertService);
     this.utente = new Utente();
@@ -59,14 +60,31 @@ export class EditProfiloPage extends BaseComponent implements OnInit {
     ).subscribe(r => {
       this.unsubscribe$.next();
       this.unsubscribe$.complete();
-      this.ngZone.run(() => this.router.navigate(['login'])).then();
+      this.ngZone.run(() => this.router.navigate(['home'])).then();
     });
 
     this.route.queryParams.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(params => {
       this.reload = params.reload === 'true';
-      this.utente = JSON.parse(params.utente) as Utente;
+      console.log('params: ' + JSON.stringify(params));
+      if (params === undefined || params.utente === undefined || params.utente === '') {
+        if (this.appSessionService.isInSession(environment.KEY_USER_ID)) {
+          this.caricaUtente(this.appSessionService.get(environment.KEY_USER_ID));
+        } else {
+          this.appSessionService.loadDataFromStorage(environment.KEY_USER_ID).then((val: string) => {
+            if (val !== undefined && val !== null && val !== '') {
+              const decodedVal = this.decodeObjectInStorage(val);
+              this.caricaUtente(decodedVal);
+            } else {
+              this.appSessionService.clearForLogout();
+            }
+          });
+        }
+      } else {
+        this.utente = JSON.parse(params.utente) as Utente;
+        this.imgPreview = this.utente.urlFotoUtente;
+      }
     });
   }
 
@@ -75,10 +93,72 @@ export class EditProfiloPage extends BaseComponent implements OnInit {
 
   public salvaUtente() {
     console.log('Salvataggio Utente');
+    if (this.urlUtenteCambiata) {
+      this.uploadService.upload(this.imgPreview, this.folder).then((res) => {
+        console.log('Response' + res);
+        this.imgPreview = res as string;
+        this.utente.urlFotoUtente = res as string;
+
+        // salvo l'utente e poi lo ricarico
+        this.commonService.put(this.richiesteService.getRichiestaPutUtente(this.utente)).subscribe(r => {
+          if (r.idUtente) {
+            this.caricaUtente(r.idUtente);
+          } else {
+            this.manageErrorPut('Utente');
+          }
+        }, err => {
+
+        });
+      }, err => {
+        console.log('Error is', err);
+      });
+    }
+  }
+
+  public caricaUtente(idUtente: string) {
+    this.commonService.get(this.richiesteService.getRichiestaGetUtente(idUtente)).subscribe(r => {
+      if (r.esito.codice === environment.ESITO_OK_CODICE) {
+        this.alertService.presentAlert('utente aggiornato correttamente');
+        this.utente = r.utente;
+        this.imgPreview = this.utente.urlFotoUtente;
+        this.appSessionService.set(environment.KEY_UTENTE, JSON.stringify(this.utente));
+      } else {
+        this.manageError(r);
+      }
+    });
   }
 
   public profiloUtente() {
     this.goToPage('profilo');
+  }
+
+  public changeProfileImage(event) {
+    this.imgPreview = event;
+    this.urlUtenteCambiata = true;
+  }
+
+  async logout() {
+    const alert = await this.alertController.create({
+      header: 'Logout',
+      message: 'Sicuro di voler uscire?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            this.appSessionService.clearForLogout();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   onScroll(event) {

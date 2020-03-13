@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 import { FileuploadComponent } from './fileupload.component';
 import { RouterModule } from '@angular/router';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/File/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 
@@ -20,7 +19,6 @@ import { FilePath } from '@ionic-native/file-path/ngx';
     declarations: [FileuploadComponent],
     exports: [FileuploadComponent],
     providers: [
-        Camera,
         File,
         WebView,
         FilePath

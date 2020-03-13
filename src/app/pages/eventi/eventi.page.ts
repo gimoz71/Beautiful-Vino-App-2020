@@ -42,7 +42,7 @@ export class EventiPage extends BaseComponent implements OnInit {
     ).subscribe(r => {
       this.unsubscribe$.next();
       this.unsubscribe$.complete();
-      this.ngZone.run(() => this.router.navigate(['login'])).then();
+      this.ngZone.run(() => this.router.navigate(['home'])).then();
     });
 
 
@@ -55,7 +55,7 @@ export class EventiPage extends BaseComponent implements OnInit {
           console.log('recuperato id azienda da storage: ' + decodedVal);
           this.ottieniDati(decodedVal);
         } else {
-          this.goToPage('login');
+          this.appSessionService.clearForLogout();
         }
       });
     }

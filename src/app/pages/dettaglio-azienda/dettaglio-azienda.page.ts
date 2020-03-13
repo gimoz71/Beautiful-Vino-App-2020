@@ -53,7 +53,7 @@ export class DettaglioAziendaPage extends BaseComponent implements OnInit {
         ).subscribe(r => {
             this.unsubscribe$.next();
             this.unsubscribe$.complete();
-            this.ngZone.run(() => this.router.navigate(['login'])).then();
+            this.ngZone.run(() => this.router.navigate(['home'])).then();
         });
 
         // fare anche un controllo della presenza dell'oggetto Azienda in sessione, in modo da ottimizzare e non chiamare sempre la app
@@ -66,7 +66,7 @@ export class DettaglioAziendaPage extends BaseComponent implements OnInit {
                     console.log('recuperato id azienda da storage: ' + decodedVal);
                     this.ottieniDati(decodedVal);
                 } else {
-                    this.goToPage('login');
+                    this.appSessionService.clearForLogout();
                 }
             });
         }

@@ -32,6 +32,8 @@
     "@ionic/angular": "^5.0.4",
     "@ionic/storage": "^2.2.0",
     "amazon-cognito-identity-js": "^3.2.2",
+    "aws-sdk": "^2.621.0",
+    "buffer": "^5.5.0",
     "cordova-android": "^8.1.0",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-file": "^6.0.2",

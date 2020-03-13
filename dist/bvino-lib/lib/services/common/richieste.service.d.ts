@@ -6,6 +6,7 @@ import { Feed } from '../../models/entita/feed/feed';
 import { Vino } from '../../models/entita/vino/vino';
 import { Provincia } from '../../models/entita/provincia/provincia';
 import { RichiestaNotificaGenerica } from '../../models/comunicazioni/richieste/notifica/richiestanotificagenerica';
+import { RichiestaConnectGenerica } from '../../models/comunicazioni/richieste/connect/richiestaconnectgenerica';
 export declare class RichiesteService {
     private env;
     constructor(env: any);
@@ -32,4 +33,7 @@ export declare class RichiesteService {
     getRichiestaPutFeed(feed: Feed): RichiestaPutGenerica;
     getRichiestaPutVino(vino: Vino): RichiestaPutGenerica;
     getRichiestaNotifica(messaggio: string): RichiestaNotificaGenerica;
+    getRichiestaAggiungiEventoAPreferiti(idUtente: string, idEvento: string): RichiestaConnectGenerica;
+    getRichiestaAcquistaEvento(idUtente: string, idEvento: string): RichiestaConnectGenerica;
+    getRichiestaRimuoviEventoDaPreferiti(idUtente: string, idEvento: string): RichiestaConnectGenerica;
 }
