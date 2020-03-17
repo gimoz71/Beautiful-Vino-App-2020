@@ -33,6 +33,7 @@ export declare class RichiesteService {
     getRichiestaPutEvento(evento: Evento): RichiestaPutGenerica;
     getRichiestaPutFeed(feed: Feed): RichiestaPutGenerica;
     getRichiestaPutVino(vino: Vino): RichiestaPutGenerica;
+    getRichiestaPutuserProfileWithImage(utente: Utente): RichiestaPutGenerica;
     getRichiestaNotifica(messaggio: string): RichiestaNotificaGenerica;
     getRichiestaAggiungiEventoAPreferiti(idUtente: string, idEvento: string, dataEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
     getRichiestaAcquistaEvento(idUtente: string, idEvento: string, dataEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;

@@ -1,4 +1,4 @@
-import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { AuthenticationDetails, CognitoUser, CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import { Observable } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { __awaiter } from 'tslib';
@@ -77,6 +77,61 @@ class BVAuthorizationService {
      */
     ngOnInit() {
         throw new Error('Method not implemented.');
+    }
+    /**
+     * @param {?} username
+     * @param {?} password
+     * @param {?} name
+     * @return {?}
+     */
+    signup(username, password, name) {
+        /** @type {?} */
+        const attributeList = [];
+        /** @type {?} */
+        const dataEmail = {
+            Name: 'email',
+            Value: username
+        };
+        /** @type {?} */
+        const dataPersonalName = {
+            Name: 'name',
+            Value: name
+        };
+        /** @type {?} */
+        const dataPersonalNickname = {
+            Name: 'nickname',
+            Value: name
+        };
+        /** @type {?} */
+        const emailAttribute = new CognitoUserAttribute(dataEmail);
+        /** @type {?} */
+        const nameAttribute = new CognitoUserAttribute(dataPersonalName);
+        /** @type {?} */
+        const nicknameAttribute = new CognitoUserAttribute(dataPersonalNickname);
+        attributeList.push(emailAttribute);
+        attributeList.push(nameAttribute);
+        attributeList.push(nicknameAttribute);
+        return Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        observer => {
+            return userPool.signUp(username, password, attributeList, null, (/**
+             * @param {?} err
+             * @param {?} result
+             * @return {?}
+             */
+            function (err, result) {
+                if (err) {
+                    observer.error(err);
+                    console.log(err);
+                }
+                else {
+                    observer.next(result);
+                    observer.complete();
+                }
+            }));
+        }));
     }
     /**
      * @param {?} username
@@ -578,6 +633,17 @@ class RichiesteService {
         const richiesta = new RichiestaPutGenerica();
         richiesta.functionName = this.env.putVinoFunctionName;
         richiesta.vino = vino;
+        return richiesta;
+    }
+    /**
+     * @param {?} utente
+     * @return {?}
+     */
+    getRichiestaPutuserProfileWithImage(utente) {
+        /** @type {?} */
+        const richiesta = new RichiestaPutGenerica();
+        richiesta.functionName = this.env.putUserProfileImageWithUserFunctionName;
+        richiesta.utente = utente;
         return richiesta;
     }
     // -------- NOTIFICATION --------

@@ -95,6 +95,65 @@
         /**
          * @param {?} username
          * @param {?} password
+         * @param {?} name
+         * @return {?}
+         */
+        BVAuthorizationService.prototype.signup = /**
+         * @param {?} username
+         * @param {?} password
+         * @param {?} name
+         * @return {?}
+         */
+            function (username, password, name) {
+                /** @type {?} */
+                var attributeList = [];
+                /** @type {?} */
+                var dataEmail = {
+                    Name: 'email',
+                    Value: username
+                };
+                /** @type {?} */
+                var dataPersonalName = {
+                    Name: 'name',
+                    Value: name
+                };
+                /** @type {?} */
+                var dataPersonalNickname = {
+                    Name: 'nickname',
+                    Value: name
+                };
+                /** @type {?} */
+                var emailAttribute = new amazonCognitoIdentityJs.CognitoUserAttribute(dataEmail);
+                /** @type {?} */
+                var nameAttribute = new amazonCognitoIdentityJs.CognitoUserAttribute(dataPersonalName);
+                /** @type {?} */
+                var nicknameAttribute = new amazonCognitoIdentityJs.CognitoUserAttribute(dataPersonalNickname);
+                attributeList.push(emailAttribute);
+                attributeList.push(nameAttribute);
+                attributeList.push(nicknameAttribute);
+                return rxjs.Observable.create(( /**
+                 * @param {?} observer
+                 * @return {?}
+                 */function (observer) {
+                    return userPool.signUp(username, password, attributeList, null, ( /**
+                     * @param {?} err
+                     * @param {?} result
+                     * @return {?}
+                     */function (err, result) {
+                        if (err) {
+                            observer.error(err);
+                            console.log(err);
+                        }
+                        else {
+                            observer.next(result);
+                            observer.complete();
+                        }
+                    }));
+                }));
+            };
+        /**
+         * @param {?} username
+         * @param {?} password
          * @return {?}
          */
         BVAuthorizationService.prototype.signin = /**
@@ -841,6 +900,21 @@
                 var richiesta = new RichiestaPutGenerica();
                 richiesta.functionName = this.env.putVinoFunctionName;
                 richiesta.vino = vino;
+                return richiesta;
+            };
+        /**
+         * @param {?} utente
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaPutuserProfileWithImage = /**
+         * @param {?} utente
+         * @return {?}
+         */
+            function (utente) {
+                /** @type {?} */
+                var richiesta = new RichiestaPutGenerica();
+                richiesta.functionName = this.env.putUserProfileImageWithUserFunctionName;
+                richiesta.utente = utente;
                 return richiesta;
             };
         // -------- NOTIFICATION --------

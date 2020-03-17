@@ -37,9 +37,6 @@ export class HomePage extends BaseComponent implements OnInit {
 
           this.appSessionService.set(environment.KEY_AUTH_TOKEN, this.decodeObjectInStorage(val));
           this.inizializzaApp();
-        } else {
-          console.log('--------- HOME ---------- : manca il token anche in storage, necessario login');
-          this.goToPage('login'); // manca il token anche in storage, necessario login
         }
       });
     }
@@ -64,7 +61,7 @@ export class HomePage extends BaseComponent implements OnInit {
   }
 
   public registrati() {
-    this.alertService.presentAlert('NON ANCORA IMPLEMENTATA');
+    this.goToPage('registrati');
   }
 
 }

@@ -1,31 +1,38 @@
 <div class="main-body access registrati" [style.backgroundColor]="registerColor">
     <div class="content-area">
         <div class="content registrati">
-            
+
             <h3 class="title-access">
                 Registrati
             </h3>
             <form class="user">
                 <div class="form-group">
                     <label>Nome</label>
-                    <input type="text" class="form-control form-control-user" >
+                    <input type="text" class="form-control form-control-user" [(ngModel)]="name" name="name">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control form-control-user" >
+                    <input type="email" class="form-control form-control-user" [(ngModel)]="email" name="email">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control form-control-user" >
+                    <input type="password" class="form-control form-control-user" [(ngModel)]="password"
+                        name="password">
                 </div>
-                
+                <div class="form-group">
+                    <label>Conferma Password</label>
+                    <input type="password" class="form-control form-control-user" [(ngModel)]="passwordConfirm"
+                        name="passwordConfirm">
+                </div>
             </form>
             <div class="access-cta">
                 <p><small>Cliccando su registrati accetterai i <a hef="#">Termini d'uso</a></small></p>
-                <button class="button white text-center full-width" (click)="submit()">Registrati</button>
+                <button class="button white text-center full-width" (click)="registrati()">Registrati</button>
                 <p>oppure</p>
-                <button class="button social facebook text-center full-width" (click)="submit()">Registrati con Facebook</button>
-                <button class="button social google text-center full-width" (click)="submit()">Registrati con Google</button>
+                <button class="button social facebook text-center full-width" (click)="registratiFb()">Registrati con
+                    Facebook</button>
+                <button class="button social google text-center full-width" (click)="registratiG()">Registrati con
+                    Google</button>
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ export declare class BVAuthorizationService implements OnInit {
     cognitoUser: any;
     ngOnInit(): void;
     constructor(sessionService: SessionService);
+    signup(username: string, password: string, name: string): Observable<CodeDeliveryDetailsType>;
     signin(username: string, password: string): Observable<CognitoUserSession>;
     forgotPassword(username: string): Observable<CodeDeliveryDetailsType>;
     isLoggedIn(): boolean;

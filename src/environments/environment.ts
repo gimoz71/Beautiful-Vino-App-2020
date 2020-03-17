@@ -69,7 +69,8 @@ export const environment = {
   AWS_UPLOADBUCKET_REGION: '',
   AWS_UPLOADBUCKET_BUCKETNAME: '',
   GOOGLE_MAP_API_KEY: '',
-  KEY_PAGINA_SELEZIONATA: 'paginaSelezionata'
+  KEY_PAGINA_SELEZIONATA: 'paginaSelezionata',
+  ID_PROFILO_AZIENDA: '1582804080'
 };
 
 /*

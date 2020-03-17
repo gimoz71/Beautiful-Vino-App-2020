@@ -31,13 +31,13 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Milano
+                                {{evento.cittaEvento}}
                             </div>
                         </div>
                         <h2 class="titolo">{{evento.titoloEvento}}</h2>
                         <div class="clearfix">
                             <h4 class="data">{{evento.dataEvento | BVDateFormat_gg_mm_aaaa}}</h4>
-                            <h2 class="badge">{{evento.prezzoEvento}}</h2>
+                            <h2 class="badge">€ {{evento.prezzoEvento}}</h2>
                         </div>
                         <div class="testo estratto" [innerHTML]="evento.testoEvento"></div>
                     </div>
