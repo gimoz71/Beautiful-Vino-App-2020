@@ -296,15 +296,15 @@ form {
         position: relative;
         .chiudi {
             position: absolute; 
-            top: 5px;
-            left: 5px;
-            height: 30px;
-            width: 30px;
+            top: 10px;
+            left: 10px;
+            height: 40px;
+            width: 40px;
             background-color: rgba(0,0,0,.7);
             border-radius: 50%;
             svg {
-                width: 30px;
-                height: 30px;
+                width: 40px;
+                height: 40px;
                 fill: #fff;
             }
         }
@@ -383,8 +383,12 @@ form {
 		text-align: left;
         color: #000;
         span {
-            display: inline-block;
-            width: 80px;
+            float: left;
+            width: 70px;
+        }
+        b{
+            display: block;
+            margin-left: 70px;
         }
 	}
 	.highlight {
@@ -427,19 +431,22 @@ form {
     }
     .float-chiudi {
         float: left; 
-        height: 30px;
-        width: 30px;
+        height: 40px;
+        width: 40px;
         svg {
             opacity: .5;
-             height: 30px;
-            width: 30px;
+            height: 40px;
+            width: 40px;
         }
     }
     .float-header {
         float: left;
         font-size: 16px;
         margin: 0;
-        padding: .35em;
+        padding-top: .7em;
+        padding-bottom: .7em;
+        text-align: left;
+        max-width: 85%;
     }
 }
 
@@ -498,20 +505,20 @@ a:visited {
     }
     .edit-profilo {
         position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 20px;
-        height: 20px;
+        top: 25px;
+        right: 25px;
+        width: 25px;
+        height: 25px;
         svg {
             fill: #fff;
         }
     }
     .page-back {
         position: absolute;
-        top: 20px;
-        left: 20px;
-        width: 10px;
-        height: 10px;
+        top: 25px;
+        left: 25px;
+        width: 15px;
+        height: 15px;
         svg {
             fill: #fff;
         }
@@ -647,7 +654,20 @@ a:visited {
 				border: none;
 			}
 		}
-	}
+    }
+    &.vino {
+        .info {
+            overflow:hidden;
+            height: 3.5em;
+            position: relative;
+            &:after {
+                position: absolute;
+                content:'...';
+                bottom: -3px;
+                right: 0px;
+            }
+        }
+    }
 	&.evento, &.azienda {
 		/* elementi eventi */
 
