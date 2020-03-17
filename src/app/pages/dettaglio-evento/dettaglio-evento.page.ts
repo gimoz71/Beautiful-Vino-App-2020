@@ -102,6 +102,7 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
 
     public dettaglioVino(vino: Vino) {
         console.log('vado al dettaglio vino: ' + vino.nomeVino);
+        this.goToPageParams('dettaglio-vino', { queryParams: { vinoselezionato: JSON.stringify(vino), reload: 'true' } });
     }
 
 

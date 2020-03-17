@@ -9,6 +9,7 @@ import { ThemeChangerService } from 'src/app/services/themeChanger/themechanger.
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { Subject } from 'rxjs';
 import { ColorChangeCommunicationService } from '../../services/colorChangeCommunication/colorchangecommunication.service';
+import { CodeDeliveryDetailsType } from 'aws-sdk/clients/cognitoidentityserviceprovider';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +41,17 @@ export class LoginPage extends BaseComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
+  public forgotPassword() {
+    if (this.username === '') {
+      this.alertService.presentErrorAlert('username obbligatorio');
+    } else {
+      this.authService.forgotPassword(this.username).subscribe((response: CodeDeliveryDetailsType) => {
+        this.alertService.presentAlert('Inviata richiesta di recupero password per ' + this.username + ' controllare la mail');
+      });
+    }
+  }
+
+  public login() {
     this.authService.signin(this.username, this.password).subscribe(
 
       (response: CognitoUserSession) => {

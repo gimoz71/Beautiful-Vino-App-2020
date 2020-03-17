@@ -62,7 +62,7 @@ export class DettaglioVinoPage extends BaseComponent implements OnInit {
     }
 
     public reloadVino() {
-        this.commonService.get(this.richiesteService.getRichiestaGetEvento(this.vino.idVino)).subscribe(r => {
+        this.commonService.get(this.richiesteService.getRichiestaGetVino(this.vino.idVino)).subscribe(r => {
             if (r.esito.codice === environment.ESITO_OK_CODICE) {
                 this.vino = r.vino;
             } else {

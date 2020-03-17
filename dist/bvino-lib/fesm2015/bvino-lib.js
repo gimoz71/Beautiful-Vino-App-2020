@@ -124,6 +124,43 @@ class BVAuthorizationService {
         }));
     }
     /**
+     * @param {?} username
+     * @return {?}
+     */
+    forgotPassword(username) {
+        /** @type {?} */
+        const userData = {
+            Username: username,
+            Pool: userPool
+        };
+        /** @type {?} */
+        const cognitoUser = new CognitoUser(userData);
+        return Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        observer => {
+            cognitoUser.forgotPassword({
+                onSuccess: (/**
+                 * @param {?} result
+                 * @return {?}
+                 */
+                function (result) {
+                    observer.next(result);
+                    observer.complete();
+                }),
+                onFailure: (/**
+                 * @param {?} err
+                 * @return {?}
+                 */
+                function (err) {
+                    console.log(err);
+                    observer.error(err);
+                })
+            });
+        }));
+    }
+    /**
      * @return {?}
      */
     isLoggedIn() {

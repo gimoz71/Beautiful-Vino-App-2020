@@ -146,6 +146,47 @@ var BVAuthorizationService = /** @class */ (function () {
         }));
     };
     /**
+     * @param {?} username
+     * @return {?}
+     */
+    BVAuthorizationService.prototype.forgotPassword = /**
+     * @param {?} username
+     * @return {?}
+     */
+    function (username) {
+        /** @type {?} */
+        var userData = {
+            Username: username,
+            Pool: userPool
+        };
+        /** @type {?} */
+        var cognitoUser = new CognitoUser(userData);
+        return Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        function (observer) {
+            cognitoUser.forgotPassword({
+                onSuccess: (/**
+                 * @param {?} result
+                 * @return {?}
+                 */
+                function (result) {
+                    observer.next(result);
+                    observer.complete();
+                }),
+                onFailure: (/**
+                 * @param {?} err
+                 * @return {?}
+                 */
+                function (err) {
+                    console.log(err);
+                    observer.error(err);
+                })
+            });
+        }));
+    };
+    /**
      * @return {?}
      */
     BVAuthorizationService.prototype.isLoggedIn = /**
