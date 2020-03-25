@@ -63,7 +63,6 @@ export class AuthComponent extends BaseComponent implements OnInit {
               if (r.esito.codice === environment.ESITO_OK_CODICE) {
                 const utenteDb = r.utente as Utente;
 
-
                 this.appSessionService.set(environment.KEY_UTENTE, JSON.stringify(utenteDb));
                 if (utente.idProfiloAziendaUtente !== undefined && utente.idProfiloAziendaUtente !== '') {
                   this.commonService.get(this.richiesteService.getRichiestaGetProfiloAzienda(utenteDb.idProfiloAziendaUtente))
