@@ -135,7 +135,7 @@ form {
 	margin: 0 30px;
 
 	.form-group {
-		margin: 10px 0;
+		margin: 5px 0;
 	}
     label {
         font-size: .8em; 
@@ -156,13 +156,14 @@ form {
 }
 
 .access-cta {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: 30px;
-            color: #fff;
-        }
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 30px;
+    margin-top: 0;
+    color: #fff;
+}
 
 .content {
     &.registrati, &.accedi {
@@ -200,7 +201,7 @@ form {
 	text-align: center;
 	background-position: 12px center;
 	background-repeat: no-repeat;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
 	&.btn-first-color {
 		background: $firstColor;
 		color: #fff;
@@ -221,10 +222,16 @@ form {
 	}
 	&.white {
 		background-color: rgba(255, 255, 255, 0.5);
-		color: #fff;
+        color: #fff;
+        
+        &:focus, &:active {
+            background-color: rgba(255, 255, 255, .8);
+            color: #000;
+        }
 	}
 
 	&.social {
+       
 		&.facebook {
 			color: #2c78d0;
 			background-color: #fff;
@@ -232,7 +239,10 @@ form {
 		&.google {
 			color: #ea3806;
 			background-color: #fff;
-		}
+        }
+         &:focus, &:active {
+            background-color: #ccc;
+        }
 	}
 }
 
@@ -274,8 +284,11 @@ form {
 	}
 }
 .profile {
-	.page-title * {
-		color: #fff;
+    .page-title {
+        margin-top: 20px;
+        * {
+            color: #fff;
+        }
 	}
 	.scroller-content {
 		top: $profile-header-size;
@@ -390,7 +403,15 @@ form {
             display: block;
             margin-left: 70px;
         }
-	}
+    }
+    .partecipanti {
+        margin: 10px;
+		text-align: left;
+        color: #666;
+        span {
+            color: $firstColor;
+        }
+    }
 	.highlight {
 		margin: 10px;
 		text-align: left;
@@ -474,7 +495,7 @@ form {
 
 .title-access {
 	color: #fff;
-	margin-top: 30px;
+	margin-top: 20px;
 }
 a:link,
 a:visited {
@@ -525,7 +546,7 @@ a:visited {
     }
     .thumb-edit {
         position: relative;
-        margin-top: 10px;
+        //margin-top: 10px;
         height: 100px;
         width: 100px;
         left: 50%;
@@ -568,9 +589,14 @@ a:visited {
 
 /* box elementi generali */
 .titolo-box {
+    font-size: 20px;
     text-align: left;
-    color: $firstColor;
+    color: #333;
     margin: 30px 0  0 10px;
+    &.hl {
+        color: $firstColor;
+        text-transform: uppercase;
+    }
     
     //border-bottom: solid 1px #efefef;
 }
@@ -584,7 +610,7 @@ a:visited {
     .titolo {
 
 			margin-top: 0;
-			font-size: 1.25rem;
+			font-size: 1.15rem;
     }
 	.cover {
 		width: 100%;
@@ -629,6 +655,7 @@ a:visited {
             float: left;
 		}
 		.titolo {
+            font-size: 17px;
 			margin-top: 0;
 			margin-left: 50px;
 			span {
@@ -641,7 +668,8 @@ a:visited {
 			padding: 0;
 			margin: 0;
 			margin-left: 50px;
-			font-size: 0.9rem;
+            font-size: 0.9rem;
+            color: #666;
 		}
 		div {
 			padding: 20px 0;

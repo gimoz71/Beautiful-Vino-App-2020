@@ -85,7 +85,7 @@
                     <p class="description" [innerHTML]="evento.testoEvento">
                     </p>
 
-                    <h3 class="titolo-box">Elenco dei vini</h3>
+                    <h3 class="titolo-box hl">Elenco dei vini</h3>
                     <div class="box vino clearfix" *ngFor="let vino of evento.viniEventoInt"
                         (click)="dettaglioVino(vino)">
                         <div>
@@ -94,7 +94,7 @@
                             <p class="info">{{vino.inBreveVino}}</p>
                         </div>
                     </div>
-                    <h3 class="titolo-box">Dove</h3>
+                    <h3 class="titolo-box hl">Dove</h3>
                 </div>
                 <div class="area-mappa">
                     <app-bvmaps [latitudine]="evento.latitudineEvento" [longitudine]="evento.longitudineEvento"
@@ -107,6 +107,13 @@
                             {{evento.telefonoEvento}}<br>{{evento.emailEvento}}
                         </div>
                     </div>
+                </div>
+                <div class="frame-content">
+                    <h3 class="titolo-box ">Partecipanti</h3>
+                    <p class="partecipanti clearfix">
+                        <strong>Max 30</strong><br>
+                        <span>Disponibili ancora 26 posti</span>
+                    </p>
                 </div>
             </div>
             <div class="footer action">
