@@ -36,6 +36,6 @@ export declare class RichiesteService {
     getRichiestaPutuserProfileWithImage(utente: Utente): RichiestaPutGenerica;
     getRichiestaNotifica(messaggio: string): RichiestaNotificaGenerica;
     getRichiestaAggiungiEventoAPreferiti(idUtente: string, idEvento: string, dataEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
-    getRichiestaAcquistaEvento(idUtente: string, idEvento: string, dataEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
+    getRichiestaAcquistaEvento(idUtente: string, idEvento: string, dataEvento: number, dataPrenotazioneEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
     getRichiestaRimuoviEventoDaPreferiti(idUtente: string, idEvento: string, dataEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
 }

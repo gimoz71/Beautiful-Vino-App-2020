@@ -4,6 +4,11 @@ import { PipeTransform, Pipe } from '@angular/core';
 export class BVDatePipe implements PipeTransform {
   transform(value: string, times: number) {
     // in input ho sempre una stringa contenente il long della data
+
+    console.log('PIPE: ' + value);
+    if (+value === 0) {
+      return '-';
+    }
     const date = new Date(+value);
     return this.leftpad(date.getDate(), 2)
       + '/' + this.leftpad(date.getMonth() + 1, 2)

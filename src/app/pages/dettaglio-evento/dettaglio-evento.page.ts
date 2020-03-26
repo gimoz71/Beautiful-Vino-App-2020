@@ -127,7 +127,6 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
     }
 
     public aggiungiAiPreferiti() {
-        const preferitoEvento = (this.evento.statoPreferitoEvento === 'P' ? 1 : 0);
         this.commonService.connect(this.richiesteService.getRichiestaAggiungiEventoAPreferiti(
             this.idUtente,
             this.evento.idEvento,
@@ -147,12 +146,70 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
     }
 
     public acquistaEvento() {
-        this.alertService.presentAlert('FUNZIONE NON IMPLEMENTATA');
+        if (!this.evento.eventoRicorrente) {
+            this.commonService.connect(this.richiesteService.getRichiestaAcquistaEvento(
+                this.idUtente,
+                this.evento.idEvento,
+                this.evento.dataEvento,
+                this.evento.dataEvento,
+                0,
+                1))
+                .subscribe(r => {
+                    if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                        // ricarico l'utente
+                        this.reloadEvento();
+                    } else {
+                        this.alertService.presentErrorAlert(r.esito.message);
+                    }
+                }, err => {
+                    this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
+                });
+        } else {
+            this.goToAcquistaRicorrente();
+        }
     }
 
     onScroll(event) {
         this.showNav = this.scrollTop < event.target.scrollTop;
         // this.scrollTop = event.target.scrollTop; <-- commentato perchè refresha il valore di scrolltop
+    }
+
+    public goToAcquistaRicorrente() {
+        this.goToPageParams('acquistaevento', { queryParams: { eventoselezionato: JSON.stringify(this.evento), idutente: this.idUtente } });
+    }
+
+    public isAcquistoAbilitato() {
+        if (this.evento.dettagliIscrittiEvento) {
+            if (this.evento.dettagliIscrittiEvento.length >= 0) {
+                for (const iscrittoEvento of this.evento.dettagliIscrittiEvento) {
+                    if (iscrittoEvento.idUtente === this.idUtente) {
+                        return false;
+                    }
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+        return true;
+    }
+
+    public getDataEventoAcquistato() {
+        if (this.evento.dettagliIscrittiEvento) {
+            if (this.evento.dettagliIscrittiEvento.length >= 0) {
+                for (const iscrittoEvento of this.evento.dettagliIscrittiEvento) {
+                    if (iscrittoEvento.idUtente === this.idUtente) {
+                        return iscrittoEvento.dataEvento;
+                    }
+                }
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+        return 0;
     }
 
     ionViewDidLeave() {

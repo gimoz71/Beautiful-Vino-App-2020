@@ -971,6 +971,7 @@
          * @param {?} idUtente
          * @param {?} idEvento
          * @param {?} dataEvento
+         * @param {?} dataPrenotazioneEvento
          * @param {?} statoPreferitoEvento
          * @param {?} statoAcquistatoEvento
          * @return {?}
@@ -979,16 +980,18 @@
          * @param {?} idUtente
          * @param {?} idEvento
          * @param {?} dataEvento
+         * @param {?} dataPrenotazioneEvento
          * @param {?} statoPreferitoEvento
          * @param {?} statoAcquistatoEvento
          * @return {?}
          */
-            function (idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
+            function (idUtente, idEvento, dataEvento, dataPrenotazioneEvento, statoPreferitoEvento, statoAcquistatoEvento) {
                 /** @type {?} */
                 var richiesta = new RichiestaConnectGenerica();
                 richiesta.idUtente = idUtente;
                 richiesta.idEvento = idEvento;
                 richiesta.dataEvento = dataEvento;
+                richiesta.dataPrenotazioneEvento = dataPrenotazioneEvento;
                 richiesta.statoEvento = 'A';
                 richiesta.statoPreferitoEvento = statoPreferitoEvento;
                 richiesta.statoAcquistatoEvento = statoAcquistatoEvento;

@@ -70,7 +70,9 @@
                         <div style="width: 100%;">
                             <h2 class="titolo">{{evento.titoloEvento}}</h2>
                             <div class="clearfix">
-                                <h4 class="data">{{evento.dataEvento | BVDateFormat_gg_mm_aaaa}}</h4>
+                                <h4 class="data">
+                                    {{evento.eventoRicorrente ? 'EVENTO RICORRENTE' : (evento.dataEvento | BVDateFormat_gg_mm_aaaa)}}
+                                </h4>
                                 <h2 class="badge">&euro; {{evento.prezzoEvento}}</h2>
                             </div>
                         </div>
@@ -109,7 +111,10 @@
             </div>
             <div class="footer action">
                 <div class="frame-content">
-                    <button class="button text-center btn-second-color full-width"
+                    <button *ngIf="!isAcquistoAbilitato()" class="button text-center btn-second-color full-width"
+                        disabled="true"><b>Evento già acquistato (
+                            {{getDataEventoAcquistato() | BVDateFormat_gg_mm_aaaa}})</b></button>
+                    <button *ngIf="isAcquistoAbilitato()" class="button text-center btn-second-color full-width"
                         (click)="acquistaEvento()"><b>Acquista</b>
                         (&euro; {{evento.prezzoEvento}})</button>
                 </div>

@@ -682,16 +682,18 @@ class RichiesteService {
      * @param {?} idUtente
      * @param {?} idEvento
      * @param {?} dataEvento
+     * @param {?} dataPrenotazioneEvento
      * @param {?} statoPreferitoEvento
      * @param {?} statoAcquistatoEvento
      * @return {?}
      */
-    getRichiestaAcquistaEvento(idUtente, idEvento, dataEvento, statoPreferitoEvento, statoAcquistatoEvento) {
+    getRichiestaAcquistaEvento(idUtente, idEvento, dataEvento, dataPrenotazioneEvento, statoPreferitoEvento, statoAcquistatoEvento) {
         /** @type {?} */
         const richiesta = new RichiestaConnectGenerica();
         richiesta.idUtente = idUtente;
         richiesta.idEvento = idEvento;
         richiesta.dataEvento = dataEvento;
+        richiesta.dataPrenotazioneEvento = dataPrenotazioneEvento;
         richiesta.statoEvento = 'A';
         richiesta.statoPreferitoEvento = statoPreferitoEvento;
         richiesta.statoAcquistatoEvento = statoAcquistatoEvento;

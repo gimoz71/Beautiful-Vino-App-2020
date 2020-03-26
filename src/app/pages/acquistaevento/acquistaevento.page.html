@@ -1,0 +1,95 @@
+<div class="main-body">
+  <div class="content-area">
+    <div class="content dettagli footer-action">
+      <div class="utility-header" [class.reveal]="showNav">
+        <div class="float-chiudi" (click)="tornaADettaglioEvento()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
+            <title>chiudi-sottile</title>
+            <g id="Layer_2" data-name="Layer 2">
+              <g id="Layer_1-2" data-name="Layer 1">
+                <!--<path d="M92.66,0a92.66,92.66,0,1,0,92.66,92.66A92.77,92.77,0,0,0,92.66,0Zm0,175.33a82.66,82.66,0,1,1,82.66-82.66A82.76,82.76,0,0,1,92.66,175.33Z" />-->
+                <path
+                  d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
+              </g>
+            </g>
+          </svg>
+        </div>
+        <h3 class="float-header">{{evento.titoloEvento}}</h3>
+      </div>
+      <div class="dettaglio-header" [ngStyle]="{'background-image': 'url('+evento.urlFotoEvento+')'}">
+        <div class="chiudi" (click)="router.navigate(['/eventi']);">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
+            <title>chiudi-sottile</title>
+            <g id="Layer_2" data-name="Layer 2">
+              <g id="Layer_1-2" data-name="Layer 1">
+                <!--<path d="M92.66,0a92.66,92.66,0,1,0,92.66,92.66A92.77,92.77,0,0,0,92.66,0Zm0,175.33a82.66,82.66,0,1,1,82.66-82.66A82.76,82.76,0,0,1,92.66,175.33Z" />-->
+                <path
+                  d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="box evento clearfix">
+          <div class="location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 319.36 425.45">
+              <title>location</title>
+              <g id="Layer_2" data-name="Layer 2">
+                <g id="Layer_1-2" data-name="Layer 1">
+                  <path
+                    d="M159.79,425.45c-28.36-32.36-54.94-65.26-79.65-99.64C56.2,292.52,33.69,258.36,16.59,220.94,9.66,205.78,3.64,190.24,1.3,173.65-2.19,149,1.47,125,10.87,102.24,34.46,45.12,77.17,11,138.16,1.73c84.08-12.81,164.9,46.87,179.25,130,5.25,30.42-.45,58.43-12.73,85.88-17.29,38.65-39.82,74.24-65.13,107.95-24,31.95-49.55,62.72-74.45,94C163.55,421.5,161.78,423.25,159.79,425.45Zm.5-358.5c-43.42-.31-79.76,34.89-80.16,77.65-.43,45,34.87,81.15,79.57,81.41,43.72.26,79.5-35.22,79.75-79.07A79.16,79.16,0,0,0,160.29,66.95Z" />
+                </g>
+              </g>
+            </svg>
+            {{evento.cittaEvento}}
+          </div>
+          <div class="favourites" *ngIf="evento && evento.statoPreferitoEvento === 'P'" (click)="togliDaiPreferiti()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 407.98 375.6">
+              <title>favourites</title>
+              <g id="Layer_2" data-name="Layer 2">
+                <g id="Layer_1-2" data-name="Layer 1">
+                  <path
+                    d="M0,123.08V101.57a16,16,0,0,0,.76-2.64c2.77-24.2,12-45.58,28.68-63.37C55.42,7.87,87.95-3,125.2.77c25.14,2.58,47.47,12.8,66.45,29.72,4.22,3.76,7.78,8.26,11.59,12.36,5.79-5.4,10.57-10.38,15.88-14.71C245.09,7,274.89-2.61,308.27.61,332.7,3,354.4,12.43,372.42,29.37c26.84,25.23,37.83,56.75,35.17,93-2,28-13.33,52.7-28.74,75.72-21.36,31.9-48.39,58.77-76,85.11C270.71,314,236,341.93,205.22,374.16a18.62,18.62,0,0,1-2,1.44,26.71,26.71,0,0,0-2.57-3.56c-9.22-9.19-18.25-18.58-27.79-27.42C145.15,319,117,293.92,89.57,268,67,246.63,46.06,223.62,28.8,197.57,18.28,181.7,9.47,165,4.81,146.34,2.89,138.67,1.58,130.84,0,123.08Z" />
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="favourites-off" *ngIf="!(evento && evento.statoPreferitoEvento === 'P')"
+            (click)="aggiungiAiPreferiti()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 407.98 375.6">
+              <title>favourites-off</title>
+              <g id="Layer_2" data-name="Layer 2">
+                <g id="Layer_1-2" data-name="Layer 1">
+                  <path
+                    d="M295.79,22c3.39,0,6.88.17,10.34.5,19.9,1.95,37.13,9.65,51.22,22.9,21.3,20,30.55,44.67,28.3,75.4-1.51,21.07-9.48,41.74-25.08,65.05-20.32,30.35-47.16,56.87-72.94,81.46-12.52,12-25.8,23.88-38.64,35.36-14.93,13.36-30.25,27.05-45,41.5-5.22-5.24-10.59-10.54-16.16-15.7-10.76-10-21.73-20-32.35-29.62C138.7,283.58,121.38,267.78,104.7,252c-24.25-23-43.07-44.74-57.56-66.61C36.31,169.08,29.64,155,26.15,141,25,136.27,24,131.32,23,126.08c-.33-1.7-.66-3.43-1-5.19V104.76c.13-.53.24-1.05.35-1.58l.17-.87.1-.88c2.32-20.26,9.8-36.88,22.86-50.82,18-19.22,39.53-28.56,65.7-28.56,3.82,0,7.79.2,11.77.6,20.14,2.07,38.32,10.23,54.06,24.26a81.31,81.31,0,0,1,6.19,6.55c1.24,1.41,2.53,2.87,3.92,4.36l15,16.15,16.12-15c2-1.87,3.83-3.63,5.6-5.34,3.37-3.25,6.28-6.05,9.16-8.4C252.19,29.59,272.72,22,295.79,22m0-22c-28.36,0-54,9.67-76.67,28.14-5.31,4.33-10.09,9.31-15.88,14.71-3.81-4.1-7.37-8.6-11.59-12.36C172.67,13.57,150.34,3.35,125.2.77a139.35,139.35,0,0,0-14-.72C79.76.05,52.11,11.4,29.44,35.56,12.76,53.35,3.53,74.73.76,98.93A16.24,16.24,0,0,1,0,101.57v21.51c1.58,7.76,2.89,15.59,4.81,23.26,4.66,18.66,13.47,35.36,24,51.23C46.06,223.62,67,246.63,89.57,268c27.43,25.92,55.58,51,83.29,76.62,9.54,8.84,18.57,18.23,27.79,27.42a26.62,26.62,0,0,1,2.57,3.56,19.15,19.15,0,0,0,2-1.44c30.78-32.23,65.49-60.16,97.63-91,27.61-26.34,54.64-53.21,76-85.11,15.41-23,26.74-47.72,28.74-75.72,2.66-36.25-8.33-67.77-35.17-93C354.4,12.43,332.7,3,308.27.61,304.05.2,299.9,0,295.79,0Z" />
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div style="width: 100%;">
+            <h2 class="titolo">{{evento.titoloEvento}}</h2>
+            <div class="clearfix">
+              <h2 class="badge">&euro; {{evento.prezzoEvento}}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-content">
+        <p class="intro clearfix">
+          Scegli una data per l'evento
+        </p>
+        <select class="form-control form-control-user custom-select" (change)="selezionaDataRicorrente($event.target)">
+          <option *ngFor="let dataRicorrente of evento.dateRicorrenti" [ngValue]="dataRicorrente"
+            value="{{dataRicorrente}}">
+            {{dataRicorrente | BVDateFormat_gg_mm_aaaa}}
+            {{ dataRicorrente === 0 ? '' : '(' + getPostiDisponibiliDataEvento(dataRicorrente) + ')'}}
+          </option>
+        </select>
+        <p class="intro clearfix" *ngIf="isDataAcquistoSelezionata">Data selezionata
+          {{dataAcquistoSelezionata | BVDateFormat_gg_mm_aaaa}}
+        </p>
+        <button class="button text-center btn-second-color full-width"
+          (click)="acquistaEvento()"><b>Acquista</b></button>
+      </div>
+    </div>
+  </div>
+</div>

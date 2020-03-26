@@ -9,6 +9,7 @@ export declare class RichiestaConnectGenerica {
     idEvento: string;
     idVino: string;
     dataEvento: number;
+    dataPrenotazioneEvento: number;
     statoEvento: string;
     statoVino: string;
     statoUtente: string;

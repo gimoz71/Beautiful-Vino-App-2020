@@ -11,6 +11,7 @@ import { Utente } from '../utente/utente';
 export declare class Evento {
     idEvento: string;
     dataEvento: number;
+    dataPrenotazioneEvento: number;
     dataEventoa: string;
     cittaEvento: string;
     titoloEvento: string;
@@ -36,6 +37,7 @@ export declare class Evento {
     provinciaEvento: Provincia;
     aziendaOspitanteEvento: Azienda;
     iscrittiEvento: Array<Utente>;
+    dettagliIscrittiEvento: Array<UtenteEvento>;
     viniEvento: Array<Vino>;
     badgeEventoInt: BadgeEvento;
     provinciaEventoInt: ProvinciaEvento;
@@ -44,4 +46,6 @@ export declare class Evento {
     iscrittiEventoInt: Array<UtenteEvento>;
     viniEventoInt: Array<VinoEvento>;
     aziendeViniEvento: Array<Azienda>;
+    eventoRicorrente: boolean;
+    dateRicorrenti: Array<number>;
 }

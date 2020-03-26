@@ -53,6 +53,10 @@ const routes: Routes = [
         path: 'edit-profilo',
         loadChildren: () => import('./pages/edit-profilo/edit-profilo.module').then(m => m.EditProfiloPageModule)
     },
+    {
+        path: 'acquistaevento',
+        loadChildren: () => import('./pages/acquistaevento/acquistaevento.module').then(m => m.AcquistaeventoPageModule)
+    }
 ];
 
 @NgModule({
