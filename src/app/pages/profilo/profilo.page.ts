@@ -22,6 +22,7 @@ export class ProfiloPage extends BaseComponent implements OnInit {
   public listaEventi: Array<Evento>;
   public utente: Utente;
 
+
   constructor(
     public alertService: AlertService,
     public router: Router,

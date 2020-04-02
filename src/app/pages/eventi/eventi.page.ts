@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environmentkeys';
 import { BaseComponent } from 'src/app/components/base/base.component';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { AppSessionService } from 'src/app/services/appsession/appSession.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-eventi',
@@ -20,6 +21,8 @@ export class EventiPage extends BaseComponent implements OnInit {
 
   public listaEventi: Array<Evento>;
 
+  public showPage = false;
+
   constructor(
     private commonService: BVCommonService,
     private richiesteService: RichiesteService,
@@ -27,7 +30,8 @@ export class EventiPage extends BaseComponent implements OnInit {
     public router: Router,
     private logoutComm: LogoutCommunicationService,
     public ngZone: NgZone,
-    public appSessionService: AppSessionService
+    public appSessionService: AppSessionService,
+    public loaderService: LoaderService
   ) {
     super(router, alertService);
     this.listaEventi = new Array<Evento>();
@@ -67,6 +71,7 @@ export class EventiPage extends BaseComponent implements OnInit {
         // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {
         if (r.esito.codice === environment.ESITO_OK_CODICE) {
           this.listaEventi = this.normalizeList(r.eventi);
+          this.showPage = true;
         } else {
           this.manageError(r);
         }
@@ -92,6 +97,7 @@ export class EventiPage extends BaseComponent implements OnInit {
   }
 
   public dettaglioEvento(evento: Evento) {
+    this.loaderService.presentLoader('caricamento...');
     this.goToPageParams('dettaglio-evento', { queryParams: { eventoselezionato: JSON.stringify(evento), reload: 'false' } });
   }
 
@@ -102,6 +108,23 @@ export class EventiPage extends BaseComponent implements OnInit {
   ionViewDidLeave() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  public refresh(event) {
+    this.commonService.get(this.richiesteService.getRichiestaGetEventiAzienda(this.appSessionService.get(environment.KEY_AZIENDA_ID)))
+      .subscribe(r => {
+        // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {
+        if (r.esito.codice === environment.ESITO_OK_CODICE) {
+          this.listaEventi = this.normalizeList(r.eventi);
+          event.target.complete();
+        } else {
+          this.manageError(r);
+          event.target.complete();
+        }
+      }, err => {
+        this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
+        event.target.complete();
+      });
   }
 
 }

@@ -38,13 +38,16 @@ import { FileuploadModule } from './components/fileupload/fileupload.module';
 import { StoreService } from './services/store/store.service';
 import { ColorChangeCommunicationService } from './services/colorChangeCommunication/colorchangecommunication.service';
 import { FileuploadService } from './services/bvfileupload/fileupload.service';
+import { LoaderService } from './services/loader/loader.service';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      animated: false
+    }),
     AppRoutingModule,
     HttpClientModule,
     BvinoLibModule.forRoot(environment),
@@ -71,6 +74,7 @@ import { FileuploadService } from './services/bvfileupload/fileupload.service';
     Camera,
     StoreService,
     FileuploadService,
+    LoaderService,
     File,
     WebView,
     {

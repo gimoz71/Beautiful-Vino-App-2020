@@ -20,6 +20,8 @@ export class ScopriPage extends BaseComponent implements OnInit {
 
   public listaFeed: Array<Feed>;
 
+  public showPage = false;
+
   constructor(
     private commonService: BVCommonService,
     private richiesteService: RichiesteService,
@@ -66,6 +68,7 @@ export class ScopriPage extends BaseComponent implements OnInit {
         // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {
         if (r.esito.codice === environment.ESITO_OK_CODICE) {
           this.listaFeed = r.feed;
+          this.showPage = true;
         } else {
           this.manageError(r);
         }
@@ -84,6 +87,23 @@ export class ScopriPage extends BaseComponent implements OnInit {
   ionViewDidLeave() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  public refresh(event) {
+    this.commonService.get(this.richiesteService.getRichiestaGetFeedAzienda(this.appSessionService.get(environment.KEY_AZIENDA_ID)))
+      .subscribe(r => {
+        // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {
+        if (r.esito.codice === environment.ESITO_OK_CODICE) {
+          this.listaFeed = r.feed;
+          event.target.complete();
+        } else {
+          this.manageError(r);
+          event.target.complete();
+        }
+      }, err => {
+        this.alertService.presentErrorAlert(err.statusText);
+        event.target.complete();
+      });
   }
 
 }

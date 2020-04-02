@@ -24,6 +24,11 @@ export class DettaglioVinoPage extends BaseComponent implements OnInit {
     public vino: Vino;
     public reload = false;
 
+    public eventoPrecedente: Evento;
+    public vaiAEvento = false;
+
+    public showPage = false;
+
     constructor(
         private route: ActivatedRoute,
         public alertService: AlertService,
@@ -52,8 +57,13 @@ export class DettaglioVinoPage extends BaseComponent implements OnInit {
         this.route.queryParams.pipe(
             takeUntil(this.unsubscribe$)
         ).subscribe(params => {
+            if (params.evento) {
+                this.eventoPrecedente = JSON.parse(params.evento) as Evento;
+                this.vaiAEvento = true;
+            }
             this.reload = params.reload === 'true';
             this.vino = JSON.parse(params.vinoselezionato) as Vino;
+            this.showPage = true;
             if (this.reload) {
                 // devo ricaricare il vino
                 this.reloadVino();
@@ -80,8 +90,14 @@ export class DettaglioVinoPage extends BaseComponent implements OnInit {
         console.log('vado al dettaglio evento: ' + evento.titoloEvento);
     }
 
-    public elencoVini() {
-        this.goToPage('vini');
+    public chiudiDettaglio() {
+        if (this.vaiAEvento) {
+            this.goToPageParams('dettaglio-evento',
+                { queryParams: { eventoselezionato: JSON.stringify(this.eventoPrecedente), reload: 'false' } });
+            this.vaiAEvento = false;
+        } else {
+            this.goToPage('vini');
+        }
     }
 
     onScroll(event) {

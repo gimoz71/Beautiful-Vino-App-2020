@@ -8,6 +8,7 @@ import { ColorChangeCommunicationService } from '../../services/colorChangeCommu
 import { BVCommonService, RichiesteService, BVAuthorizationService, Utente } from 'bvino-lib';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { CodeDeliveryDetailsType } from 'aws-sdk/clients/cognitoidentityserviceprovider';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-auth',
@@ -28,7 +29,8 @@ export class AuthComponent extends BaseComponent implements OnInit {
     public commonService: BVCommonService,
     public richiesteService: RichiesteService,
     public authService: BVAuthorizationService,
-    public colorChangeComm: ColorChangeCommunicationService
+    public colorChangeComm: ColorChangeCommunicationService,
+    public loaderService: LoaderService
   ) {
     super(router, alertService);
   }
@@ -36,6 +38,7 @@ export class AuthComponent extends BaseComponent implements OnInit {
   ngOnInit() { }
 
   public loginAfterSignup(username: string, password: string, name: string) {
+    this.loaderService.presentLoader('autenticazione in corso');
     this.authService.signin(username, password).subscribe(
       (response: CognitoUserSession) => {
         const accessToken = response.getAccessToken();
@@ -83,13 +86,15 @@ export class AuthComponent extends BaseComponent implements OnInit {
 
                           this.colorChangeComm.comunicateColorChange();
                         }
-
+                        this.loaderService.dismissLoader();
                         this.router.navigate(['/eventi']);
 
                       } else {
+                        this.loaderService.dismissLoader();
                         this.alertService.presentErrorAlert(s.esito.message);
                       }
                     }, err2 => {
+                      this.loaderService.dismissLoader();
                       this.alertService.presentErrorAlert(err2.statusText);
                     });
                 } else {
@@ -99,12 +104,15 @@ export class AuthComponent extends BaseComponent implements OnInit {
                 // ora devo recuperare il profiloAzienda
 
               } else {
+                this.loaderService.dismissLoader();
                 this.alertService.presentErrorAlert(r.esito.message);
               }
             }, err => {
+              this.loaderService.dismissLoader();
               this.alertService.presentErrorAlert(err.statusText);
             });
           } else {
+            this.loaderService.dismissLoader();
             this.alertService.presentErrorAlert(r.esito.message);
           }
         });
@@ -113,6 +121,7 @@ export class AuthComponent extends BaseComponent implements OnInit {
   }
 
   public login(username: string, password: string) {
+    this.loaderService.presentLoader('autenticazione in corso');
     this.authService.signin(username, password).subscribe(
 
       (response: CognitoUserSession) => {
@@ -128,6 +137,7 @@ export class AuthComponent extends BaseComponent implements OnInit {
 
         if (idUtenteDb === undefined || idUtenteDb === '') {
           this.alertService.presentErrorAlert('Utente loggato ma manca il corrispondente sul DB. Non posso procedere');
+          this.loaderService.dismissLoader();
           this.router.navigate(['/login']);
         } else {
           this.commonService.get(this.richiesteService.getRichiestaGetUtente(idUtenteDb)).subscribe(r => {
@@ -152,13 +162,15 @@ export class AuthComponent extends BaseComponent implements OnInit {
 
                       this.colorChangeComm.comunicateColorChange();
                     }
-
+                    this.loaderService.dismissLoader();
                     this.router.navigate(['/eventi']);
 
                   } else {
+                    this.loaderService.dismissLoader();
                     this.alertService.presentErrorAlert(s.esito.message);
                   }
                 }, err2 => {
+                  this.loaderService.dismissLoader();
                   this.alertService.presentErrorAlert(err2.statusText);
                 });
               } else {
@@ -168,14 +180,17 @@ export class AuthComponent extends BaseComponent implements OnInit {
               // ora devo recuperare il profiloAzienda
 
             } else {
+              this.loaderService.dismissLoader();
               this.alertService.presentErrorAlert(r.esito.message);
             }
           }, err => {
+            this.loaderService.dismissLoader();
             this.alertService.presentErrorAlert(err.statusText);
           });
         }
       },
       (err) => {
+        this.loaderService.dismissLoader();
         this.alertService.presentErrorAlert('Errore di autenticazione');
         console.log('ERRORE DI AUTENTICAZIONE: ' + err);
       });

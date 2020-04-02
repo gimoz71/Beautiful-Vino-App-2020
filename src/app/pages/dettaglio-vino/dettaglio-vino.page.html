@@ -1,9 +1,9 @@
 <div class="main-body">
     <div class="content-area">
-        <div class="content dettagli">
+        <div class="content dettagli" *ngIf="showPage">
             <div class="scroller-content" (scroll)="onScroll($event)">
                 <div class="utility-header" [class.reveal]="showNav">
-                    <div class="float-chiudi" (click)="elencoVini()">
+                    <div class="float-chiudi" (click)="chiudiDettaglio()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
                             <g id="Layer_2" data-name="Layer 2">
@@ -18,7 +18,7 @@
                     <h3 class="float-header">{{vino.nomeVino}}</h3>
                 </div>
                 <div class="dettaglio-header" [ngStyle]="{'background-image': 'url(' + vino.urlImmagineVino + ')'}">
-                    <div class="chiudi" (click)="elencoVini()">
+                    <div class="chiudi" (click)="chiudiDettaglio()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
                             <g id="Layer_2" data-name="Layer 2">

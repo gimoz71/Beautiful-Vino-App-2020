@@ -24,6 +24,8 @@ export class DettaglioFeedPage extends BaseComponent implements OnInit {
     public feed: Feed;
     public reload = false;
 
+    public showPage = false;
+
     constructor(
         private route: ActivatedRoute,
         public alertService: AlertService,
@@ -54,6 +56,7 @@ export class DettaglioFeedPage extends BaseComponent implements OnInit {
         ).subscribe(params => {
             this.reload = params.reload === 'true';
             this.feed = JSON.parse(params.feedselezionato) as Feed;
+            this.showPage = true;
         });
     }
 

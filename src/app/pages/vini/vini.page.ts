@@ -20,6 +20,8 @@ export class ViniPage extends BaseComponent implements OnInit {
 
   public listaVini: Array<Vino>;
 
+  public showPage = false;
+
   constructor(
     private commonService: BVCommonService,
     private richiesteService: RichiesteService,
@@ -64,6 +66,7 @@ export class ViniPage extends BaseComponent implements OnInit {
       .subscribe(r => {
         if (r.esito.codice === environment.ESITO_OK_CODICE) {
           this.listaVini = r.vini;
+          this.showPage = true;
         } else {
           this.manageError(r);
         }
@@ -84,4 +87,19 @@ export class ViniPage extends BaseComponent implements OnInit {
     this.unsubscribe$.complete();
   }
 
+  public refresh(event) {
+    this.commonService.get(this.richiesteService.getRichiestaGetViniAzienda(this.appSessionService.get(environment.KEY_AZIENDA_ID)))
+      .subscribe(r => {
+        if (r.esito.codice === environment.ESITO_OK_CODICE) {
+          this.listaVini = r.vini;
+          event.target.complete();
+        } else {
+          this.manageError(r);
+          event.target.complete();
+        }
+      }, err => {
+        this.alertService.presentErrorAlert(err.statusText);
+        event.target.complete();
+      });
+  }
 }

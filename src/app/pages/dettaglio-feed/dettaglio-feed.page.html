@@ -1,5 +1,5 @@
 <div class="main-body">
-    <div class="content-area">
+    <div class="content-area" *ngIf="showPage">
         <div class="content dettagli">
             <div class="scroller-content" (scroll)="onScroll($event)">
                 <div class="utility-header" [class.reveal]="showNav">

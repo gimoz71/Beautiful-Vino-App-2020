@@ -11,6 +11,7 @@ import { AlertService } from 'src/app/services/alert/alert.service';
 import { Subject } from 'rxjs';
 import { ColorChangeCommunicationService } from '../../services/colorChangeCommunication/colorchangecommunication.service';
 import { AuthComponent } from '../../components/auth/auth.component';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 
 @Component({
@@ -36,8 +37,9 @@ export class LoginPage extends AuthComponent implements OnInit {
     public commonService: BVCommonService,
     public richiesteService: RichiesteService,
     public themeChanger: ThemeChangerService,
-    public colorChangeComm: ColorChangeCommunicationService) {
-    super(router, alertService, appSessionService, commonService, richiesteService, authService, colorChangeComm);
+    public colorChangeComm: ColorChangeCommunicationService,
+    public loaderService: LoaderService) {
+    super(router, alertService, appSessionService, commonService, richiesteService, authService, colorChangeComm, loaderService);
 
   }
 

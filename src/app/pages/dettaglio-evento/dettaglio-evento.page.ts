@@ -8,6 +8,7 @@ import { AlertService } from 'src/app/services/alert/alert.service';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environmentkeys';
 import { AppSessionService } from 'src/app/services/appsession/appSession.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
     selector: 'app-dettaglio-evento',
@@ -26,6 +27,8 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
 
     public idUtente: string;
 
+    public showPage = false;
+
     constructor(
         private route: ActivatedRoute,
         public alertService: AlertService,
@@ -34,7 +37,8 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
         public ngZone: NgZone,
         public commonService: BVCommonService,
         public richiesteService: RichiesteService,
-        public appSessionService: AppSessionService
+        public appSessionService: AppSessionService,
+        public loaderService: LoaderService
     ) {
         super(router, alertService);
         this.evento = new Evento();
@@ -77,6 +81,8 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
         ).subscribe(params => {
             this.evento = JSON.parse(params.eventoselezionato) as Evento;
             // devo ricaricare l'evento
+            this.showPage = true;
+            this.loaderService.dismissLoader();
             this.reloadEvento();
         });
     }
@@ -89,6 +95,7 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
             .subscribe(r => {
                 if (r.esito.codice === environment.ESITO_OK_CODICE) {
                     this.evento = r.evento;
+
                 } else {
                     this.manageError(r);
                 }
@@ -102,7 +109,8 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
 
     public dettaglioVino(vino: Vino) {
         console.log('vado al dettaglio vino: ' + vino.nomeVino);
-        this.goToPageParams('dettaglio-vino', { queryParams: { vinoselezionato: JSON.stringify(vino), reload: 'true' } });
+        this.goToPageParams('dettaglio-vino',
+            { queryParams: { vinoselezionato: JSON.stringify(vino), reload: 'true', evento: JSON.stringify(this.evento) } });
     }
 
 
@@ -215,6 +223,24 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
     ionViewDidLeave() {
         this.unsubscribe$.next();
         this.unsubscribe$.complete();
+    }
+    public doRefresh(event: any) {
+        this.commonService.get(this.richiesteService.getRichiestaGetEventoUtente(
+            this.evento.idEvento,
+            this.evento.dataEvento,
+            this.idUtente))
+            .subscribe(r => {
+                if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                    this.evento = r.evento;
+                    event.target.complete();
+                } else {
+                    this.manageError(r);
+                    event.target.complete();
+                }
+            }, err => {
+                this.alertService.presentErrorAlert(err.statusText);
+                event.target.complete();
+            });
     }
 
 }

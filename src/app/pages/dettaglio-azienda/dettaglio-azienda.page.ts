@@ -21,6 +21,8 @@ export class DettaglioAziendaPage extends BaseComponent implements OnInit {
     private unsubscribe$ = new Subject<void>();
     public azienda: Azienda;
 
+    public showPage = false;
+
     scrollTop = 150;
     showNav = false;
 
@@ -77,6 +79,7 @@ export class DettaglioAziendaPage extends BaseComponent implements OnInit {
             .subscribe(r => {
                 if (r.esito.codice === environment.ESITO_OK_CODICE) {
                     this.azienda = r.azienda;
+                    this.showPage = true;
                 } else {
                     this.manageError(r);
 

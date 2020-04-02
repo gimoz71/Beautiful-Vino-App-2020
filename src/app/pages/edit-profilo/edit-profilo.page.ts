@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environmentkeys';
 import { AppSessionService } from 'src/app/services/appsession/appSession.service';
 import { FileuploadService } from '../../services/bvfileupload/fileupload.service';
 import { AlertController } from '@ionic/angular';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-edit-profilo',
@@ -35,6 +36,8 @@ export class EditProfiloPage extends BaseComponent implements OnInit {
 
   public imgPreview = '';
 
+  public showPage = false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +49,8 @@ export class EditProfiloPage extends BaseComponent implements OnInit {
     public richiesteService: RichiesteService,
     public appSessionService: AppSessionService,
     public uploadService: FileuploadService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public loaderService: LoaderService
   ) {
     super(router, alertService);
     this.utente = new Utente();
@@ -94,34 +98,46 @@ export class EditProfiloPage extends BaseComponent implements OnInit {
   public salvaUtente() {
     console.log('Salvataggio Utente');
     if (this.urlUtenteCambiata) {
+      this.loaderService.presentLoader('salvataggio immagine');
       this.uploadService.upload(this.imgPreview, this.folder).then((res) => {
         console.log('Response' + res);
         this.imgPreview = res as string;
         this.utente.urlFotoUtente = res as string;
-
+        this.loaderService.dismissLoader();
         // salvo l'utente e poi lo ricarico
-        this.commonService.put(this.richiesteService.getRichiestaPutUtente(this.utente)).subscribe(r => {
-          if (r.idUtente) {
-            this.caricaUtente(r.idUtente);
-          } else {
-            this.manageErrorPut('Utente');
-          }
-        }, err => {
-
-        });
+        this.salva();
       }, err => {
         console.log('Error is', err);
       });
+    } else {
+      this.salva();
     }
   }
 
+  private salva() {
+    this.loaderService.presentLoader('salvataggio utente');
+    this.commonService.put(this.richiesteService.getRichiestaPutUtente(this.utente)).subscribe(r => {
+      this.loaderService.dismissLoader();
+      if (r.idUtente) {
+        this.caricaUtente(r.idUtente);
+      } else {
+        this.manageErrorPut('Utente');
+      }
+    }, err => {
+
+    });
+  }
+
   public caricaUtente(idUtente: string) {
+    this.loaderService.presentLoader('carica utente');
     this.commonService.get(this.richiesteService.getRichiestaGetUtente(idUtente)).subscribe(r => {
+      this.loaderService.dismissLoader();
       if (r.esito.codice === environment.ESITO_OK_CODICE) {
         this.alertService.presentAlert('utente aggiornato correttamente');
         this.utente = r.utente;
         this.imgPreview = this.utente.urlFotoUtente;
         this.appSessionService.set(environment.KEY_UTENTE, JSON.stringify(this.utente));
+        this.showPage = true;
       } else {
         this.manageError(r);
       }

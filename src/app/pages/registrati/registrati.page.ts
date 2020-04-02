@@ -7,6 +7,7 @@ import { AlertService } from 'src/app/services/alert/alert.service';
 import { CodeDeliveryDetailsType } from 'aws-sdk/clients/cognitoidentityserviceprovider';
 import { ColorChangeCommunicationService } from 'src/app/services/colorChangeCommunication/colorchangecommunication.service';
 import { environment } from 'src/environments/environmentkeys';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-registrati',
@@ -28,8 +29,9 @@ export class RegistratiPage extends AuthComponent implements OnInit {
     public alertService: AlertService,
     public commonService: BVCommonService,
     public richiesteService: RichiesteService,
-    public colorChangeComm: ColorChangeCommunicationService) {
-    super(router, alertService, appSessionService, commonService, richiesteService, authService, colorChangeComm);
+    public colorChangeComm: ColorChangeCommunicationService,
+    public loaderService: LoaderService) {
+    super(router, alertService, appSessionService, commonService, richiesteService, authService, colorChangeComm, loaderService);
 
     this.name = '';
     this.email = '';

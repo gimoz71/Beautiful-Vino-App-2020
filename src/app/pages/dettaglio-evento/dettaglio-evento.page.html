@@ -1,5 +1,5 @@
 <div class="main-body">
-    <div class="content-area">
+    <div class="content-area" *ngIf="showPage">
         <div class="content dettagli footer-action">
             <div class="scroller-content" (scroll)="onScroll($event)">
                 <div class="utility-header" [class.reveal]="showNav">
@@ -80,7 +80,7 @@
                 </div>
                 <div class="frame-content">
                     <p class="intro clearfix">
-                        <strong>Tema:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        <strong>Tema:</strong> {{evento.temaEvento}}
                     </p>
                     <p class="description" [innerHTML]="evento.testoEvento">
                     </p>
@@ -108,18 +108,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="frame-content">
+                <div class="frame-content" *ngIf="!evento.eventoRicorrente">
                     <h3 class="titolo-box ">Partecipanti</h3>
                     <p class="partecipanti clearfix">
-                        <strong>Max 30</strong><br>
-                        <span>Disponibili ancora 26 posti</span>
+                        <strong>{{evento.numMaxPartecipantiEvento}}</strong><br>
+                        <span>Disponibili ancora {{evento.numPostiDisponibiliEvento}} posti</span>
                     </p>
                 </div>
             </div>
             <div class="footer action">
                 <div class="frame-content">
                     <button *ngIf="!isAcquistoAbilitato()" class="button text-center btn-second-color full-width"
-                        disabled="true"><b>Evento già acquistato (
+                        disabled="true"><b>Evento già
+                            acquistato (
                             {{getDataEventoAcquistato() | BVDateFormat_gg_mm_aaaa}})</b></button>
                     <button *ngIf="isAcquistoAbilitato()" class="button text-center btn-second-color full-width"
                         (click)="acquistaEvento()"><b>Acquista</b>
