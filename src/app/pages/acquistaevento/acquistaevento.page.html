@@ -80,7 +80,7 @@
         <select class="form-control form-control-user custom-select" (change)="selezionaDataRicorrente($event.target)">
           <option *ngFor="let dataRicorrente of evento.dateRicorrenti" [ngValue]="dataRicorrente"
             value="{{dataRicorrente}}">
-            {{dataRicorrente | BVDateFormat_gg_mm_aaaa}}
+            {{dataRicorrente | BVDateFormat_gg_mm_aaaa_hh_mm}}
             {{ dataRicorrente === 0 ? '' : '(' + getPostiDisponibiliDataEvento(dataRicorrente) + ')'}}
           </option>
         </select>
