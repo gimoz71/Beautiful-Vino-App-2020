@@ -1,4 +1,4 @@
-<div class="main-body" [style.backgroundColor]="registerColor">
+<div class="main-body auto-scroll" [style.backgroundColor]="registerColor">
     <div class="content-area">
         <div class="content accedi">
 
@@ -7,20 +7,20 @@
             </h3>
             <form class="user">
                 <div class="form-group">
-                    <label>Email</label>
+                    <label>email</label>
                     <input type="email" name="email" [(ngModel)]="username">
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
+                    <label>password</label>
                     <input type="password" name="psw" [(ngModel)]="password">
                 </div>
             </form>
             <div class="access-cta">
                 <p style="margin-bottom: 40px;"><a [routerLink]="" (click)="forgotPassword()">Dimenticato la
                         password?</a></p>
-                <button class="button white text-center full-width" (click)="loginApp()">Accedi</button>
+                <button class="button white text-center full-width access" (click)="loginApp()">Accedi</button>
                 <p>oppure</p>
-                <button class="button social facebook text-center full-width" (click)="loginFacebook()">Accedi con
+                <button class="button social facebook text-center full-width " (click)="loginFacebook()">Accedi con
                     Facebook</button>
                 <button class="button social google text-center full-width" (click)="loginGoogle()">Accedi con
                     Google</button>

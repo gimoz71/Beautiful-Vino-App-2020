@@ -32,7 +32,7 @@
                     Per diventare <span>{{utente.livelloUtente}}</span> ti mancano ancora 81 pp
                 </p>
             </div>
-            <div class="scroller-content">
+            <div class="scroller-content bottom-menu">
                 <div class="frame-content" *ngIf="utente && utente.eventiUtente && utente.eventiUtente.length > 0">
                     <div class="box evento clearfix" *ngFor="let evento of utente.eventiUtente">
                         <div class="cover" [ngStyle]="{'background-image': 'url(' + evento.urlFotoEvento + ')'}">

@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environmentkeys';
 })
 export class HomePage extends BaseComponent implements OnInit {
 
-  public loginImages = 'url(https://www.stockvault.net/data/2019/08/28/268829/preview16.jpg)';
+  public loginImages = 'url(assets/img/bg-splash.jpg)';
 
   constructor(
     public router: Router,
