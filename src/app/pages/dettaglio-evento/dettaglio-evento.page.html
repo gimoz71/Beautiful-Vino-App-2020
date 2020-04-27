@@ -9,6 +9,13 @@
                             <g id="Layer_2" data-name="Layer 2">
                                 <g id="Layer_1-2" data-name="Layer 1">
                                     <!--<path d="M92.66,0a92.66,92.66,0,1,0,92.66,92.66A92.77,92.77,0,0,0,92.66,0Zm0,175.33a82.66,82.66,0,1,1,82.66-82.66A82.76,82.76,0,0,1,92.66,175.33Z" />-->
+                                    <defs>
+                                        <filter id="f3" x="0" y="0" width="200%" height="200%">
+                                            <feOffset result="offOut" in="SourceAlpha" dx="20" dy="20" />
+                                            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+                                            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                                        </filter>
+                                    </defs>
                                     <path
                                         d="M129.2,56.13a5,5,0,0,0-7.07,0L92.66,85.59,63.2,56.13a5,5,0,0,0-7.07,7.07L85.59,92.66,56.13,122.13a5,5,0,1,0,7.07,7.07L92.66,99.73l29.46,29.46a5,5,0,1,0,7.07-7.07L99.73,92.66,129.2,63.2A5,5,0,0,0,129.2,56.13Z" />
                                 </g>
@@ -18,6 +25,7 @@
                     <h3 class="float-header">{{evento.titoloEvento}}</h3>
                 </div>
                 <div class="dettaglio-header" [ngStyle]="{'background-image': 'url('+evento.urlFotoEvento+')'}">
+                    <div class="overlay-mask"></div>
                     <div class="chiudi" (click)="router.navigate(['/eventi']);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>

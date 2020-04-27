@@ -28,7 +28,7 @@
 /* Custom variables */
 
 $default-header-size: 90px;
-$profile-header-size: 145px;
+$profile-header-size: 175px;
 $footer-size: 50px;
 $footer-size-action: $footer-size + 10px;
 
@@ -51,6 +51,82 @@ $border-right: #fff;
 $border-left: rgba(0, 0, 0, 0.1);
 
 $default-gradient: linear-gradient(#ffffff, #f1f1f1);
+
+
+
+@font-face {
+font-family: 'Inter';
+font-style: normal;
+font-weight: normal;
+src: url('assets/fonts/Inter-Regular.woff') format('woff'),
+    url('assets/fonts/Inter-Regular.woff2') format('woff2');
+}
+
+
+@font-face {
+font-family: 'Inter';
+font-style: italic;
+font-weight: normal;
+src: url('assets/fonts/Inter-Italic.woff') format('woff'),
+    url('assets/fonts/Inter-Italic.woff2') format('woff2');
+}
+
+
+@font-face {
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+src: url('assets/fonts/Inter-Medium.woff') format('woff'),
+    url('assets/fonts/Inter-Medium.woff2') format('woff2');
+}
+
+
+@font-face {
+font-family: 'Inter';
+font-style: italic;
+font-weight: 400;
+src: url('assets/fonts/Inter-MediumItalic.woff') format('woff'),
+    url('assets/fonts/Inter-MediumItalic.woff2') format('woff2');
+}
+
+
+@font-face {
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+src: url('assets/fonts/Inter-Bold.woff') format('woff'),
+    url('assets/fonts/Inter-Bold.woff2') format('woff2');
+}
+
+
+@font-face {
+font-family: 'Inter';
+font-style: italic;
+font-weight: 600;
+src: url('assets/fonts/Inter-BoldItalic.woff') format('woff'),
+    url('assets/fonts/Inter-BoldItalic.woff2') format('woff2');
+}
+
+
+@font-face {
+font-family: 'Inter';
+font-style: normal;
+font-weight: 800;
+src: url('assets/fonts/Inter-Black.woff') format('woff'),
+    url('assets/fonts/Inter-Black.woff2') format('woff2');
+}
+
+
+@font-face {
+font-family: 'Inter';
+font-style: italic;
+font-weight: 800;
+src: url('assets/fonts/Inter-BlackItalic.woff') format('woff'),
+    url('assets/fonts/Inter-BlackItalic.woff2') format('woff2');
+}
+
+
+
 
 @font-face {
 	font-family: "larsseit";
@@ -127,8 +203,11 @@ svg {
 
 html,
 body {
-	font-family: "Arial";
+	font-family: 'Inter';
 	background-color: #fff;
+}
+* {
+    font-family: 'Inter';
 }
 
 form {
@@ -227,7 +306,7 @@ form {
 }
 .select-css:focus {
 	border-color: #aaa;
-	box-shadow: 0 0 1px 3px rgba(0, 0, 0, .5);
+	//box-shadow: 0 0 1px 3px rgba(0, 0, 0, .5);
 	box-shadow: 0 0 0 3px -moz-mac-focusring;
 	color: #222;
 	outline: none;
@@ -356,6 +435,10 @@ form {
         * {
             color: #fff;
         }
+        .header-title {
+         font-size: 18px;
+         padding: 3px 0;
+        }
 	}
 	.scroller-content {
 		top: $profile-header-size;
@@ -367,7 +450,7 @@ form {
 }
 
 .dettagli {
-    font-size: .9em;
+    font-size: 1em;
     letter-spacing: 0.05em;
 	.dettaglio-header, .area-mappa {
 		height: 70vw;
@@ -376,14 +459,30 @@ form {
 		background-position: center;
         padding: 15px;
         position: relative;
+        .overlay-gradient {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+        }
+        .overlay-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: url('assets/img/gradient-mask.png') 0 0/100% 100% no-repeat;
+        }
         .chiudi {
             position: absolute; 
             top: 30px;
             left: 10px;
             height: 35px;
             width: 35px;
-            background-color: rgba(0,0,0,0.1);
-            border-radius: 50%;
+            /*background-color: rgba(0,0,0,0.1);
+            border-radius: 50%;*/
             svg {
                 width: 35px;
                 height: 35px;
@@ -405,14 +504,14 @@ form {
                     padding:  0 !important;
                     margin: 5px 0;
                     font-weight: 400;
-                    font-family: "Arial";
+                    //font-family: "Arial";
                 }
                 .location {
                     position: absolute; 
                     font-size: 14px;
                     line-height: 1em;
                     left: 10px;
-                    top: -30px;
+                    top: -35px;
                     padding: 5px 8px;
                     color: #fff;
                     background: rgba(0, 0, 0, 0);
@@ -471,7 +570,7 @@ form {
 		text-align: left;
         color: #000;
         &.tema {
-            font-size: 1.1em;
+            font-size: 1.05em;
             line-height: 1.2em;
             color: #444;
         }
@@ -489,13 +588,13 @@ form {
                 display: block;
             }
             .tit-caratteristica{
-                width: 4.8em;
+                width: 5.2em;
                 font-weight: bold;
                 float: left;
             }
             .dett-caratteristica {
                 float: left;
-                width: 12em;
+                width: 11.4em;
                 padding-left: .3em;
             }
         }
@@ -813,12 +912,13 @@ a:visited {
     &.vino {
         .info {
             overflow:hidden;
-            height: 2.2em;
+            height: 2.4em;
             position: relative;
+            padding-right: 15px;
             &:after {
                 position: absolute;
                 content:'...';
-                bottom: -3px;
+                bottom: 3px;
                 right: 0px;
             }
         }

@@ -1,8 +1,8 @@
 <div class="main-body">
     <div class="content-area" *ngIf="showPage">
         <div class="content dettagli">
-            <div class="scroller-content">
-                <div class="utility-header">
+            <div class="scroller-content" (scroll)="onScroll($event)">
+                <div class="utility-header" [class.reveal]="showNav">
                     <div class="float-chiudi" (click)="router.navigate(['/eventi']);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
@@ -17,8 +17,7 @@
                     </div>
                     <h3 class="float-header">{{azienda.nomeAzienda}}</h3>
                 </div>
-                <div class="dettaglio-header"
-                    [ngStyle]="{'background-image': 'url(' + azienda.urlImmagineAzienda + ')'}">
+                <div class="dettaglio-header" [ngStyle]="{'background-image': 'url(' + azienda.urlImmagineAzienda + ')'}">
                     <div class="chiudi" (click)="router.navigate(['/eventi']);">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.33 185.33">
                             <title>chiudi-sottile</title>
@@ -69,13 +68,13 @@
                     </div>
                 </div> -->
                 <div class="frame-content" *ngIf="azienda.viniAzienda && azienda.viniAzienda.length > 0">
-                    <h3 class="titolo-box">Elenco dei vini</h3>
+                    <h3 class="titolo-box hl">Elenco dei vini</h3>
                     <div class="box vino clearfix" *ngFor="let vino of azienda.viniAzienda"
                         (click)="dettaglioVino(vino)">
                         <div>
                             <img [src]="vino.urlLogoVino" class="vino-thumb">
-                            <h3 class="titolo">{{vino.nomeVino}}<span>{{vino.AnnoVino}}</span></h3>
-                            <p class="info">{{vino.uvaggioVino}}</p>
+                            <h3 class="titolo">{{vino.nomeVino}}<span>{{vino.uvaggioVino}}</span></h3>
+                            <p class="info">{{vino.inBreveVino}}</p>
                         </div>
                     </div>
                 </div>
