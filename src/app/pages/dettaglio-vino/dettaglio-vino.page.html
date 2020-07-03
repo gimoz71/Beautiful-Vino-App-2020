@@ -35,22 +35,21 @@
                         <div>
                             <h2 class="titolo">{{vino.nomeVino}}</h2>
                             <div class="clearfix">
-                                <h4 class="indirizzo" style="max-height: 2.5em; overflow:hidden">{{vino.infoVino}}</h4>
+                                <h4 class="indirizzo" style="max-height: 2.5em; overflow:hidden">{{(vino.aziendaVinoInt != null ? vino.aziendaVinoInt.nomeAzienda : '')}}</h4>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="frame-content">
                     <p class="intro vino caratteristiche clearfix">
-                        <span class="caratteristica clearfix"><span class="tit-caratteristica">Uvaggio:</span><span class="dett-caratteristica">{{vino.uvaggioVino}}</span></span>
-                        <span class="caratteristica clearfix"><span class="tit-caratteristica">Regione:</span><span class="dett-caratteristica">{{vino.regioneVino}}</span></span>
-                        <span class="caratteristica clearfix"><span class="tit-caratteristica">Profumo:</span><span class="dett-caratteristica">{{vino.profumoVino}}</span></span>
+                        <span *ngIf="vino.uvaggioVino" span class="caratteristica clearfix"><span class="tit-caratteristica">Uvaggio:</span><span class="dett-caratteristica">{{vino.uvaggioVino}}</span></span>
+                        <span *ngIf="vino.regioneVino" class="caratteristica clearfix"><span class="tit-caratteristica">Regione:</span><span class="dett-caratteristica">{{vino.regioneVino}}</span></span>
+                        <span *ngIf="vino.profumoVino" class="caratteristica clearfix"><span class="tit-caratteristica">Profumo:</span><span class="dett-caratteristica">{{vino.profumoVino}}</span></span>
                     </p>
                     <p class="intro vino highlight">
                         <strong>In Breve:</strong> {{vino.inBreveVino}}
                     </p>
-                    <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique et metus iaculis vestibulum. Ut faucibus gravida volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris feugiat felis erat. Pellentesque a commodo mauris. Vivamus elementum sodales purus nec porttitor. Pellentesque ut dapibus mauris. Proin varius nibh eu nisi viverra, eget sollicitudin quam porttitor. In iaculis vestibulum diam, et semper diam eleifend pulvinar. Donec orci libero, aliquam non bibendum eu, dapibus eget elit. Vivamus egestas eu ipsum nec venenatis. Suspendisse varius sapien mollis mi tristique, quis posuere ex ultricies. Etiam rutrum lobortis dui, in luctus justo ornare quis.</p>
-                    <p class="description" [innerHTML]="vino.descrizioneVino"></p>
+                    <p class="description" [innerHTML]="vino.infoVino"></p>
                 </div>
                 <!-- <div class="frame-content">
                     <h3 class="titolo-box">Prossimi eventi</h3>

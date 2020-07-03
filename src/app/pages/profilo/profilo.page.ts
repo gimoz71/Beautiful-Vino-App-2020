@@ -28,7 +28,9 @@ export class ProfiloPage extends BaseComponent implements OnInit {
     public router: Router,
     public ngZone: NgZone,
     public logoutComm: LogoutCommunicationService,
-    public appSessionService: AppSessionService
+    public appSessionService: AppSessionService,
+    public commonService: BVCommonService,
+    public richiesteService: RichiesteService
   ) {
     super(router, alertService);
     this.listaEventi = new Array<Evento>();
@@ -77,6 +79,29 @@ export class ProfiloPage extends BaseComponent implements OnInit {
 
   public editProfilo() {
     this.goToPageParams('edit-profilo', { queryParams: { utente: JSON.stringify(this.utente), reload: 'false' } });
+  }
+
+  public refresh(event) {
+
+    const idUtente = this.appSessionService.get(environment.KEY_USER_ID);
+
+    if (idUtente === undefined || idUtente === '') {
+      this.alertService.presentErrorAlert('Utente loggato ma manca il corrispondente sul DB. Non posso procedere');
+      this.router.navigate(['/login']);
+    } else {
+      this.commonService.get(this.richiesteService.getRichiestaGetUtente(idUtente)).subscribe(r => {
+        if (r.esito.codice === environment.ESITO_OK_CODICE) {
+          this.utente = r.utente as Utente;
+          event.target.complete();
+        } else {
+          this.manageError(r);
+          event.target.complete();
+        }
+      }, err => {
+        this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
+        event.target.complete();
+      });
+    }
   }
 
   ionViewDidLeave() {

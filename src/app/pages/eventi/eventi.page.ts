@@ -23,6 +23,8 @@ export class EventiPage extends BaseComponent implements OnInit {
 
   public showPage = false;
 
+  public nomeAzienda: string;
+
   constructor(
     private commonService: BVCommonService,
     private richiesteService: RichiesteService,
@@ -35,12 +37,12 @@ export class EventiPage extends BaseComponent implements OnInit {
   ) {
     super(router, alertService);
     this.listaEventi = new Array<Evento>();
-
+    
   }
 
   ionViewDidEnter() {
     this.appSessionService.set(environment.KEY_PAGINA_SELEZIONATA, 'eventi');
-
+    this.nomeAzienda = this.appSessionService.get(environment.KEY_AZIENDA_NOME);
     this.logoutComm.logoutObservable.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(r => {
