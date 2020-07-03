@@ -176,6 +176,14 @@ $colors: (
 	def: #283943
 );
 
+ion-refresher {
+ position: relative;
+ z-index: 10;
+ * {
+    color: #fff;
+}
+}
+
 .hide {
 	opacity: 0;
 	left: -100%;
@@ -944,7 +952,7 @@ a:visited {
 			font-size: 15px;
 			color: #999;
 			font-weight: 200;
-			margin: 10px 0 !important;
+			margin: 0 0 10px 0 !important;
 			padding: 3px 0px;
 		}
 		.badge {

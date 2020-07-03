@@ -1,8 +1,4 @@
 <ion-content>
-    <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-        <ion-refresher-content refreshingSpinner="dots" pullingIcon="arrow-dropdown">
-        </ion-refresher-content>
-    </ion-refresher>
     <div class="main-body">
         <div class="content-area" *ngIf="showPage">
             <div class="content standard">
@@ -21,13 +17,19 @@
                     <h3>Lista dei vini</h3>
                 </div>
                 <div class="scroller-content bottom-menu">
-                    <div class="frame-content">
-                        <div class="box vino clearfix" (click)="dettaglioVino(vino)" *ngFor="let vino of listaVini">
-                            <img [src]="vino.urlImmagineVino" class="vino-thumb">
-                            <h3 class="titolo">{{vino.nomeVino}} <span>{{vino.uvaggioVino}}</span></h3>
-                            <p class="info">{{vino.inBreveVino}}</p>
+                     <ion-content>
+                        <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+                            <ion-refresher-content refreshingSpinner="dots" pullingIcon="arrow-dropdown">
+                            </ion-refresher-content>
+                        </ion-refresher>
+                        <div class="frame-content">
+                            <div class="box vino clearfix" (click)="dettaglioVino(vino)" *ngFor="let vino of listaVini">
+                                <img [src]="vino.urlImmagineVino" class="vino-thumb">
+                                <h3 class="titolo">{{vino.nomeVino}} <span>{{vino.uvaggioVino}}</span></h3>
+                                <p class="info">{{vino.inBreveVino}}</p>
+                            </div>
                         </div>
-                    </div>
+                    </ion-content>
                 </div>
             </div>
         </div>
