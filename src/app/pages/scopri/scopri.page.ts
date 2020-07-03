@@ -90,20 +90,51 @@ export class ScopriPage extends BaseComponent implements OnInit {
   }
 
   public refresh(event) {
-    this.commonService.get(this.richiesteService.getRichiestaGetFeedAzienda(this.appSessionService.get(environment.KEY_AZIENDA_ID)))
-      .subscribe(r => {
-        // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {
-        if (r.esito.codice === environment.ESITO_OK_CODICE) {
-          this.listaFeed = r.feed;
-          event.target.complete();
-        } else {
-          this.manageError(r);
-          event.target.complete();
-        }
-      }, err => {
-        this.alertService.presentErrorAlert(err.statusText);
-        event.target.complete();
-      });
-  }
 
+    if (this.appSessionService.isInSession(environment.KEY_AZIENDA_ID)) {
+      // L'ID è NELLA SESSIONE, NON è NECESSARIO RECUPERARLO DALLO STORAGE
+      this.commonService.get(this.richiesteService.getRichiestaGetFeedAzienda(this.appSessionService.get(environment.KEY_AZIENDA_ID)))
+        .subscribe(r => {
+          // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {
+          if (r.esito.codice === environment.ESITO_OK_CODICE) {
+            this.listaFeed = r.feed;
+            this.showPage = true;
+            event.target.complete();
+          } else {
+            event.target.complete();
+            this.manageHttpError(r);
+          }
+        }, err => {
+          this.alertService.presentErrorAlert('errore recupero elenco feed, contattare l\'amministratore');
+          event.target.complete();
+        });
+    } else {
+      // L'ID NON è IN SESSIONE SI VA NELLO STORAGE A RECUPERARLO
+      this.appSessionService.loadDataFromStorage(environment.KEY_AZIENDA_ID).then((val: string) => {
+        if (val !== undefined && val !== null && val !== '') {
+          const decodedVal = this.decodeObjectInStorage(val);
+          console.log('recuperato id azienda da storage: ' + decodedVal);
+          this.commonService.get(this.richiesteService.getRichiestaGetFeedAzienda(decodedVal))
+            .subscribe(r => {
+              // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {
+              if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                this.listaFeed = r.feed;
+                this.showPage = true;
+                event.target.complete();
+              } else {
+                event.target.complete();
+                this.manageHttpError(r);
+              }
+            }, err => {
+              this.alertService.presentErrorAlert('errore recupero elenco feed, contattare l\'amministratore');
+              event.target.complete();
+            });
+        } else {
+          event.target.complete();
+          this.alertService.presentErrorAlert('id azienda non presente in sessione, necessario nuovo login');
+          this.appSessionService.clearForLogout();
+        }
+      });
+    }
+  }
 }

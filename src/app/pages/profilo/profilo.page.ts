@@ -39,6 +39,7 @@ export class ProfiloPage extends BaseComponent implements OnInit {
 
   ionViewDidEnter() {
     this.appSessionService.set(environment.KEY_PAGINA_SELEZIONATA, 'profilo');
+
     this.logoutComm.logoutObservable.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(r => {
@@ -63,6 +64,15 @@ export class ProfiloPage extends BaseComponent implements OnInit {
 
     const utenteString = this.appSessionService.get(environment.KEY_UTENTE);
     if (utenteString === undefined || utenteString === '') {
+
+      this.appSessionService.loadDataFromStorage(environment.KEY_UTENTE).then((val: string) => {
+        if (val !== undefined && val !== null && val !== '') {
+          const decodedVal = this.decodeObjectInStorage(val);
+          this.utente = JSON.parse(decodedVal) as Utente;
+        } else {
+          this.appSessionService.clearForLogout();
+        }
+      });
       // necessario login
       this.appSessionService.clearForLogout();
     } else {

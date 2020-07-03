@@ -9,6 +9,7 @@ import { BaseComponent } from 'src/app/components/base/base.component';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { AppSessionService } from 'src/app/services/appsession/appSession.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { Boolean } from 'aws-sdk/clients/apigateway';
 
 @Component({
   selector: 'app-eventi',
@@ -37,7 +38,7 @@ export class EventiPage extends BaseComponent implements OnInit {
   ) {
     super(router, alertService);
     this.listaEventi = new Array<Evento>();
-    
+
   }
 
   ionViewDidEnter() {
@@ -75,7 +76,7 @@ export class EventiPage extends BaseComponent implements OnInit {
           this.listaEventi = this.normalizeList(r.eventi);
           this.showPage = true;
         } else {
-          this.manageError(r);
+          this.manageHttpError(r);
         }
       }, err => {
         this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
@@ -113,20 +114,51 @@ export class EventiPage extends BaseComponent implements OnInit {
   }
 
   public refresh(event) {
-    this.commonService.get(this.richiesteService.getRichiestaGetEventiAzienda(this.appSessionService.get(environment.KEY_AZIENDA_ID)))
-      .subscribe(r => {
-        // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {
-        if (r.esito.codice === environment.ESITO_OK_CODICE) {
-          this.listaEventi = this.normalizeList(r.eventi);
-          event.target.complete();
-        } else {
-          this.manageError(r);
-          event.target.complete();
-        }
-      }, err => {
-        this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
-        event.target.complete();
-      });
-  }
 
+    if (this.appSessionService.isInSession(environment.KEY_AZIENDA_ID)) {
+      // L'ID è NELLA SESSIONE, NON è NECESSARIO RECUPERARLO DALLO STORAGE
+      this.commonService.get(this.richiesteService.getRichiestaGetEventiAzienda(this.appSessionService.get(environment.KEY_AZIENDA_ID)))
+        .subscribe(r => {
+          // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {
+          if (r.esito.codice === environment.ESITO_OK_CODICE) {
+            this.listaEventi = this.normalizeList(r.eventi);
+            this.showPage = true;
+            event.target.complete();
+          } else {
+            event.target.complete();
+            this.manageHttpError(r);
+          }
+        }, err => {
+            this.alertService.presentErrorAlert('errore recupero elenco eventi, contattare l\'amministratore');
+            event.target.complete();
+        });
+    } else {
+      // L'ID NON è IN SESSIONE SI VA NELLO STORAGE A RECUPERARLO
+      this.appSessionService.loadDataFromStorage(environment.KEY_AZIENDA_ID).then((val: string) => {
+        if (val !== undefined && val !== null && val !== '') {
+          const decodedVal = this.decodeObjectInStorage(val);
+          console.log('recuperato id azienda da storage: ' + decodedVal);
+          this.commonService.get(this.richiesteService.getRichiestaGetEventiAzienda(decodedVal))
+            .subscribe(r => {
+              // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {
+              if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                this.listaEventi = this.normalizeList(r.eventi);
+                this.showPage = true;
+                event.target.complete();
+              } else {
+                event.target.complete();
+                this.manageHttpError(r);
+              }
+            }, err => {
+              this.alertService.presentErrorAlert('errore recupero elenco eventi, contattare l\'amministratore');
+              event.target.complete();
+            });
+        } else {
+          event.target.complete();
+          this.alertService.presentErrorAlert('id azienda non presente in sessione, necessario nuovo login');
+          this.appSessionService.clearForLogout();
+        }
+      });
+    }
+  }
 }

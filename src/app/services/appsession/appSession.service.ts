@@ -22,7 +22,18 @@ export class AppSessionService {
    *
    */
   public get(key: string) {
-    return this.sessionService.get(key);
+    const appSessionVersion = this.sessionService.get(key);
+    if (appSessionVersion && appSessionVersion !== '') {
+      return appSessionVersion;
+    } else {
+      // this.storeService.getDataPromise(key).then((val) => {
+      //   if (val && val !== '') {
+      //     return  window.atob(val as string);
+      //   } else { return ''; }
+      // });
+      return '';
+    }
+
   }
 
   public loadDataFromStorage(key: string): Promise<any> {
