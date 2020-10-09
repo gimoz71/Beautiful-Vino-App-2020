@@ -7,12 +7,15 @@ import { Vino } from '../../models/entita/vino/vino';
 import { Provincia } from '../../models/entita/provincia/provincia';
 import { RichiestaNotificaGenerica } from '../../models/comunicazioni/richieste/notifica/richiestanotificagenerica';
 import { RichiestaConnectGenerica } from '../../models/comunicazioni/richieste/connect/richiestaconnectgenerica';
+import { Azienda } from '../../models/entita/azienda/azienda';
+import { Badge } from '../../models/entita/badge/badge';
 export declare class RichiesteService {
     private env;
     constructor(env: any);
     getRichiestaGetUtenti(): RichiestaGetGenerica;
     getRichiestaGetUtentiAzienda(idAzienda: string): RichiestaGetGenerica;
     getRichiestaGetUtente(idUtente: string): RichiestaGetGenerica;
+    getRichiestaGetUtenteEmail(emailUtente: string): RichiestaGetGenerica;
     getRichiestaGetAziende(): RichiestaGetGenerica;
     getRichiestaGetAzienda(idAzienda: string): RichiestaGetGenerica;
     getRichiestaGetBadges(): RichiestaGetGenerica;
@@ -33,9 +36,11 @@ export declare class RichiesteService {
     getRichiestaPutEvento(evento: Evento): RichiestaPutGenerica;
     getRichiestaPutFeed(feed: Feed): RichiestaPutGenerica;
     getRichiestaPutVino(vino: Vino): RichiestaPutGenerica;
+    getRichiestaPutAzienda(azienda: Azienda): RichiestaPutGenerica;
     getRichiestaPutuserProfileWithImage(utente: Utente): RichiestaPutGenerica;
+    getRichiestaPutBadge(badge: Badge): RichiestaPutGenerica;
     getRichiestaNotifica(messaggio: string): RichiestaNotificaGenerica;
     getRichiestaAggiungiEventoAPreferiti(idUtente: string, idEvento: string, dataEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
-    getRichiestaAcquistaEvento(idUtente: string, idEvento: string, dataEvento: number, dataPrenotazioneEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
+    getRichiestaAcquistaEvento(idUtente: string, idEvento: string, dataEvento: number, dataPrenotazioneEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number, numeroPartecipanti: number): RichiestaConnectGenerica;
     getRichiestaRimuoviEventoDaPreferiti(idUtente: string, idEvento: string, dataEvento: number, statoPreferitoEvento: number, statoAcquistatoEvento: number): RichiestaConnectGenerica;
 }

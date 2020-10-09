@@ -54,6 +54,7 @@ export class ScopriPage extends BaseComponent implements OnInit {
         if (val !== undefined && val !== null && val !== '') {
           const decodedVal = this.decodeObjectInStorage(val);
           console.log('recuperato id azienda da storage: ' + decodedVal);
+          this.appSessionService.set(environment.KEY_AZIENDA_ID, decodedVal);
           this.ottieniDati(decodedVal);
         } else {
           this.appSessionService.clearForLogout();
@@ -114,6 +115,7 @@ export class ScopriPage extends BaseComponent implements OnInit {
         if (val !== undefined && val !== null && val !== '') {
           const decodedVal = this.decodeObjectInStorage(val);
           console.log('recuperato id azienda da storage: ' + decodedVal);
+          this.appSessionService.set(environment.KEY_AZIENDA_ID, decodedVal);
           this.commonService.get(this.richiesteService.getRichiestaGetFeedAzienda(decodedVal))
             .subscribe(r => {
               // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {

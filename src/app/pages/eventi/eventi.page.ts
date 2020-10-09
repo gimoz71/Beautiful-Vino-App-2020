@@ -43,7 +43,19 @@ export class EventiPage extends BaseComponent implements OnInit {
 
   ionViewDidEnter() {
     this.appSessionService.set(environment.KEY_PAGINA_SELEZIONATA, 'eventi');
-    this.nomeAzienda = this.appSessionService.get(environment.KEY_AZIENDA_NOME);
+    if (this.appSessionService.isInSession(environment.KEY_AZIENDA_NOME)) {
+      this.nomeAzienda = this.appSessionService.get(environment.KEY_AZIENDA_NOME);
+    } else {
+      this.appSessionService.loadDataFromStorage(environment.KEY_AZIENDA_NOME).then((val: string) => {
+        if (val !== undefined && val !== null && val !== '') {
+          const decodedVal = this.decodeObjectInStorage(val);
+          this.nomeAzienda = decodedVal;
+          this.appSessionService.set(environment.KEY_AZIENDA_NOME, decodedVal);
+        } else {
+          this.appSessionService.clearForLogout();
+        }
+      });
+    }
     this.logoutComm.logoutObservable.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(r => {
@@ -60,6 +72,7 @@ export class EventiPage extends BaseComponent implements OnInit {
         if (val !== undefined && val !== null && val !== '') {
           const decodedVal = this.decodeObjectInStorage(val);
           console.log('recuperato id azienda da storage: ' + decodedVal);
+          this.appSessionService.set(environment.KEY_AZIENDA_ID, decodedVal);
           this.ottieniDati(decodedVal);
         } else {
           this.appSessionService.clearForLogout();
@@ -138,6 +151,7 @@ export class EventiPage extends BaseComponent implements OnInit {
         if (val !== undefined && val !== null && val !== '') {
           const decodedVal = this.decodeObjectInStorage(val);
           console.log('recuperato id azienda da storage: ' + decodedVal);
+          this.appSessionService.set(environment.KEY_AZIENDA_ID, decodedVal);
           this.commonService.get(this.richiesteService.getRichiestaGetEventiAzienda(decodedVal))
             .subscribe(r => {
               // this.eventiService.getEventi(this.richiesteService.getRichiestaGetEventi()).subscribe(r => {

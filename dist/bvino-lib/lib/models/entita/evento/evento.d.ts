@@ -48,4 +48,6 @@ export declare class Evento {
     aziendeViniEvento: Array<Azienda>;
     eventoRicorrente: boolean;
     dateRicorrenti: Array<number>;
+    oldDate: number;
+    oldIdAzienda: string;
 }

@@ -9,6 +9,7 @@ import { BaseComponent } from 'src/app/components/base/base.component';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { Utente } from 'bvino-lib/fesm2015/bvino-lib';
 import { AppSessionService } from 'src/app/services/appsession/appSession.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-profilo',
@@ -30,7 +31,8 @@ export class ProfiloPage extends BaseComponent implements OnInit {
     public logoutComm: LogoutCommunicationService,
     public appSessionService: AppSessionService,
     public commonService: BVCommonService,
-    public richiesteService: RichiesteService
+    public richiesteService: RichiesteService,
+    public loaderService: LoaderService
   ) {
     super(router, alertService);
     this.listaEventi = new Array<Evento>();
@@ -67,14 +69,13 @@ export class ProfiloPage extends BaseComponent implements OnInit {
 
       this.appSessionService.loadDataFromStorage(environment.KEY_UTENTE).then((val: string) => {
         if (val !== undefined && val !== null && val !== '') {
-          const decodedVal = this.decodeObjectInStorage(val);
+          const decodedVal = this.decodeObjectInStorageNoEscape(val);
           this.utente = JSON.parse(decodedVal) as Utente;
+          this.appSessionService.set(environment.KEY_UTENTE, decodedVal);
         } else {
           this.appSessionService.clearForLogout();
         }
       });
-      // necessario login
-      this.appSessionService.clearForLogout();
     } else {
       this.utente = JSON.parse(utenteString) as Utente;
     }
@@ -96,12 +97,22 @@ export class ProfiloPage extends BaseComponent implements OnInit {
     const idUtente = this.appSessionService.get(environment.KEY_USER_ID);
 
     if (idUtente === undefined || idUtente === '') {
-      this.alertService.presentErrorAlert('Utente loggato ma manca il corrispondente sul DB. Non posso procedere');
-      this.router.navigate(['/login']);
+        this.appSessionService.loadDataFromStorage(environment.KEY_UTENTE).then((val: string) => {
+          if (val !== undefined && val !== null && val !== '') {
+            const decodedVal = this.decodeObjectInStorageNoEscape(val);
+            this.utente = JSON.parse(decodedVal) as Utente;
+            event.target.complete();
+            this.appSessionService.set(environment.KEY_UTENTE, decodedVal);
+          } else {
+            this.appSessionService.clearForLogout();
+            event.target.complete();
+          }
+        });
     } else {
       this.commonService.get(this.richiesteService.getRichiestaGetUtente(idUtente)).subscribe(r => {
         if (r.esito.codice === environment.ESITO_OK_CODICE) {
           this.utente = r.utente as Utente;
+          this.appSessionService.set(environment.KEY_UTENTE, JSON.stringify(this.utente));
           event.target.complete();
         } else {
           this.manageError(r);
@@ -117,6 +128,11 @@ export class ProfiloPage extends BaseComponent implements OnInit {
   ionViewDidLeave() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  public dettaglioEvento(evento: Evento) {
+    this.loaderService.presentLoader('caricamento...');
+    this.goToPageParams('dettaglio-evento', { queryParams: { eventoselezionato: JSON.stringify(evento), reload: 'false' } });
   }
 
 }

@@ -17,7 +17,7 @@ export class LoaderService {
     public async presentLoader(loaderMessage: string) {
         this.loading = await this.loadingController.create({
             message: loaderMessage,
-            duration: 10000
+            duration: 2000
         });
         await this.loading.present();
     }

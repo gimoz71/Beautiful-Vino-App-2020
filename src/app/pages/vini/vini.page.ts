@@ -53,6 +53,7 @@ export class ViniPage extends BaseComponent implements OnInit {
         if (val !== undefined && val !== null && val !== '') {
           const decodedVal = this.decodeObjectInStorage(val);
           console.log('recuperato id azienda da storage: ' + decodedVal);
+          this.appSessionService.set(environment.KEY_AZIENDA_ID, decodedVal);
           this.ottieniDati(decodedVal);
         } else {
           this.appSessionService.clearForLogout();
@@ -88,18 +89,43 @@ export class ViniPage extends BaseComponent implements OnInit {
   }
 
   public refresh(event) {
-    this.commonService.get(this.richiesteService.getRichiestaGetViniAzienda(this.appSessionService.get(environment.KEY_AZIENDA_ID)))
-      .subscribe(r => {
-        if (r.esito.codice === environment.ESITO_OK_CODICE) {
-          this.listaVini = r.vini;
+    if (this.appSessionService.isInSession(environment.KEY_AZIENDA_ID)) {
+      this.commonService.get(this.richiesteService.getRichiestaGetViniAzienda(this.appSessionService.get(environment.KEY_AZIENDA_ID)))
+        .subscribe(r => {
+          if (r.esito.codice === environment.ESITO_OK_CODICE) {
+            this.listaVini = r.vini;
+            event.target.complete();
+          } else {
+            this.manageError(r);
+            event.target.complete();
+          }
+        }, err => {
+          this.alertService.presentErrorAlert(err.statusText);
           event.target.complete();
+        });
+    } else {
+      this.appSessionService.loadDataFromStorage(environment.KEY_AZIENDA_ID).then((val: string) => {
+        if (val !== undefined && val !== null && val !== '') {
+          const decodedVal = this.decodeObjectInStorage(val);
+          console.log('recuperato id azienda da storage: ' + decodedVal);
+          this.appSessionService.set(environment.KEY_AZIENDA_ID, decodedVal);
+          this.commonService.get(this.richiesteService.getRichiestaGetViniAzienda(decodedVal))
+            .subscribe(r => {
+              if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                this.listaVini = r.vini;
+                event.target.complete();
+              } else {
+                this.manageError(r);
+                event.target.complete();
+              }
+            }, err => {
+              this.alertService.presentErrorAlert(err.statusText);
+              event.target.complete();
+            });
         } else {
-          this.manageError(r);
-          event.target.complete();
+          this.appSessionService.clearForLogout();
         }
-      }, err => {
-        this.alertService.presentErrorAlert(err.statusText);
-        event.target.complete();
       });
+    }
   }
 }

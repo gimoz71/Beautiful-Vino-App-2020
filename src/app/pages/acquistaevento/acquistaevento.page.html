@@ -70,14 +70,31 @@
                     </div>
                 </div>
                 <div class="frame-content">
+                    <div *ngIf="evento.eventoRicorrente">
+                        <p class="intro clearfix" style="margin: 15px">
+                            Scegli una data per l'evento
+                        </p>
+                        <select class="form-control form-control-user select-css" (change)="selezionaDataRicorrente($event.target)">
+                            <option *ngFor="let dataRicorrente of evento.dateRicorrenti" [ngValue]="dataRicorrente" value="{{dataRicorrente}}">
+                                {{dataRicorrente | BVDateFormat_gg_mm_aaaa_hh_mm}}
+                                {{ dataRicorrente === 0 ? '' : '(' + getPostiDisponibiliDataEvento(dataRicorrente) + ')'}}
+                            </option>
+                        </select>
+                    </div>
                     <p class="intro clearfix" style="margin: 15px">
-                        Scegli una data per l'evento
+                        Scegli il numero dei partecipanti
                     </p>
-                    <select class="form-control form-control-user select-css" (change)="selezionaDataRicorrente($event.target)">
-                        <option *ngFor="let dataRicorrente of evento.dateRicorrenti" [ngValue]="dataRicorrente" value="{{dataRicorrente}}">
-                            {{dataRicorrente | BVDateFormat_gg_mm_aaaa_hh_mm}}
-                            {{ dataRicorrente === 0 ? '' : '(' + getPostiDisponibiliDataEvento(dataRicorrente) + ')'}}
-                        </option>
+                    <select class="form-control form-control-user select-css" (change)="selezionaQuantita($event.target)">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
                     </select>
                     
                     <p class="intro clearfix" *ngIf="isDataAcquistoSelezionata" style="margin: 15px;">Data selezionata

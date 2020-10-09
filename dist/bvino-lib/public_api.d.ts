@@ -5,6 +5,7 @@ export * from './lib/services/common/bvhttp.service';
 export * from './lib/services/common/richieste.service';
 export * from './lib/services/common/alert.service';
 export * from './lib/services/common/common.service';
+export * from './lib/services/common/constants.service';
 export * from './lib/models/token/accesstoken';
 export * from './lib/models/token/accesstokenpayload';
 export * from './lib/models/token/awstoken';

@@ -1,6 +1,6 @@
-export declare class EventoUtente {
+export declare class EventoBadge {
     idEvento: string;
     dataEvento: number;
     statoEvento: string;
-    numeroPartecipanti: number;
+    pubblicatoEvento: boolean;
 }

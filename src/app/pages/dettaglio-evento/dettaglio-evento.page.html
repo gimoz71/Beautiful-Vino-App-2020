@@ -126,10 +126,10 @@
             </div>
             <div class="footer action">
                 <div class="frame-content">
-                    <button *ngIf="!isAcquistoAbilitato()" class="button text-center btn-second-color full-width"
-                        disabled="true"><b>Evento già
+                    <button *ngIf="!isAcquistoAbilitato()" class="button text-center btn-second-color full-width" (click)="acquistaEvento()">
+                        <b>Evento già
                             acquistato (
-                            {{getDataEventoAcquistato() | BVDateFormat_gg_mm_aaaa}})</b></button>
+                            {{getDataEventoAcquistato() | BVDateFormat_gg_mm_aaaa}})<br/>Acquista di nuovo</b></button>
                     <button *ngIf="isAcquistoAbilitato()" class="button text-center btn-second-color full-width"
                         (click)="acquistaEvento()"><b>Acquista</b>
                         (&euro; {{evento.prezzoEvento}})</button>

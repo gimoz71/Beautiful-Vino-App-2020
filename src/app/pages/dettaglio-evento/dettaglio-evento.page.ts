@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BaseComponent } from 'src/app/components/base/base.component';
-import { Evento, Azienda, Vino, BVCommonService, RichiesteService } from 'bvino-lib';
+import { Evento, Azienda, Vino, BVCommonService, RichiesteService, Utente } from 'bvino-lib';
 import { LogoutCommunicationService } from 'src/app/services/logoutCommunication/logoutcommunication.service';
 import { takeUntil } from 'rxjs/operators';
 import { AlertService } from 'src/app/services/alert/alert.service';
@@ -104,6 +104,32 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
             });
     }
 
+    public reloadUtenteInSessione() {
+
+        const idUtente = this.appSessionService.get(environment.KEY_USER_ID);
+
+        if (idUtente === undefined || idUtente === '') {
+            this.appSessionService.loadDataFromStorage(environment.KEY_UTENTE).then((val: string) => {
+                if (val !== undefined && val !== null && val !== '') {
+                    const decodedVal = this.decodeObjectInStorageNoEscape(val);
+                    this.commonService.get(this.richiesteService.getRichiestaGetUtente(decodedVal)).subscribe(r => {
+                        if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                            const utente = r.utente as Utente;
+                            this.appSessionService.set(environment.KEY_UTENTE, JSON.stringify(utente));
+                        }
+                    });
+                }
+            });
+        } else {
+            this.commonService.get(this.richiesteService.getRichiestaGetUtente(idUtente)).subscribe(r => {
+                if (r.esito.codice === environment.ESITO_OK_CODICE) {
+                    const utente = r.utente as Utente;
+                    this.appSessionService.set(environment.KEY_UTENTE, JSON.stringify(utente));
+                }
+            });
+        }
+    }
+
     ngOnInit() {
     }
 
@@ -115,6 +141,7 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
 
 
     public togliDaiPreferiti() {
+        this.loaderService.presentLoader('rimuovo dai preferiti');
         this.commonService.connect(this.richiesteService.getRichiestaRimuoviEventoDaPreferiti(
             this.idUtente,
             this.evento.idEvento,
@@ -126,15 +153,20 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
                 if (r.esito.codice === environment.ESITO_OK_CODICE) {
                     // ricarico l'utente
                     this.reloadEvento();
+                    this.reloadUtenteInSessione();
+                    this.loaderService.dismissLoader();
                 } else {
                     this.alertService.presentErrorAlert(r.esito.message);
+                    this.loaderService.dismissLoader();
                 }
             }, err => {
                 this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
+                this.loaderService.dismissLoader();
             });
     }
 
     public aggiungiAiPreferiti() {
+        this.loaderService.presentLoader('salvo nei preferiti');
         this.commonService.connect(this.richiesteService.getRichiestaAggiungiEventoAPreferiti(
             this.idUtente,
             this.evento.idEvento,
@@ -145,36 +177,42 @@ export class DettaglioEventoPage extends BaseComponent implements OnInit {
                 if (r.esito.codice === environment.ESITO_OK_CODICE) {
                     // ricarico l'utente
                     this.reloadEvento();
+                    this.reloadUtenteInSessione();
+                    this.loaderService.dismissLoader();
                 } else {
                     this.alertService.presentErrorAlert(r.esito.message);
+                    this.loaderService.dismissLoader();
                 }
             }, err => {
                 this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
+                this.loaderService.dismissLoader();
             });
     }
 
     public acquistaEvento() {
-        if (!this.evento.eventoRicorrente) {
-            this.commonService.connect(this.richiesteService.getRichiestaAcquistaEvento(
-                this.idUtente,
-                this.evento.idEvento,
-                this.evento.dataEvento,
-                this.evento.dataEvento,
-                0,
-                1))
-                .subscribe(r => {
-                    if (r.esito.codice === environment.ESITO_OK_CODICE) {
-                        // ricarico l'utente
-                        this.reloadEvento();
-                    } else {
-                        this.alertService.presentErrorAlert(r.esito.message);
-                    }
-                }, err => {
-                    this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
-                });
-        } else {
-            this.goToAcquistaRicorrente();
-        }
+        this.goToAcquistaRicorrente();
+        // if (!this.evento.eventoRicorrente) {
+        //     this.commonService.connect(this.richiesteService.getRichiestaAcquistaEvento(
+        //         this.idUtente,
+        //         this.evento.idEvento,
+        //         this.evento.dataEvento,
+        //         this.evento.dataEvento,
+        //         0,
+        //         1,
+        //         1))
+        //         .subscribe(r => {
+        //             if (r.esito.codice === environment.ESITO_OK_CODICE) {
+        //                 // ricarico l'utente
+        //                 this.reloadEvento();
+        //             } else {
+        //                 this.alertService.presentErrorAlert(r.esito.message);
+        //             }
+        //         }, err => {
+        //             this.alertService.presentErrorAlert('errore recupero elenco aziende: ' + err.statusText);
+        //         });
+        // } else {
+
+        // }
     }
 
     onScroll(event) {

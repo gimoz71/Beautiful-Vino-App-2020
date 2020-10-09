@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('amazon-cognito-identity-js'), require('rxjs'), require('@angular/platform-browser/animations'), require('ngx-toastr'), require('@angular/router'), require('@angular/common/http'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('bvino-lib', ['exports', 'amazon-cognito-identity-js', 'rxjs', '@angular/platform-browser/animations', 'ngx-toastr', '@angular/router', '@angular/common/http', '@angular/core'], factory) :
-    (factory((global['bvino-lib'] = {}),global.amazonCognitoIdentityJs,global.rxjs,global.ng.platformBrowser.animations,global.ngxToastr,global.ng.router,global.ng.common.http,global.ng.core));
-}(this, (function (exports,amazonCognitoIdentityJs,rxjs,animations,ngxToastr,router,http,core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('amazon-cognito-identity-js'), require('rxjs'), require('aws-sdk/clients/cognitoidentityserviceprovider'), require('@angular/platform-browser/animations'), require('ngx-toastr'), require('@angular/router'), require('@angular/common/http'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('bvino-lib', ['exports', 'amazon-cognito-identity-js', 'rxjs', 'aws-sdk/clients/cognitoidentityserviceprovider', '@angular/platform-browser/animations', 'ngx-toastr', '@angular/router', '@angular/common/http', '@angular/core'], factory) :
+    (factory((global['bvino-lib'] = {}),global.amazonCognitoIdentityJs,global.rxjs,global.CognitoIdentityServiceProvider,global.ng.platformBrowser.animations,global.ngxToastr,global.ng.router,global.ng.common.http,global.ng.core));
+}(this, (function (exports,amazonCognitoIdentityJs,rxjs,CognitoIdentityServiceProvider,animations,ngxToastr,router,http,core) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -73,15 +73,14 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @type {?} */
-    var poolData = {
-        UserPoolId: 'eu-central-1_KzlMv3BwL',
-        ClientId: '25i6sfibl4qqqk2g8vgsmtsth7'
-    };
-    /** @type {?} */
-    var userPool = new amazonCognitoIdentityJs.CognitoUserPool(poolData);
     var BVAuthorizationService = /** @class */ (function () {
-        function BVAuthorizationService(sessionService) {
+        function BVAuthorizationService(sessionService, env) {
+            this.env = env;
+            this.poolData = {
+                UserPoolId: this.env.UserPoolId,
+                ClientId: this.env.ClientId
+            };
+            this.userPool = new amazonCognitoIdentityJs.CognitoUserPool(this.poolData);
         }
         /**
          * @return {?}
@@ -105,6 +104,7 @@
          * @return {?}
          */
             function (username, password, name) {
+                var _this = this;
                 /** @type {?} */
                 var attributeList = [];
                 /** @type {?} */
@@ -135,7 +135,7 @@
                  * @param {?} observer
                  * @return {?}
                  */function (observer) {
-                    return userPool.signUp(username, password, attributeList, null, ( /**
+                    return _this.userPool.signUp(username, password, attributeList, null, ( /**
                      * @param {?} err
                      * @param {?} result
                      * @return {?}
@@ -172,10 +172,11 @@
                 /** @type {?} */
                 var userData = {
                     Username: username,
-                    Pool: userPool
+                    Pool: this.userPool
                 };
                 /** @type {?} */
                 var cognitoUser = new amazonCognitoIdentityJs.CognitoUser(userData);
+                cognitoUser.setAuthenticationFlowType('USER_PASSWORD_AUTH');
                 return rxjs.Observable.create(( /**
                  * @param {?} observer
                  * @return {?}
@@ -194,9 +195,35 @@
                          */function (err) {
                             console.log(err);
                             observer.error(err);
+                        }),
+                        newPasswordRequired: ( /**
+                         * @param {?} resp
+                         * @return {?}
+                         */function (resp) {
+                            resp.challenge = 'NEW_PASSWORD_REQUIRED';
+                            observer.next(resp);
+                            observer.complete();
                         })
                     });
                 }));
+            };
+        /**
+         * @param {?} username
+         * @return {?}
+         */
+        BVAuthorizationService.prototype.signOut = /**
+         * @param {?} username
+         * @return {?}
+         */
+            function (username) {
+                /** @type {?} */
+                var userData = {
+                    Username: username,
+                    Pool: this.userPool
+                };
+                /** @type {?} */
+                var cognitoUser = new amazonCognitoIdentityJs.CognitoUser(userData);
+                cognitoUser.signOut();
             };
         /**
          * @param {?} username
@@ -210,7 +237,7 @@
                 /** @type {?} */
                 var userData = {
                     Username: username,
-                    Pool: userPool
+                    Pool: this.userPool
                 };
                 /** @type {?} */
                 var cognitoUser = new amazonCognitoIdentityJs.CognitoUser(userData);
@@ -237,13 +264,65 @@
                 }));
             };
         /**
+         * @param {?} username
+         * @param {?} oldpassword
+         * @param {?} password
+         * @return {?}
+         */
+        BVAuthorizationService.prototype.changePassword = /**
+         * @param {?} username
+         * @param {?} oldpassword
+         * @param {?} password
+         * @return {?}
+         */
+            function (username, oldpassword, password) {
+                /** @type {?} */
+                var userData = {
+                    Username: username,
+                    Pool: this.userPool
+                };
+                // const currentUser = this.userPool.getCurrentUser();
+                /** @type {?} */
+                var cognitoUser = new amazonCognitoIdentityJs.CognitoUser(userData);
+                cognitoUser.getSession(( /**
+                 * @param {?} result
+                 * @return {?}
+                 */function (result) {
+                    /** @type {?} */
+                    var session = result;
+                    console.log('session: ' + JSON.stringify(session));
+                }));
+                /** @type {?} */
+                var serviceProvider = new CognitoIdentityServiceProvider({ region: 'eu-central-1' });
+                return rxjs.Observable.create(( /**
+                 * @param {?} observer
+                 * @return {?}
+                 */function (observer) {
+                    cognitoUser.changePassword(oldpassword, password, ( /**
+                     * @param {?} error
+                     * @param {?} result
+                     * @return {?}
+                     */function (error, result) {
+                        if (result) {
+                            console.log('result change password: ' + JSON.stringify(result));
+                            observer.next(result);
+                            observer.complete();
+                        }
+                        if (error) {
+                            console.log('error change password: ' + JSON.stringify(error));
+                            observer.error(error);
+                        }
+                    }));
+                }));
+            };
+        /**
          * @return {?}
          */
         BVAuthorizationService.prototype.isLoggedIn = /**
          * @return {?}
          */
             function () {
-                return userPool.getCurrentUser() !== null;
+                return this.userPool.getCurrentUser() !== null;
             };
         /**
          * @return {?}
@@ -252,7 +331,7 @@
          * @return {?}
          */
             function () {
-                return userPool.getCurrentUser();
+                return this.userPool.getCurrentUser();
             };
         BVAuthorizationService.decorators = [
             { type: core.Injectable }
@@ -260,7 +339,8 @@
         /** @nocollapse */
         BVAuthorizationService.ctorParameters = function () {
             return [
-                { type: SessionService }
+                { type: SessionService },
+                { type: undefined, decorators: [{ type: core.Inject, args: ['env',] }] }
             ];
         };
         return BVAuthorizationService;
@@ -601,6 +681,21 @@
                 return richiesta;
             };
         /**
+         * @param {?} emailUtente
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaGetUtenteEmail = /**
+         * @param {?} emailUtente
+         * @return {?}
+         */
+            function (emailUtente) {
+                /** @type {?} */
+                var richiesta = new RichiestaGetGenerica();
+                richiesta.functionName = this.env.getUtenteEmailFunctionName;
+                richiesta.emailUtente = emailUtente;
+                return richiesta;
+            };
+        /**
          * @return {?}
          */
         RichiesteService.prototype.getRichiestaGetAziende = /**
@@ -903,6 +998,21 @@
                 return richiesta;
             };
         /**
+         * @param {?} azienda
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaPutAzienda = /**
+         * @param {?} azienda
+         * @return {?}
+         */
+            function (azienda) {
+                /** @type {?} */
+                var richiesta = new RichiestaPutGenerica();
+                richiesta.functionName = this.env.putAziendaFunctionName;
+                richiesta.azienda = azienda;
+                return richiesta;
+            };
+        /**
          * @param {?} utente
          * @return {?}
          */
@@ -915,6 +1025,21 @@
                 var richiesta = new RichiestaPutGenerica();
                 richiesta.functionName = this.env.putUserProfileImageWithUserFunctionName;
                 richiesta.utente = utente;
+                return richiesta;
+            };
+        /**
+         * @param {?} badge
+         * @return {?}
+         */
+        RichiesteService.prototype.getRichiestaPutBadge = /**
+         * @param {?} badge
+         * @return {?}
+         */
+            function (badge) {
+                /** @type {?} */
+                var richiesta = new RichiestaPutGenerica();
+                richiesta.functionName = this.env.putVinoFunctionName;
+                richiesta.badge = badge;
                 return richiesta;
             };
         // -------- NOTIFICATION --------
@@ -974,6 +1099,7 @@
          * @param {?} dataPrenotazioneEvento
          * @param {?} statoPreferitoEvento
          * @param {?} statoAcquistatoEvento
+         * @param {?} numeroPartecipanti
          * @return {?}
          */
         RichiesteService.prototype.getRichiestaAcquistaEvento = /**
@@ -983,9 +1109,10 @@
          * @param {?} dataPrenotazioneEvento
          * @param {?} statoPreferitoEvento
          * @param {?} statoAcquistatoEvento
+         * @param {?} numeroPartecipanti
          * @return {?}
          */
-            function (idUtente, idEvento, dataEvento, dataPrenotazioneEvento, statoPreferitoEvento, statoAcquistatoEvento) {
+            function (idUtente, idEvento, dataEvento, dataPrenotazioneEvento, statoPreferitoEvento, statoAcquistatoEvento, numeroPartecipanti) {
                 /** @type {?} */
                 var richiesta = new RichiestaConnectGenerica();
                 richiesta.idUtente = idUtente;
@@ -996,6 +1123,7 @@
                 richiesta.statoPreferitoEvento = statoPreferitoEvento;
                 richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
                 richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
+                richiesta.numeroPartecipanti = numeroPartecipanti;
                 return richiesta;
             };
         /**
@@ -1042,6 +1170,28 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var ConstantsService = /** @class */ (function () {
+        function ConstantsService() {
+            this.RUOLO_SUPER_ADMIN = 'SA';
+            this.RUOLO_AZIENDA_ADMIN = 'AA';
+            this.RUOLO_UTENTE_GENERICO = 'UG';
+            this.RUOLO_UTENTE_AZIENDA = 'UA';
+            this.KEY_AZIENDA_ID_DEFAULT = '000';
+            this.KEY_AZIENDA_NOME_DEFAULT = 'Beautiful Vino';
+            this.KEY_AZIENDA_LOGO_DEFAULT = '';
+            this.KEY_AZIENDA_SPLASHSCREEN_DEFAULT = '';
+            this.KEY_AZIENDA_PAYPALCODE_DEFAULT = '';
+        }
+        ConstantsService.decorators = [
+            { type: core.Injectable }
+        ];
+        return ConstantsService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var BvinoLibModule = /** @class */ (function () {
         function BvinoLibModule() {
         }
@@ -1078,7 +1228,8 @@
                             SessionService,
                             AlertService,
                             BVHttpService,
-                            RichiesteService
+                            RichiesteService,
+                            ConstantsService
                         ],
                         exports: []
                     },] }
@@ -1539,6 +1690,7 @@
     exports.RichiesteService = RichiesteService;
     exports.AlertService = AlertService;
     exports.BVCommonService = BVCommonService;
+    exports.ConstantsService = ConstantsService;
     exports.AccessToken = AccessToken;
     exports.AccessTokenPayload = AccessTokenPayload;
     exports.AwsToken = AwsToken;

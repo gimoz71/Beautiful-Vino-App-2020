@@ -14,6 +14,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
     },
     {
+        path: 'cambio-password',
+        loadChildren: () => import('./pages/cambio-password/cambio-password.module').then(m => m.CambioPasswordPageModule)
+    },
+    {
         path: 'registrati',
         loadChildren: () => import('./pages/registrati/registrati.module').then(m => m.RegistratiPageModule)
     },
@@ -56,7 +60,11 @@ const routes: Routes = [
     {
         path: 'acquistaevento',
         loadChildren: () => import('./pages/acquistaevento/acquistaevento.module').then(m => m.AcquistaeventoPageModule)
-    }
+    },
+  {
+    path: 'cambio-password',
+    loadChildren: () => import('./pages/cambio-password/cambio-password.module').then( m => m.CambioPasswordPageModule)
+  }
 ];
 
 @NgModule({

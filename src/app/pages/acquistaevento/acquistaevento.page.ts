@@ -22,6 +22,8 @@ export class AcquistaeventoPage extends BaseComponent implements OnInit {
 
   public dataAcquistoSelezionata: number;
   public isDataAcquistoSelezionata = false;
+  public quantitaSelezionata: number;
+  public isQuantitaSelezionata = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -75,8 +77,12 @@ export class AcquistaeventoPage extends BaseComponent implements OnInit {
     ).subscribe(params => {
       this.evento = JSON.parse(params.eventoselezionato) as Evento;
 
-      const newFirstElement = 0;
-      this.evento.dateRicorrenti = [newFirstElement].concat(this.evento.dateRicorrenti);
+      if (this.evento && this.evento.eventoRicorrente) {
+        this.evento.dateRicorrenti = this.evento.dateRicorrenti;
+      } else {
+        this.dataAcquistoSelezionata = this.evento.dataEvento;
+      }
+
       this.idUtente = params.idutente;
     });
   }
@@ -86,13 +92,20 @@ export class AcquistaeventoPage extends BaseComponent implements OnInit {
   }
 
   public acquistaEvento() {
+
+    let dataEventoAcquisto = this.evento.dataEvento;
+    if (this.evento.eventoRicorrente) {
+      dataEventoAcquisto = this.dataAcquistoSelezionata;
+    }
+
     this.commonService.connect(this.richiesteService.getRichiestaAcquistaEvento(
       this.idUtente,
       this.evento.idEvento,
       this.evento.dataEvento,
-      this.dataAcquistoSelezionata,
+      dataEventoAcquisto,
       1,
-      1))
+      1,
+      this.quantitaSelezionata))
       .subscribe(r => {
         if (r.esito.codice === environment.ESITO_OK_CODICE) {
           // torno all'evento
@@ -108,17 +121,15 @@ export class AcquistaeventoPage extends BaseComponent implements OnInit {
 
   public getPostiDisponibiliDataEvento(data: number): number {
     let tot = 0;
-    if (this.evento.dettagliIscrittiEvento) {
-      if (this.evento.dettagliIscrittiEvento.length >= 0) {
-        for (const iscrittoEvento of this.evento.dettagliIscrittiEvento) {
-          if (iscrittoEvento.dataEvento === data) {
-            {
-              tot++;
-            }
+    if (this.evento.dettagliIscrittiEvento && this.evento.dettagliIscrittiEvento.length > 0) {
+      for (const iscrittoEvento of this.evento.dettagliIscrittiEvento) {
+        if (iscrittoEvento.dataEvento === data) {
+          {
+            tot = tot + iscrittoEvento.postiAcquistati; // aggiungere posti acquistati
           }
+        } else {
+          return 0;
         }
-      } else {
-        return 0;
       }
     } else {
       return 0;
@@ -127,14 +138,25 @@ export class AcquistaeventoPage extends BaseComponent implements OnInit {
   }
 
   public selezionaDataRicorrente(event: any) {
-    console.log('dataRicorrenteSelezionata: ' + event.value);
-    if (event.value === 0 || event.value === '0') {
-      this.isDataAcquistoSelezionata = false;
-    } else {
-      this.isDataAcquistoSelezionata = true;
-      this.dataAcquistoSelezionata = event.value;
+    if (this.evento && this.evento.eventoRicorrente) {
+      console.log('dataRicorrenteSelezionata: ' + event.value);
+      if (event.value === 0 || event.value === '0') {
+        this.isDataAcquistoSelezionata = false;
+      } else {
+        this.isDataAcquistoSelezionata = true;
+        this.dataAcquistoSelezionata = event.value;
+      }
     }
+  }
 
+  public selezionaQuantita(event: any) {
+    console.log('quantitaSelezionata: ' + event.value);
+    if (event.value === 0 || event.value === '0') {
+      this.isQuantitaSelezionata = false;
+    } else {
+      this.isQuantitaSelezionata = true;
+      this.quantitaSelezionata = event.value;
+    }
   }
 
 }

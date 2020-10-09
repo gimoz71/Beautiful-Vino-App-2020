@@ -74,12 +74,12 @@ export class EditProfiloPage extends BaseComponent implements OnInit {
       console.log('params: ' + JSON.stringify(params));
       if (params === undefined || params.utente === undefined || params.utente === '') {
         if (this.appSessionService.isInSession(environment.KEY_USER_ID)) {
-          this.caricaUtente(this.appSessionService.get(environment.KEY_USER_ID));
+          this.caricaUtenteEmail(this.appSessionService.get(environment.KEY_USER_EMAIL));
         } else {
-          this.appSessionService.loadDataFromStorage(environment.KEY_USER_ID).then((val: string) => {
+          this.appSessionService.loadDataFromStorage(environment.KEY_USER_EMAIL).then((val: string) => {
             if (val !== undefined && val !== null && val !== '') {
               const decodedVal = this.decodeObjectInStorage(val);
-              this.caricaUtente(decodedVal);
+              this.caricaUtenteEmail(decodedVal);
             } else {
               this.appSessionService.clearForLogout();
             }
@@ -134,6 +134,22 @@ export class EditProfiloPage extends BaseComponent implements OnInit {
       this.loaderService.dismissLoader();
       if (r.esito.codice === environment.ESITO_OK_CODICE) {
         this.alertService.presentAlert('utente aggiornato correttamente');
+        this.utente = r.utente;
+        this.imgPreview = this.utente.urlFotoUtente;
+        this.appSessionService.set(environment.KEY_UTENTE, JSON.stringify(this.utente));
+        this.showPage = true;
+      } else {
+        this.manageError(r);
+      }
+    });
+  }
+
+  public caricaUtenteEmail(emailUtente: string) {
+    this.loaderService.presentLoader('carica utente');
+    this.commonService.get(this.richiesteService.getRichiestaGetUtenteEmail(emailUtente)).subscribe(r => {
+      this.loaderService.dismissLoader();
+      if (r.esito.codice === environment.ESITO_OK_CODICE) {
+        // this.alertService.presentAlert('utente aggiornato correttamente');
         this.utente = r.utente;
         this.imgPreview = this.utente.urlFotoUtente;
         this.appSessionService.set(environment.KEY_UTENTE, JSON.stringify(this.utente));

@@ -47,7 +47,7 @@ export class LoginPage extends AuthComponent implements OnInit {
   }
 
   public forgotPassword() {
-    if (this.username === '') {
+    if (this.username === undefined || this.username === '') {
       this.alertService.presentErrorAlert('username obbligatorio');
     } else {
       this.authService.forgotPassword(this.username).subscribe((response: CodeDeliveryDetailsType) => {

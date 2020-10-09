@@ -4,19 +4,29 @@
 
 export const environment = {
   production: false,
-  baseAppUrlGet: 'https://h8o3gup5lj.execute-api.eu-central-1.amazonaws.com',
-  baseAppUrlPut: 'https://4aqjw0dwx0.execute-api.eu-central-1.amazonaws.com',
-  baseAppUrlNotifica: 'https://d4rszjint3.execute-api.eu-central-1.amazonaws.com',
-  baseAppUrlConnect: 'https://ivbkaplee3.execute-api.eu-central-1.amazonaws.com',
+  baseAppUrlGet: 'https://2iiw2mzqh7.execute-api.eu-central-1.amazonaws.com',
+  baseAppUrlPut: 'https://apj0rtcmfd.execute-api.eu-central-1.amazonaws.com',
+  baseAppUrlNotifica: 'https://w7zs1zf5x9.execute-api.eu-central-1.amazonaws.com',
+  baseAppUrlConnect: 'https://pmxuycfs6c.execute-api.eu-central-1.amazonaws.com',
+  // baseAppUrlGet: 'https://h8o3gup5lj.execute-api.eu-central-1.amazonaws.com',
+  // baseAppUrlPut: 'https://4aqjw0dwx0.execute-api.eu-central-1.amazonaws.com',
+  // baseAppUrlNotifica: 'https://d4rszjint3.execute-api.eu-central-1.amazonaws.com',
+  // baseAppUrlConnect: 'https://ivbkaplee3.execute-api.eu-central-1.amazonaws.com',
+  colorePrimario: '#e51d70',
+  coloreSecondario: '#f9da2c',
+  paypalCode: '',
+
   tokenHeaderKey: 'Authorization',
   pathSeparator: '/',
-  getServiceName: 'GET_SICURA',
+  getServiceName: 'BeautifulVinoGetSecure',
+  // getServiceName: 'GET_SICURA',
   putServiceName: 'BeautifulVinoPut',
   connectServiceName: 'BeautifulVinoConnect',
   notificationServiceName: 'BeautifulVinoNotification',
   KEY_AUTH_TOKEN: 'beautifulvino_authtoken',
   KEY_USER: 'beautifulvino_user',
   KEY_USER_ID: 'beautifulvino_user_id',
+  KEY_USER_EMAIL: 'beautifulvino_user_email',
   KEY_AZIENDA_ID: 'beautifulvino_azienda_id',
   KEY_AZIENDA_NOME: 'beautifulvino_azienda_nome',
   KEY_AZIENDA_LOGO: 'beautifulvino_azienda_logo',
@@ -41,6 +51,7 @@ export const environment = {
   getUtentiAziendaFunctionName: 'getUtentiAziendaGen',
   getUtentiFunctionName: 'getUtentiGen',
   getUtenteFunctionName: 'getUtenteGen',
+  getUtenteEmailFunctionName: 'getUtenteEmailGen',
   getViniFunctionName: 'getViniGen',
   getVinoFunctionName: 'getVinoGen',
   getViniEventoFunctionName: 'getViniEventoGen',
@@ -70,7 +81,9 @@ export const environment = {
   AWS_UPLOADBUCKET_BUCKETNAME: '',
   GOOGLE_MAP_API_KEY: '',
   KEY_PAGINA_SELEZIONATA: 'paginaSelezionata',
-  ID_PROFILO_AZIENDA: '1582804080'
+  ID_PROFILO_AZIENDA: '1582804080',
+  UserPoolId: '',
+  ClientId: ''
 };
 
 /*

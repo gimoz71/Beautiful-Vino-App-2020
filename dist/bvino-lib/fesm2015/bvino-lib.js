@@ -1,5 +1,6 @@
 import { AuthenticationDetails, CognitoUser, CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import { Observable } from 'rxjs';
+import * as CognitoIdentityServiceProvider from 'aws-sdk/clients/cognitoidentityserviceprovider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { __awaiter } from 'tslib';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
@@ -59,18 +60,18 @@ SessionService.ctorParameters = () => [];
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-const poolData = {
-    UserPoolId: 'eu-central-1_KzlMv3BwL',
-    ClientId: '25i6sfibl4qqqk2g8vgsmtsth7'
-};
-/** @type {?} */
-const userPool = new CognitoUserPool(poolData);
 class BVAuthorizationService {
     /**
      * @param {?} sessionService
+     * @param {?} env
      */
-    constructor(sessionService) {
+    constructor(sessionService, env) {
+        this.env = env;
+        this.poolData = {
+            UserPoolId: this.env.UserPoolId,
+            ClientId: this.env.ClientId
+        };
+        this.userPool = new CognitoUserPool(this.poolData);
     }
     /**
      * @return {?}
@@ -116,7 +117,7 @@ class BVAuthorizationService {
          * @return {?}
          */
         observer => {
-            return userPool.signUp(username, password, attributeList, null, (/**
+            return this.userPool.signUp(username, password, attributeList, null, (/**
              * @param {?} err
              * @param {?} result
              * @return {?}
@@ -149,10 +150,11 @@ class BVAuthorizationService {
         /** @type {?} */
         const userData = {
             Username: username,
-            Pool: userPool
+            Pool: this.userPool
         };
         /** @type {?} */
         const cognitoUser = new CognitoUser(userData);
+        cognitoUser.setAuthenticationFlowType('USER_PASSWORD_AUTH');
         return Observable.create((/**
          * @param {?} observer
          * @return {?}
@@ -174,9 +176,32 @@ class BVAuthorizationService {
                 function (err) {
                     console.log(err);
                     observer.error(err);
+                }),
+                newPasswordRequired: (/**
+                 * @param {?} resp
+                 * @return {?}
+                 */
+                function (resp) {
+                    resp.challenge = 'NEW_PASSWORD_REQUIRED';
+                    observer.next(resp);
+                    observer.complete();
                 })
             });
         }));
+    }
+    /**
+     * @param {?} username
+     * @return {?}
+     */
+    signOut(username) {
+        /** @type {?} */
+        const userData = {
+            Username: username,
+            Pool: this.userPool
+        };
+        /** @type {?} */
+        const cognitoUser = new CognitoUser(userData);
+        cognitoUser.signOut();
     }
     /**
      * @param {?} username
@@ -186,7 +211,7 @@ class BVAuthorizationService {
         /** @type {?} */
         const userData = {
             Username: username,
-            Pool: userPool
+            Pool: this.userPool
         };
         /** @type {?} */
         const cognitoUser = new CognitoUser(userData);
@@ -216,16 +241,65 @@ class BVAuthorizationService {
         }));
     }
     /**
+     * @param {?} username
+     * @param {?} oldpassword
+     * @param {?} password
+     * @return {?}
+     */
+    changePassword(username, oldpassword, password) {
+        /** @type {?} */
+        const userData = {
+            Username: username,
+            Pool: this.userPool
+        };
+        // const currentUser = this.userPool.getCurrentUser();
+        /** @type {?} */
+        const cognitoUser = new CognitoUser(userData);
+        cognitoUser.getSession((/**
+         * @param {?} result
+         * @return {?}
+         */
+        result => {
+            /** @type {?} */
+            const session = result;
+            console.log('session: ' + JSON.stringify(session));
+        }));
+        /** @type {?} */
+        const serviceProvider = new CognitoIdentityServiceProvider({ region: 'eu-central-1' });
+        return Observable.create((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        observer => {
+            cognitoUser.changePassword(oldpassword, password, (/**
+             * @param {?} error
+             * @param {?} result
+             * @return {?}
+             */
+            (error, result) => {
+                if (result) {
+                    console.log('result change password: ' + JSON.stringify(result));
+                    observer.next(result);
+                    observer.complete();
+                }
+                if (error) {
+                    console.log('error change password: ' + JSON.stringify(error));
+                    observer.error(error);
+                }
+            }));
+        }));
+    }
+    /**
      * @return {?}
      */
     isLoggedIn() {
-        return userPool.getCurrentUser() !== null;
+        return this.userPool.getCurrentUser() !== null;
     }
     /**
      * @return {?}
      */
     getAuthenticatedUser() {
-        return userPool.getCurrentUser();
+        return this.userPool.getCurrentUser();
     }
 }
 BVAuthorizationService.decorators = [
@@ -233,7 +307,8 @@ BVAuthorizationService.decorators = [
 ];
 /** @nocollapse */
 BVAuthorizationService.ctorParameters = () => [
-    { type: SessionService }
+    { type: SessionService },
+    { type: undefined, decorators: [{ type: Inject, args: ['env',] }] }
 ];
 
 /**
@@ -412,6 +487,17 @@ class RichiesteService {
         const richiesta = new RichiestaGetGenerica();
         richiesta.functionName = this.env.getUtenteFunctionName;
         richiesta.idUtente = idUtente;
+        return richiesta;
+    }
+    /**
+     * @param {?} emailUtente
+     * @return {?}
+     */
+    getRichiestaGetUtenteEmail(emailUtente) {
+        /** @type {?} */
+        const richiesta = new RichiestaGetGenerica();
+        richiesta.functionName = this.env.getUtenteEmailFunctionName;
+        richiesta.emailUtente = emailUtente;
         return richiesta;
     }
     /**
@@ -636,6 +722,17 @@ class RichiesteService {
         return richiesta;
     }
     /**
+     * @param {?} azienda
+     * @return {?}
+     */
+    getRichiestaPutAzienda(azienda) {
+        /** @type {?} */
+        const richiesta = new RichiestaPutGenerica();
+        richiesta.functionName = this.env.putAziendaFunctionName;
+        richiesta.azienda = azienda;
+        return richiesta;
+    }
+    /**
      * @param {?} utente
      * @return {?}
      */
@@ -644,6 +741,17 @@ class RichiesteService {
         const richiesta = new RichiestaPutGenerica();
         richiesta.functionName = this.env.putUserProfileImageWithUserFunctionName;
         richiesta.utente = utente;
+        return richiesta;
+    }
+    /**
+     * @param {?} badge
+     * @return {?}
+     */
+    getRichiestaPutBadge(badge) {
+        /** @type {?} */
+        const richiesta = new RichiestaPutGenerica();
+        richiesta.functionName = this.env.putVinoFunctionName;
+        richiesta.badge = badge;
         return richiesta;
     }
     // -------- NOTIFICATION --------
@@ -685,9 +793,10 @@ class RichiesteService {
      * @param {?} dataPrenotazioneEvento
      * @param {?} statoPreferitoEvento
      * @param {?} statoAcquistatoEvento
+     * @param {?} numeroPartecipanti
      * @return {?}
      */
-    getRichiestaAcquistaEvento(idUtente, idEvento, dataEvento, dataPrenotazioneEvento, statoPreferitoEvento, statoAcquistatoEvento) {
+    getRichiestaAcquistaEvento(idUtente, idEvento, dataEvento, dataPrenotazioneEvento, statoPreferitoEvento, statoAcquistatoEvento, numeroPartecipanti) {
         /** @type {?} */
         const richiesta = new RichiestaConnectGenerica();
         richiesta.idUtente = idUtente;
@@ -698,6 +807,7 @@ class RichiesteService {
         richiesta.statoPreferitoEvento = statoPreferitoEvento;
         richiesta.statoAcquistatoEvento = statoAcquistatoEvento;
         richiesta.functionName = this.env.connectEventoAUtenteFunctionName;
+        richiesta.numeroPartecipanti = numeroPartecipanti;
         return richiesta;
     }
     /**
@@ -727,6 +837,27 @@ RichiesteService.decorators = [
 /** @nocollapse */
 RichiesteService.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: ['env',] }] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ConstantsService {
+    constructor() {
+        this.RUOLO_SUPER_ADMIN = 'SA';
+        this.RUOLO_AZIENDA_ADMIN = 'AA';
+        this.RUOLO_UTENTE_GENERICO = 'UG';
+        this.RUOLO_UTENTE_AZIENDA = 'UA';
+        this.KEY_AZIENDA_ID_DEFAULT = '000';
+        this.KEY_AZIENDA_NOME_DEFAULT = 'Beautiful Vino';
+        this.KEY_AZIENDA_LOGO_DEFAULT = '';
+        this.KEY_AZIENDA_SPLASHSCREEN_DEFAULT = '';
+        this.KEY_AZIENDA_PAYPALCODE_DEFAULT = '';
+    }
+}
+ConstantsService.decorators = [
+    { type: Injectable }
 ];
 
 /**
@@ -764,7 +895,8 @@ BvinoLibModule.decorators = [
                     SessionService,
                     AlertService,
                     BVHttpService,
-                    RichiesteService
+                    RichiesteService,
+                    ConstantsService
                 ],
                 exports: []
             },] }
@@ -1090,6 +1222,6 @@ class ProfiloAzienda {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { BvinoLibModule, BVAuthorizationService, SessionService, BVHttpService, RichiesteService, AlertService, BVCommonService, AccessToken, AccessTokenPayload, AwsToken, IdToken, IdTokenPayload, RefreshToken, AziendaUtente, BadgeUtente, EventoUtente, Utente, UtenteUtente, VinoUtente, Azienda, EventoAzienda, VinoAzienda, AziendaVino, EventoVino, UtenteVino, Vino, AziendaEvento, BadgeEvento, Evento, ProvinciaEvento, UtenteEvento, VinoEvento, AziendaFeed, AziendaVinoFeed, EventoFeed, Feed, VinoFeed, Badge, RichiestaGetGenerica, RispostaGetGenerica, RichiestaPutGenerica, RispostaPutGenerica, RichiestaNotificaGenerica, RispostaNotificaGenerica, RichiestaConnectGenerica, RispostaConnectGenerica, Provincia, ProfiloAzienda };
+export { BvinoLibModule, BVAuthorizationService, SessionService, BVHttpService, RichiesteService, AlertService, BVCommonService, ConstantsService, AccessToken, AccessTokenPayload, AwsToken, IdToken, IdTokenPayload, RefreshToken, AziendaUtente, BadgeUtente, EventoUtente, Utente, UtenteUtente, VinoUtente, Azienda, EventoAzienda, VinoAzienda, AziendaVino, EventoVino, UtenteVino, Vino, AziendaEvento, BadgeEvento, Evento, ProvinciaEvento, UtenteEvento, VinoEvento, AziendaFeed, AziendaVinoFeed, EventoFeed, Feed, VinoFeed, Badge, RichiestaGetGenerica, RispostaGetGenerica, RichiestaPutGenerica, RispostaPutGenerica, RichiestaNotificaGenerica, RispostaNotificaGenerica, RichiestaConnectGenerica, RispostaConnectGenerica, Provincia, ProfiloAzienda };
 
 //# sourceMappingURL=bvino-lib.js.map
